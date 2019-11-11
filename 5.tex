@@ -1,0 +1,653 @@
+Assume we have a functor $f\:X\to S$ between two categories.
+Then for any $s\in S$, we may take the fibre $X_s:=f^{-1}(s)$,
+which is a subcategory of $X$.
+This gives a rule assigning every object of $S$ a category.
+We might expect that this assignment, i.e.\ taking the fibres,
+gives a functor $S\to\cat{Cat}$.
+Indeed, this is true provided that $f$ is a ``fibration'',
+in a sense that will be made precise soon.
+This is called the \term{Grothendieck construction}.
+Schematically, this means that we have a correspondence
+\[\begin{tikzcd}[row sep=1ex,column sep=1em]
+    X\ar[dd,"\text{fibration}"'] && \cat{Cat} \\
+    & \Longleftrightarrow \\
+    S && S\ar[uu,"\text{take fibres}"']
+\end{tikzcd}\]
+between ``fibrations'' over $S$ and functors from $S$ to $\cat{Cat}$.
+
+Let us look at an example arising from algebraic geometry.
+
+\begin{example}\label{eg-5-q}
+    Let $\cat{Sch}$ denote the category of schemes.
+    For a scheme $X$, let $\cat{QCoh}_X$ be the category 
+    of quasi-coherent sheaves on $X$.
+    This defines a functor 
+    \[ \cat{QCoh}_{(-)}\:\cat{Sch}\op\to\cat{Cat}. \]
+
+    If we look carefully, it is not a functor in the usual sense,
+    since the composition law 
+    \[ f^*\circ g^*=(g\circ f)^* \]
+    only holds up to a natural isomorphism, i.e.\ a $2$-morphism in $\cat{Cat}$.
+    We call such a ``functor'' a \term{$2$-functor}.
+
+    Applying the Grothendieck construction to this $2$-functor,
+    we should get a ``fibration'' which we denote by
+    \[ \cat{QCoh}\to\cat{Sch}\op, \]
+    whose fibre over $X\in\cat{Sch}\op$ is the category $\cat{QCoh}_X$.
+    Indeed, we may construct the category $\cat{QCoh}$ of all quasi-coherent sheaves as follows.
+    \begin{itms}
+        \item The objects are pairs $(X,\mathscr F)$,
+        where $\mathscr F$ is a quasi-coherent sheaf on the scheme $X$.
+        \item A morphism from $(X,\mathscr F)$ to $(Y,\mathscr G)$
+        consists of a map of schemes $f\:Y\to X$, together with
+        a map of $\mathscr O_Y$-modules $f^*\mathscr F\to\mathscr G$, or equivalently,
+        a map of $\mathscr O_X$-modules $\mathscr F\to f_*\mathscr G$.
+    \end{itms}
+    The natural forgetful functor $\cat{QCoh}\to\cat{Sch}\op$
+    is the ``fibration'' that we wished to construct.
+    This is an example of a \emph{cocartesian fibration},
+    which we will define soon. \varqed
+\end{example}
+
+\subsection{For ordinary categories}
+
+We will study four kinds of fibrations of categories,
+which correspond to functors to $\cat{Cat}$
+according to the following table,
+where $\cat{Gpd}$ denotes the category of groupoids.
+
+\begin{center}
+    \begin{tabular}{ccc}
+        \textbf{Fibration} & & \textbf{Functor} \\ \hline
+        left fibration $X\to S$ & $\Longleftrightarrow$ & $S\to\cat{Gpd}$ \\
+        right fibration $X\to S$ & $\Longleftrightarrow$ & $S\op\to\cat{Gpd}$ \\
+        cocartesian fibration $X\to S$ & $\Longleftrightarrow$ & $S\to\cat{Cat}$ \\
+        cartesian fibration $X\to S$ & $\Longleftrightarrow$ & $S\op\to\cat{Cat}$ \\
+    \end{tabular}
+\end{center}
+
+We start with left fibrations,
+which Grothendieck originally called ``categories cofibred in groupoids''.
+By the table above, for any $s\in S$,
+the fibre $X_s$ should be a groupoid,
+and for any morphism $s\to s'$ in $S$,
+we should have a ``transport map'' $X_s\to X_{s'}$.
+
+In order to define the transport map, 
+we require that the map $p\:X\to S$ satisfies the following properties.
+\begin{itms}
+    \item Transport of objects: for any $x\in X$ and any morphism $\alpha\:s\to s'$ in $S$,
+    where $s:=p(x)$,
+    there exists a morphism $\tilde\alpha\:x\to x'$ in $X$ such that $p(\tilde\alpha)=\alpha$.
+    Pictorially, this means that the lifting problem
+    \[\begin{tikzcd}
+        x\ar[d,dotted,dash] \\
+        s \ar[r] & s'
+    \end{tikzcd}\quad\Longrightarrow\quad\begin{tikzcd}
+        x\ar[r,dashed]\ar[d,dotted,dash] & x'\ar[d,dotted,dash] \\
+        s \ar[r] & s'
+    \end{tikzcd}\]
+    % \[\vcenter{\xymatrix @R=2em { x\ar@{.}[d] \\ s \ar[r] & s' }}\quad\Longrightarrow\quad\vcenter{\xymatrix @R=2em { x\ar@{-->}[r]\ar@{.}[d] & x'\ar@{.}[d] \\ s \ar[r] & s' }}\]
+    has a solution.
+    \item Transport of morphisms: the lifting problem 
+    \[\begin{tikzcd}
+        x\ar[d]\ar[r] & x' \\
+        y\ar[d,dotted,dash]\ar[r] & y'\ar[d,dotted,dash] \\
+        s \ar[r] & s'
+    \end{tikzcd}\quad\Longrightarrow\quad\begin{tikzcd}
+        x\ar[d]\ar[r] & x'\ar[d,dashed] \\
+        y\ar[d,dotted,dash]\ar[r] & y'\ar[d,dotted,dash] \\
+        s \ar[r] & s'
+    \end{tikzcd}\]
+    % \[\vcenter{\xymatrix @R=2em { x\ar[d]\ar[r] & x' \\ y\ar@{.}[d]\ar[r] & y'\ar@{.}[d] \\ s \ar[r] & s' }}\quad\Longrightarrow\quad\vcenter{\xymatrix @R=2em { x\ar[d]\ar[r] & x'\ar@{-->}[d] \\ y\ar@{.}[d]\ar[r] & y'\ar@{.}[d] \\ s \ar[r] & s' }}\]
+    has a \emph{unique} solution.
+\end{itms}
+
+It is easy to see that if these properties are satisfied,
+then the transport map $X_s\to X_{s'}$ is well-defined up to a natural isomorphism.
+Namely, one chooses an arbitrary way to transport the objects,
+and then the morphisms can be transported uniquely.
+
+We define left fibrations by reformulating these axioms.
+
+\begin{definition}
+    A functor $p\:X\to S$ is a \term{left fibration}, if
+    it satisfies the following transport axioms.
+    \begin{itms}
+        \item The lifting problem 
+        \[\begin{tikzcd}
+            \Lambda_0[1] \ar[d] \ar[r] & X \ar[d] \\
+            \Delta[1] \ar[r] \ar[ur,dashed] & S
+        \end{tikzcd}\]
+        % \[\xymatrix{ \Lambda_0[1] \ar[d] \ar[r] & X \ar[d] \\ \Delta[1] \ar[r] \ar@{-->}[ur] & S }\]
+        has a solution.
+        \item The lifting problem 
+        \[\begin{tikzcd}
+            \Lambda_0[2] \ar[d] \ar[r] & X \ar[d] \\
+            \Delta[2] \ar[r] \ar[ur,dashed] & S
+        \end{tikzcd}\]
+        % \[\xymatrix{ \Lambda_0[2] \ar[d] \ar[r] & X \ar[d] \\ \Delta[2] \ar[r] \ar@{-->}[ur] & S }\]
+        has a unique solution.
+    \end{itms}
+    In these diagrams, the notations $\Lambda_0[n]$ and $\Delta[n]$
+    represent their corresponding ordinary categories.
+    Precisely, they are $\Ho(\Lambda_0[n])$ and $\Ho(\Delta[n])$.
+\end{definition}
+
+As an exercise, the reader can verify that 
+this definition is equivalent to the two transport axioms given
+above it.
+
+\begin{remark}
+    The uniqueness in the second axiom 
+    is actually a consequence of the lifting property
+    for $\Lambda_0[3]$, and thus will be replaced by the latter
+    in the $\infty$-categorical definition. \varqed
+\end{remark}
+
+If we take the map $\Delta[2]\to S$ to be the constant map at $s$,
+we see immediately that every morphism in the fibre $X_s$
+has a left inverse, and hence $X_s$ is a groupoid.
+
+The discussion above readily implies the following.
+
+\begin{theorem}[Grothendieck construction]
+    A left fibration between small categories $X\to S$
+    gives rise to a $2$-functor $S\to\cat{Gpd}$ by taking the fibres.
+    Conversely, every $2$-functor $S\to\cat{Gpd}$
+    corresponds to a left fibration $X\to S$ in this manner.
+\end{theorem}
+
+\begin{proof}
+    We only need to prove the converse.
+    However, the construction of such a left fibration
+    is done in the same way as in (\ref{eg-5-q}).
+\end{proof}
+
+Dually, a functor $p\:X\to S$ is a \term{right fibration}
+if $p\op\:X\op\to S\op$ is a left fibration.
+Under the Grothendieck construction,
+they correspond to functors $S\op\to\cat{Gpd}$.
+
+\subsection{For left fibrations}
+
+Our next goal is to define Grothendieck construction
+for $\infty$-categories.
+As an application,
+we will give a proof for the fact that 
+\[\Hom_{\cat C}^{\vartriangleleft}(x,y)\simeq\Hom_{\mathfrak C\cat C}(x,y)
+\simeq\Hom_{\cat C}^{\vartriangleright}(x,y)\]
+for objects $x,y$ of a quasi-category $\cat C$.
+
+\begin{definition}
+    A map of simplicial sets $p\:X\to S$ is called a \term{left fibration},
+    if the lifting problem 
+    \[\begin{tikzcd}
+        \Lambda_i[n] \ar[d] \ar[r] & X \ar[d] \\
+        \Delta[n] \ar[r] \ar[ur,dashed] & S
+    \end{tikzcd}\]
+    % \[\xymatrix{ \Lambda_i[n] \ar[d] \ar[r] & X \ar[d] \\ \Delta[n] \ar[r] \ar@{-->}[ur] & S }\]
+    has a solution for all $0\leq i<n$.
+
+    Dually, $p$ is called a \term{right fibration}
+    if the above lifting problem has a solution for all $0<i\leq n$.
+\end{definition}
+
+This definition is a natural generalisation
+of the corresponding notion for ordinary categories.
+
+\begin{proposition}
+    Let $X$ be a simplicial set.
+    The map $X\to*$ is a left fibration,
+    if and only if $X$ is a Kan complex.
+\end{proposition}
+
+\begin{proof}
+    The ``if'' part is trivial.
+    For the converse, suppose that $X\to*$ is a left fibration.
+    Then $X$ is a quasi-category.
+    Moreover, every morphism in the ordinary category $\Ho(X)$ admits a left inverse,
+    so that $\Ho(X)$ is a groupoid.
+    By (\ref{thm-4-j}), $X$ must be a Kan complex.
+\end{proof}
+
+Let $S$ be a simplicial set,
+and let $\cat{sSet}_{\/S}$ denote the over-category, which consists of
+\begin{itms}
+    \item The objects are maps $X\to S$.
+    \item A morphism from a map $X\to S$ to a map $Y\to S$ is a map $X\to Y$
+    that fits into a commutative triangle
+    \[\begin{tikzcd}[column sep=.5em]
+        X\ar[rr]\ar[dr] && Y\ar[dl] \\
+        & S\rlap{\ .}
+    \end{tikzcd}\]
+    % \[\xymatrix @C=1em { X\ar[rr]\ar[dr] && Y\ar[dl] \\ & S\rlap{\ .} }\]
+\end{itms}
+Following Lurie \cite{htt}, we will define a pair of adjoint functors
+\[\begin{tikzcd}[column sep=3em]
+    \cat{sSet}_{\/S}\ar[r,bend left,start anchor=north east,end anchor=north west,"\operatorname{St}"]
+    \ar[r,phantom,"\bot"] &
+    \operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{sSet})\rlap{\ ,}
+    \ar[l,bend left,start anchor=south west,end anchor=south east,"\operatorname{Un}"]
+\end{tikzcd}\]
+% \[\xymatrix @C=3em { \cat{sSet}_{\/S}\ar@/^2ex/[r]^{\operatorname{St}} \ar@{}[r]|{\bot} & \rlap{\operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{sSet})\ ,} \phantom{\cat{sSet}_{\/S}} \ar@/^2ex/[l]^{\operatorname{Un}} }\hspace{4em}\]
+where $\operatorname{Fun}_{\cat{sSet}}$
+denotes the (ordinary) category of simplicially enriched functors,
+and we have the following.
+
+\begin{itms}
+    \item The functor $\operatorname{St}$ is called the \term{straightening functor}.
+    Restricted to the left fibrations, it will give the Grothendieck construction.
+    \item The functor $\operatorname{Un}$ is called the \term{unstraightening functor}.
+    Restricted to the functors $\mathfrak CS\to\cat{Kan}$,
+    or equivalently $S\to\mathfrak N(\cat{Kan})=:\cat{S}$,
+    it will give the other direction of the construction.
+    \item The adjunction $(\operatorname{St}\dashv\operatorname{Un})$
+    will be a Quillen equivalence, given suitable model structures on both categories.
+\end{itms}
+
+Now, we begin the construction.
+
+\begin{definition}
+    Let $X,Y$ be simplicial sets. Their \term{join}
+    is the simplicial set $X\star Y$, whose $n$ simplices are 
+    \[(X\star Y)_n:=\Biggl\{(f,\sigma_0,\sigma_1)\mathrel{\Bigg|}
+    \begin{array}{l}
+        f\:\Delta[n]\to\Delta[1]\\
+        \sigma_0\:f^{-1}(0)\to X\\
+        \sigma_1\:f^{-1}(1)\to Y
+    \end{array}\Biggr\},\]
+    with the natural face and degeneracy maps.
+\end{definition}
+
+In other words, $X\star Y$ is obtained from $X\sqcup Y$
+by adjoining all possible arrows (and higher dimensional arrows)
+pointing from $X$ to $Y$. For example, we have
+\[ \Delta[n]\star\Delta[m]\simeq\Delta[n+m+1]. \]
+
+As special notations, write
+\[X^\vartriangleright:=X\star\{\infty\}\quad\text{and}\quad X^\vartriangleleft:=\{\infty\}\star X,\]
+where $\{\infty\}$ denotes a singleton set,
+and the point $\infty$ is called the \term{cone point}.
+
+\begin{construction}
+    Let $X\to S$ be a map of simplicial sets.
+    We construct the functor 
+    \[\operatorname{St}_SX\:\mathfrak CS\to\cat{sSet}\]
+    as follows. For $s\in S$, define 
+    \[(\operatorname{St}_SX)(s):=\Hom_M(\infty,s),\]
+    where the simplicial category $M$ is defined by 
+    \[M:=\mathfrak C\bigl(X^\vartriangleleft\mathop{\sqcup}_XS\bigr).\]
+    In other words, this construction is done through the following procedure.
+    First, adjoint a point at infinity $\infty$ on the left of $X$, giving $X^\vartriangleleft$.
+    Next, for each $s\in S$, crush the fibre $X_s$ to a point.
+    Roughly speaking, the resulting category is $M$,
+    which is a ``straightened'' version of $X^\vartriangleleft$.
+    At this point, the morphism space $\Hom_M(\infty,s)$
+    should still preserve information about $X_s$,
+    since it was made out of all morphisms from $\infty$ to $X_s$.
+    Indeed, we will see that it is weakly homotopy equivalent to $X_s$
+    if $X\to S$ is a left fibration.
+    \varqed
+\end{construction}
+
+\begin{construction}
+    Let $F\:\mathfrak CS\to\cat{sSet}$ be a functor of simplicial categories.
+    We construct a left fibration 
+    \[\operatorname{Un}_SF\to S,\]
+    so that $\operatorname{Un}_S$ becomes a right adjoint of $\operatorname{St}_S$.
+    Namely, we define 
+    \[ (\operatorname{Un}_SF)_n:=\biggl\{(\sigma,f)\biggmid\begin{array}{l}
+        \sigma\:\Delta[n]\to S\\
+        f\:\operatorname{St}_S\sigma\to F
+    \end{array}\biggr\}, \]
+    with a natural map to $S$.
+    Its $n$-simplices are just ``maps from $\Delta[n]$ to $F$'',
+    but precisely speaking, here $\Delta[n]$ should be replaced by its 
+    Grothendieck construction,
+    which is $\operatorname{St}_S\Delta[n]$.
+    This motivates the above construction. \varqed
+\end{construction}
+
+By the constructions, we see that $\operatorname{St}_S$ and $\operatorname{Un}_S$
+form an adjunction
+\[\begin{tikzcd}[column sep=3em]
+    \cat{sSet}_{\/S}\ar[r,bend left,start anchor=north east,end anchor=north west,"\operatorname{St}_S"]
+    \ar[r,phantom,"\bot"] &
+    \operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{sSet})\rlap{\ .}
+    \ar[l,bend left,start anchor=south west,end anchor=south east,"\operatorname{Un}_S"]
+\end{tikzcd}\]
+% \[\xymatrix @C=3em { \cat{sSet}_{\/S}\ar@/^2ex/[r]^{\operatorname{St}_S} \ar@{}[r]|{\bot} & \rlap{\operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{sSet})\ ,} \phantom{\cat{sSet}_{\/S}} \ar@/^2ex/[l]^{\operatorname{Un}_S} }\hspace{4em}\]
+We will sometimes omit the subscript $S$ and simply write
+$\operatorname{St}$ and $\operatorname{Un}$.
+
+\begin{example}
+    Let us consider the case $S=\{*\}$.
+    In this case, the Grothendieck construction converts between
+    fibrations onto $\{*\}$ and their fibres. We expect that the adjunction 
+    \[\begin{tikzcd}[column sep=3em]
+        \cat{sSet}\ar[r,bend left,"\operatorname{St}_{\{*\}}"]
+        \ar[r,phantom,"\bot"] &
+        \cat{sSet}
+        \ar[l,bend left,"\operatorname{Un}_{\{*\}}"]
+    \end{tikzcd}\]
+    should be an equivalence.
+    
+    By definition, We have 
+    \[ \operatorname{St}_{\{*\}}\Delta[n]\simeq\Hom_{\mathfrak C(\Delta[n]\/\Delta[n-1])}(0,*), \]
+    where $\Delta[n-1]\hookrightarrow\Delta[n]$ as the $0$-th face $\{1,\dotsc,n\}$,
+    and $\Delta[n]\/\Delta[n-1]$ denotes the simplicial set
+    obtained from $\Delta[n]$ by crushing the $0$-th face $\Delta[n-1]$ to a point,
+    and we denote this point by $*$.
+
+    Let $Q^\bullet$ denote the cosimplicial simplicial set defined by 
+    \[ Q^n:=\Hom_{\mathfrak C(\Delta[n]\/\Delta[n-1])}(0,*). \]
+    Then the adjunction
+    $(\operatorname{St}_{\{*\}}\dashv\operatorname{Un}_{\{*\}})$
+    is given by $Q^\bullet$ via the construction (\ref{con-3-a}).
+    With careful calculation (which we omit here; see \cite[Remark~2.2.2.6]{htt}),
+    one sees that there is a homeomorphism
+    \[ |Q^n|\simeq\Delta^n \]
+    of topological spaces, which is compatible with the coface maps (but not the codegeneracy maps).
+    It follows that for any $X\in\cat{sSet}$, there is a homeomorphism
+    \[ |{\operatorname{St}_{\{*\}}X}|\simeq|X|, \]
+    so that $\operatorname{St}_{\{*\}}X$ and $X$ are weakly equivalent.
+
+    This calculation also implies that
+    $\operatorname{St}_{\{*\}}$ preserves cofibrations and trivial cofibrations,
+    so that $(\operatorname{St}_{\{*\}}\dashv\operatorname{Un}_{\{*\}})$
+    is a Quillen equivalence, i.e., equivalence up to homotopy. \varqed
+\end{example}
+
+For a general $S\in\cat{sSet}$, we have the following result.
+
+\begin{theorem}\label{thm-5-g}
+    The category $\cat{sSet}_{\/S}$ has the \term{covariant model structure}, with
+    \begin{itms}
+        \item $\cat{W}$ is the class of maps $X\to Y$ such that the induced map 
+        \[ X^\vartriangleleft\mathop{\sqcup}_XS\to Y^\vartriangleleft\mathop{\sqcup}_YS \]
+        is a Dwyer--Kan equivalence.
+        \item $\cat{Cof}=\{$injections$\}$.
+        \item $\cat{Fib}\subset\{$left fibrations$\}$.
+        \item The fibrant objects are left fibrations over $S$.
+    \end{itms}
+    The category $\operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{sSet})$
+    has the \term{projective model structure}, with
+    \begin{itms}
+        \item $\cat W=\{$pointwise weak equivalences$\}$.
+        \item $\cat{Fib}=\{$pointwise fibrations$\}$.
+        \item $\cat{Cof}$ is determined by the lifting property.
+    \end{itms}
+    Using these model structures, the adjunction
+    \[\begin{tikzcd}[column sep=3em]
+        \cat{sSet}_{\/S}\ar[r,bend left,start anchor=north east,end anchor=north west,"\operatorname{St}_S"]
+        \ar[r,phantom,"\bot"] &
+        \operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{sSet})
+        \ar[l,bend left,start anchor=south west,end anchor=south east,"\operatorname{Un}_S"]
+    \end{tikzcd}\]
+    % \[\xymatrix @C=3em { \cat{sSet}_{\/S}\ar@/^2ex/[r]^{\operatorname{St}_S} \ar@{}[r]|{\bot} & \rlap{\operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{sSet})\ ,} \phantom{\cat{sSet}_{\/S}} \ar@/^2ex/[l]^{\operatorname{Un}_S} }\hspace{4em}\]
+    is a Quillen equivalence.
+\end{theorem}
+
+For a proof, see \cite[Theorem~2.2.1.2]{htt}.
+
+In particular, $\operatorname{Un}_S$ preserves fibrant objects,
+and hence it sends functors $\mathfrak CS\to\cat{Kan}$
+to left fibrations over $S$.
+
+\begin{remark}
+    Dually, for right fibrations, we have the \term{contravariant model structure}
+    on $\cat{sSet}_{\/S}$, and a Quillen equivalence
+    \[\begin{tikzcd}[column sep=3em]
+        \cat{sSet}_{\/S}\ar[r,bend left,start anchor=north east,end anchor=north west,"\operatorname{St}_S"]
+        \ar[r,phantom,"\bot"] &
+        \operatorname{Fun}_{\cat{sSet}}(\mathfrak CS\op,\cat{sSet})\rlap{\ ,}
+        \ar[l,bend left,start anchor=south west,end anchor=south east,"\operatorname{Un}_S"]
+    \end{tikzcd}\]
+    % \[\xymatrix @C=3em { \cat{sSet}_{\/S}\ar@/^2ex/[r]^{\operatorname{St}_S} \ar@{}[r]|{\bot} & \rlap{\operatorname{Fun}_{\cat{sSet}}(\mathfrak CS\op,\cat{sSet})\ ,} \phantom{\cat{sSet}_{\/S}} \ar@/^2ex/[l]^{\operatorname{Un}_S} }\hspace{4em}\]
+    where $\operatorname{Fun}_{\cat{sSet}}(\mathfrak CS\op,\cat{sSet})$
+    is equipped with the projective model structure. \varqed
+\end{remark}
+
+Now we can prove the most desired property of this construction,
+which states that the Grothendieck construction 
+gives back the fibres of a left fibration.
+
+\begin{proposition}\label{thm-5-s}
+    If $X\to S$ is a left fibration,
+    then for any $s\in S$, there is a weak homotopy equivalence
+    \[ (\operatorname{St}_SX)(s)\simeq X_s. \]
+\end{proposition}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+Our goal now is to use the Grothendieck construction 
+to study the hom-spaces of a quasi-category.
+
+Let $\cat C$ be a quasi-category, and let $K$ be a simplicial set.
+Let $p\:K\to\cat C$ be a map of simplicial sets,
+which we regard as a commutative diagram in $\cat C$.
+
+\begin{definition}
+    The \term{over-category} $\cat C_{\/K}$ is a quasi-category,
+    with $n$-simplices
+    \[ (\cat C_{\/K})_n:=\bigl\{\sigma\:\Delta[n]\star K\to\cat C\bigmid\sigma|_K=p\bigr\}. \]
+    Dually, the \term{under-category} $\cat C_{K\/}$ is a quasi-category,
+    with $n$-simplices
+    \[ (\cat C_{K\/})_n:=\bigl\{\sigma\:K\star\Delta[n]\to\cat C\bigmid\sigma|_K=p\bigr\}. \]
+\end{definition}
+
+The following is an immediate consequence of (\ref{thm-5-s}).
+
+\begin{corollary}
+    Let $\cat C$ be a quasi-category, and let $x,y\in\cat C$. Then 
+    \[ \Hom_{\cat C}^\vartriangleleft(x,y)\simeq(\operatorname{St}_{\cat C}\cat C_{x\/})(y).
+    \qedhere \] \qed
+\end{corollary}
+
+Moreover, we have the following.
+
+\begin{proposition}
+    Let $\cat C$ be a quasi-category, and let $x,y\in\cat C$. Then 
+    \[ (\operatorname{St}_{\cat C}\cat C_{x\/})(y)\simeq\Hom_{\mathfrak C\cat C}(x,y). \]
+\end{proposition}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+Combining these two equivalences, we see that
+\[\Hom_{\cat C}^\vartriangleleft(x,y)\simeq\Hom_{\mathfrak C\cat C}(x,y).\]
+A dual argument, involving right fibrations,
+shows that 
+\[\Hom_{\cat C}^\vartriangleright(x,y)\simeq\Hom_{\mathfrak C\cat C}(x,y).\]
+Therefore, we have proved the fact that $\cat C$ and $\mathfrak C\cat C$
+have weakly homotopy equivalent mapping spaces,
+as our first application of the Grothendieck construction.
+
+\subsection{For cocartesian fibrations}
+
+Recall that we have a table of Grothendieck constructions.
+
+\begin{center}
+    \begin{tabular}{ccc}
+        \textbf{Fibration} & & \textbf{Functor} \\ \hline
+        left fibration $X\to S$ & $\Longleftrightarrow$ & $S\to\cat{Gpd}$ \\
+        right fibration $X\to S$ & $\Longleftrightarrow$ & $S\op\to\cat{Gpd}$ \\
+        cocartesian fibration $X\to S$ & $\Longleftrightarrow$ & $S\to\cat{Cat}$ \\
+        cartesian fibration $X\to S$ & $\Longleftrightarrow$ & $S\op\to\cat{Cat}$ \\
+    \end{tabular}
+\end{center}
+
+Now, we sketch the construction for cocartesian and cartesian fibrations.
+
+Let $p\:X\to S$ be a functor between ordinary categories.
+A morphism $f\:x\to y$ in $X$ is said to be \term{$p$-cocartesian},
+if we have a ``cocartesian square''
+\[\begin{tikzcd}
+    x\ar[d,dotted,dash]\ar[r,"f"] & y\ar[d,dotted,dash] \\
+    p(x)\ar[r,"p(f)"]\ar[ur,phantom,end anchor=south west,very near end,"\urcorner"] & p(y)\rlap{\ .}
+\end{tikzcd}\]
+Precisely speaking, the map $x\to y$ has the following universal property.
+For any commutative diagram without the dashed arrow,
+\[\begin{tikzcd}[row sep=1em]
+    && z\ar[dd,dotted,dash] \\
+    x\ar[dd,dotted,dash]\ar[r,"f"']\ar[urr,"g"]
+    & y\ar[dd,dotted,dash]\ar[ur,dashed,end anchor=south west,"\exists!\ \tilde h"' inner sep=0pt] \\
+    && p(z) \\
+    p(x)\ar[r,"p(f)"']\ar[urr,"p(g)"]
+    & p(y)\rlap{\ ,} \ar[ur,"h"']
+\end{tikzcd}\]
+there exists a unique morphism $\tilde h\:y\to z$,
+such that $\tilde hf=g$ and $p(\tilde h)=h$.
+
+We reformulate this definition as follows.
+
+\begin{definition}
+    Let $p\:X\to S$ be a functor between ordinary categories.
+    A morphism $f\:x\to y$ in $X$ is said to be \term{$p$-cocartesian},
+    if the lifting problem 
+    \[\begin{tikzcd}
+        \Lambda_0[2] \ar[d] \ar[r] & X \ar[d] \\
+        \Delta[2] \ar[r] \ar[ur,dashed] & S
+    \end{tikzcd}\]
+    % \[\xymatrix{ \Lambda_0[2] \ar[d] \ar[r] & X \ar[d] \\ \Delta[2] \ar[r] \ar@{-->}[ur] & S }\]
+    has a unique solution, whenever the edge $[0,1]$ in $\Lambda_0[2]$ is sent to $f$ in $X$.
+\end{definition}
+
+This definition generalises naturally to quasi-categories.
+
+\begin{definition}
+    Let $p\:X\to S$ be a functor between quasi-categories.
+    A morphism $f\:x\to y$ in $X$ is said to be \term{$p$-cocartesian},
+    if the lifting problem 
+    \[\begin{tikzcd}
+        \Lambda_0[n] \ar[d] \ar[r] & X \ar[d] \\
+        \Delta[n] \ar[r] \ar[ur,dashed] & S
+    \end{tikzcd}\]
+    % \[\xymatrix{ \Lambda_0[n] \ar[d] \ar[r] & X \ar[d] \\ \Delta[n] \ar[r] \ar@{-->}[ur] & S }\]
+    has a solution whenever the edge $[0,1]$ in $\Lambda_0[n]$ is sent to $f$ in $X$.
+\end{definition}
+
+As before, the uniqueness condition is dropped,
+as it is replaced by higher lifting properties.
+
+\begin{definition}
+    Let $p\:X\to S$ be a functor between ordinary categories.
+    Then $p$ is called a \term{cocartesian fibration}, if $X$ admits ``pushouts'' from $S$:
+    \[\begin{tikzcd}
+        x\ar[d,dotted,dash] \\
+        s \ar[r] & s'
+    \end{tikzcd}\quad\Longrightarrow\quad\begin{tikzcd}
+        x\ar[r,dashed]\ar[d,dotted,dash] & x'\ar[d,dotted,dash] \\
+        s \ar[r]\ar[ur,phantom,end anchor=south west,very near end,"\urcorner"] & s'\rlap{\ .}
+    \end{tikzcd}\]
+    Precisely speaking, for any
+    $x\in X$ and any morphism $\alpha\:s\to s'$ in $S$,
+    where $s:=p(x)$,
+    there exists a $p$-cocartesian morphism $\tilde\alpha\:x\to x'$ in $X$,
+    such that $p(\tilde\alpha)=\alpha$.
+\end{definition}
+
+For quasi-categories, we have an extra requirement.
+
+\begin{definition}
+    Let $p\:X\to S$ be a functor between quasi-categories.
+    Then $p$ is called a \term{cocartesian fibration}, if
+    \begin{itms}
+        \item The lifting problem 
+        \[\begin{tikzcd}
+            \Lambda_i[n] \ar[d] \ar[r] & X \ar[d] \\
+            \Delta[n] \ar[r] \ar[ur,dashed] & S
+        \end{tikzcd}\]
+        % \[\xymatrix{ \Lambda_i[n] \ar[d] \ar[r] & X \ar[d] \\ \Delta[n] \ar[r] \ar@{-->}[ur] & S }\]
+        has a solution if $0<i<n$. That is, $p$ is an \term{inner fibration}.
+        \item $X$ admits ``pushouts'' from $S$:
+        \[\begin{tikzcd}
+            x\ar[d,dotted,dash] \\
+            s \ar[r] & s'
+        \end{tikzcd}\quad\Longrightarrow\quad\begin{tikzcd}
+            x\ar[r,dashed]\ar[d,dotted,dash] & x'\ar[d,dotted,dash] \\
+            s \ar[r]\ar[ur,phantom,end anchor=south west,very near end,"\urcorner"] & s'\rlap{\ .}
+        \end{tikzcd}\]
+    \end{itms}
+\end{definition}
+
+The first condition is a general requirement for fibration-like maps of quasi-categories,
+and it is satisfied by any functor between ordinary categories.
+
+\begin{proposition}
+    A left fibration $X\to S$ is equivalently a cocartesian fibration
+    such that every edge of $X$ is cocartesian. \qed
+\end{proposition}
+
+Cocartesian fibrations provide an obvious way to 
+define transport functors between the fibres,
+which implies the following theorem.
+
+\begin{theorem}[Grothendieck construction]
+    A cocartesian fibration $p\:X\to S$ of ordinary categories
+    gives rise to a $2$-functor $S\to\cat{Cat}$ by taking the fibres.
+    Conversely, every $2$-functor $S\to\cat{Cat}$
+    corresponds to a cocartesian fibration $X\to S$ in this manner. \qed
+\end{theorem}
+
+For quasi-categories, one needs a ``marked'' version
+of the straightening and unstraightening construction.
+We define $\cat{sSet}^+$ to be the category of simplicial sets 
+with some marked edges, such that all degenerate edges are marked.
+The morphisms in $\cat{sSet}^+$ are required to send marked edges to marked edges.
+
+For a simplicial set $S$, let $S^\sharp$ denote 
+the marked version of $S$ in which all edges are marked,
+and let $S^\flat$ denote the marked version of $S$
+in which only the degenerate edges are marked.
+We denote $(\cat{sSet}^+)_{\/{S^\sharp}}$ by $\cat{sSet}^+_{\/S}$.
+
+\begin{theorem}
+    There exists a Quillen equivalence
+    \[\begin{tikzcd}[column sep=3em]
+        \cat{sSet}^+_{\/S}\ar[r,bend left,start anchor=north east,end anchor=north west,"\operatorname{St}_S^+"]
+        \ar[r,phantom,"\bot"] &
+        \vphantom{\cat{sSet}^+_{\/S}}
+        \operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{sSet}^+)\rlap{\ ,}
+        \ar[l,bend left,start anchor=south west,end anchor=south east,"\operatorname{Un}_S^+"]
+    \end{tikzcd}\]
+    given suitable model structures on both categories.
+    Moreover, 
+    \begin{itms}
+        \item $\operatorname{Un}_S^+$ sends functors to
+        $\cat{QsCat}\simeq(\cat{sSet}^+)_{\mathrm{cf}}$
+        to cocartesian fibrations.
+        \item $\operatorname{St}_S^+$ gives back the fibres
+        for cocartesian fibrations,
+        up to a DK equivalence.
+    \end{itms}
+\end{theorem}
+
+See \cite[Theorem~3.2.0.1]{htt}.
+
+\begin{example}
+    Let $S=\cat{Cat}_\infty$ be the category of quasi-categories,
+    and let $F:=(-)^\flat\in\operatorname{Fun}(S,\cat{sSet}^+)$
+    be the inclusion functor.
+    The cocartesian fibration 
+    \[ \operatorname{Un}_S^+F=:\mathscr Z\to\cat{Cat}_\infty \]
+    is a \term{universal fibration}, in that every cocartesian fibration 
+    is equivalent to its pullback.
+    Namely, let $X\to T$ be a cocartesian fibration.
+    Then there exists a \term{classifying map}
+    \[ f:=\operatorname{St}_T^+X\:T\to\cat{Cat}_\infty, \]
+    so that 
+    \[ X\simeq f^*\mathscr Z. \]
+    Roughly speaking, this is because of the diagram 
+    \[ \begin{tikzcd}[column sep=.5em]
+        f^*\operatorname{Un}_S^+F \ar[r,phantom,"\simeq"] &
+        \operatorname{Un}_T^+G \ar[rr]\ar[d]\ar[drr,phantom,very near start,"\ulcorner"] & \ &
+        \operatorname{Un}_S^+F\ar[d] \\
+        f^*S \ar[r,phantom,"\simeq"] & T\ar[rr] && S\rlap{\ ,}
+    \end{tikzcd} \]
+    where $G:=f$. \varqed
+\end{example}

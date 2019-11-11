@@ -1,0 +1,80 @@
+\usepackage{geometry}
+\geometry{paperwidth=155mm,paperheight=235mm,outer=2cm,inner=2cm,top=2.5cm,bottom=2cm}
+\usepackage{graphicx}
+
+% unicode math
+\usepackage{amsmath}
+\usepackage{unicode-math}
+% \setmainfont{XITS}
+% \setmathfont{XITS Math}
+\setmainfont{STIX Two Text}
+\setmathfont{STIX Two Math}
+% \setmainfont{Baskerville}
+% \setsansfont[Scale=.9]{Avenir LT 45 Book}
+% \setmathfont{XITS Math}
+% \setmathfont[range={\mathup,\mathpunct}]{Baskerville}
+% \setmathfont[range=\mathit]{Baskerville Math Italic}
+% \setmathfont[range=\mathsfup,Scale=.9]{Avenir LT 45 Book}
+% \setmathfont[range={\int,\sum,\prod,\coprod}]{STIX Two Math}
+\newfontfamily\SourceSans{Source Sans Pro}[Scale=MatchLowercase]
+
+% environments
+\makeatletter
+\def\@begintheorem#1#2{\trivlist\item[\hskip \labelsep{{\textbf{#1\ #2.}}}]\it}
+\def\@opargbegintheorem#1#2#3{\trivlist\item[\hskip \labelsep{{\textbf{#1\ #2}\ $($#3$)$\textbf{.}}}]\it}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newenvironment{proof}[1][Proof]{\trivlist\item[\hskip\labelsep{\hspace*{1.5em}\it #1.}]}{\ifvmode\ \fi\qed\endtrivlist}
+\newenvironment{proof*}[1][Proof]{\trivlist\item[\hskip\labelsep{\hspace*{1.5em}\it #1.}]}{\endtrivlist}
+\def\showqed{\nolinebreak\hfill$◻$}
+\def\qed{\showqed}
+\def\qedhere{\eqno ◻\noqed}
+\def\noqed{\gdef\qed{\gdef\qed{\showqed}}}
+\def\restoreqed{\gdef\qed{\showqed}}
+
+\def\varqed{\nolinebreak\hfill$◃$}
+\newenvironment{example}{\trivlist\item[\hskip\labelsep{\refstepcounter{theorem}\gdef\@currentlabel{\thetheorem}\textbf{Example \thetheorem.}}]}{\endtrivlist}
+\newenvironment{construction}{\trivlist\item[\hskip\labelsep{\refstepcounter{theorem}\gdef\@currentlabel{\thetheorem}\textbf{Construction \thetheorem.}}]}{\endtrivlist}
+\newenvironment{remark}{\trivlist\item[\hskip\labelsep{\refstepcounter{theorem}\gdef\@currentlabel{\thetheorem}\textbf{Remark \thetheorem.}}]}{\endtrivlist}
+\makeatother
+
+\newenvironment{itms}{\begin{itemize}\itemsep=0pt\parsep=0pt}{\end{itemize}}
+\newenvironment{enum}{\begin{enumerate}[label=(\arabic*)]\itemsep=0pt\parsep=0pt}{\end{enumerate}}
+
+% ref
+\usepackage{xcolor}
+\definecolor{darkblue}{HTML}{0058c8}
+
+\usepackage[colorlinks,linkcolor=darkblue,urlcolor=darkblue,citecolor=darkblue]{hyperref}
+\hypersetup{bookmarksnumbered}
+
+\def\thesection{\arabic{section}\texorpdfstring{}{.}} % pdf bookmark numbering
+\setcounter{secnumdepth}{1} % suppress subsection numbering
+
+% text commands
+\def\term#1{\textbf{\textup{#1}}}
+
+\def\tagtext#1{\ifvmode\par\noindent\fi\raisebox{-3pt}{\tikz{
+  \node[rectangle,rounded corners=5pt,fill=gray!10,inner ysep=0pt,inner xsep=4pt,outer sep=0]
+    {\textcolor{gray!50}{\small\bf\SourceSans\strut #1}};
+}}}
+\def\nyw{\tagtext{Not yet written}}
+\def\tbc{\tagtext{To be continued}}
+\def\nex{\tagtext{Needs expanding}}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\tikzset{>=latex}
+\tikzcdset{
+  arrow style=tikz,
+  arrows={/tikz/line width=.5pt},
+  diagrams={>={Straight Barb[scale=0.8]}},
+  nodes={inner xsep=3pt,inner ysep=3pt}
+}
+
+% commands
+\input{commands}
+

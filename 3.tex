@@ -1,0 +1,442 @@
+Simplicial sets arise from many topics in mathematics,
+and they have a wide range of applications in various branches of mathematics.
+For our purpose, they will be used as a model for $\infty$-categories,
+as well as ordinary categories.
+We will see how this is done in this section.
+
+\subsection{Definition and examples}
+
+Before giving the actual definition,
+let us look at some examples of simplicial sets.
+
+\begin{example}
+    Let $X$ be a simplicial complex (as in topology),
+    together with an ordering of vertices for each simplex $\sigma$,
+    such that the inclusion of a face of $\sigma$ into $\sigma$
+    preserves the ordering of vertices.
+    Let $X_n$ denote the set of $n$-simplices of $X$, which may be degenerate.
+    Then we have a series of maps
+    \[\begin{tikzcd}
+        \cdots\ar[r,shift left=3ex]\ar[r,shift left=1ex]\ar[r,shift right=1ex]\ar[r,shift right=3ex] &
+        X_2\ar[l,shift left=2ex]\ar[l]\ar[l,shift right=2ex]\ar[r,shift left=2ex]\ar[r]\ar[r,shift right=2ex] &
+        X_1\ar[l,shift left=1ex]\ar[l,shift right=1ex]\ar[r,shift left=1ex]\ar[r,shift right=1ex] &
+        X_0\rlap{\ ,}\ar[l]
+    \end{tikzcd}\]
+    % \xymatrix{ \cdots\ar@<3ex>[r]\ar@<1ex>[r]\ar@<-1ex>[r]\ar@<-3ex>[r] & X_2\ar@<2ex>[l]\ar[l]\ar@<-2ex>[l]\ar@<2ex>[r]\ar[r]\ar@<-2ex>[r] & X_1\ar@<1ex>[l]\ar@<-1ex>[l]\ar@<1ex>[r]\ar@<-1ex>[r] & X_0\rlap{\ ,}\ar[l] }
+    where $X_n$ has $(n+1)$ maps to $X_{n-1}$, called the \emph{face maps},
+    defined by taking the $(n+1)$ faces of an $n$-simplex.
+    $X_n$ also has $(n+1)$ maps to $X_{n+1}$, called the \emph{degeneracy maps},
+    defined by regarding an $n$-simplex as a degenerate $(n+1)$-simplex.
+    This structure is called a \emph{simplicial set}. \varqed
+\end{example}
+
+\begin{example}
+    Let $X$ be a topological space, and denote
+    \[\operatorname{Sing}(X)_n:=\Hom_{\cat{Top}}(\Delta^n,X),\]
+    where $\Delta^n$ denotes the standard $n$-simplex in topology.
+    Then $\operatorname{Sing}(X)$ is a simplicial set,
+    having the same structure as in the previous example.
+    This construction is used to define singular (co)homology in algebraic topology. \varqed
+\end{example}
+
+Now we will give the formal definition of a simplicial set.
+
+\begin{definition}
+    The category $\bfDelta$ is defined as follows.
+    \begin{itms}
+        \item Its objects are the sets $[n]:=\{0,\dotsc,n\}$ for all integers $n\geq0$.
+        \item The hom-set $\Hom_\bfDelta([m],[n])$ consists of all maps from $[m]$ to $[n]$
+              preserving the order $\leq$.
+    \end{itms}
+\end{definition}
+
+In the category $\bfDelta$, there are two special classes of morphisms.
+\begin{itms}
+    \item There are $n$ maps from $[n]$ to $[n-1]$,
+    denoted by $d^i$ $(0\leq i\leq n-1)$,
+    defined by merging the elements $i$ and $i+1$ in $[n]$.
+    These are called the \term{coface maps}.
+    \item There are $(n+2)$ maps from $[n]$ to $[n+1]$,
+    denoted by $s^i$ $(0\leq i\leq n+1)$,
+    defined by skipping the element $i$ in $[n+1]$.
+    These are called the \term{codegeneracy maps}.
+\end{itms}
+In fact, all morphisms in $\bfDelta$
+can be written as a composition of these coface and codegeneracy maps.
+These maps form a diagram
+\[\begin{tikzcd}
+    \relax[0]\ar[r] &
+    \relax[1]\ar[l,shift left=1ex]\ar[l,shift right=1ex]\ar[r,shift left=1ex]\ar[r,shift right=1ex] &
+    \relax[2]\ar[l,shift left=2ex]\ar[l]\ar[l,shift right=2ex]\ar[r,shift left=2ex]\ar[r]\ar[r,shift right=2ex] &
+    \cdots\ar[l,shift left=3ex]\ar[l,shift left=1ex]\ar[l,shift right=1ex]\ar[l,shift right=3ex]
+\end{tikzcd}\]
+% \xymatrix{ [0]\ar[r] & [1]\ar@<1ex>[l]\ar@<-1ex>[l]\ar@<1ex>[r]\ar@<-1ex>[r] & [2]\ar@<2ex>[l]\ar[l]\ar@<-2ex>[l]\ar@<2ex>[r]\ar[r]\ar@<-2ex>[r] & \cdots\ar@<3ex>[l]\ar@<1ex>[l]\ar@<-1ex>[l]\ar@<-3ex>[l] }
+in the category $\bfDelta$.
+
+\begin{definition}
+    A \term{simplicial set} is a functor from $\bfDelta\op$ to $\cat{Set}$,
+    i.e.\ a contravariant functor from $\bfDelta$ to $\cat{Set}$.
+    We denote the category of simplicial sets by
+    \[\cat{sSet}:=\cat{Fun}(\bfDelta\op,\cat{Set}).\]
+    More generally, for any category $\cat C$,
+    a \term{simplicial object} in $\cat C$ is a functor from $\bfDelta\op$ to $\cat{C}$,
+    and a \term{cosimplicial object} in $\cat C$ is a functor from $\bfDelta$ to $\cat{C}$.
+\end{definition}
+
+Let $X$ be a simplicial set.
+The set $X_n:=X([n])$ is called the set of \term{$n$-simplices} of $X$.
+The maps 
+\[ d_i\:X_n\to X_{n-1}\quad\text{and}\quad s_i\:X_n\to X_{n+1},\quad\text{for }0\leq i\leq n, \]
+induced by the morphisms $d^i$ and $s^i$ in the category $\bfDelta$,
+are called the \term{face maps} and the \term{degeneracy maps}, respectively.
+
+\begin{example}
+    We construct some examples of simplicial sets.
+    \begin{itms}
+        \item The simplicial set $\Delta[n]$,
+        as a simplicial complex, corresponds to the standard $n$-simplex.
+        Its $k$-simplices are in 1--1 correspondence with 
+        order-preserving maps $[k]\to[n]$,
+        where $[n]$ can be seen as the set of vertices of $\Delta[n]$.
+        \item Note that $\Delta[\bullet]$ is a cosimplicial object in $\cat{sSet}$.
+        \item By removing the only non-degenerate $n$-simplex in $\Delta[n]$,
+        we obtain its boundary $\partial\Delta[n]$.
+        \item The simplicial set $S^n$ is defined by $\Delta[n]\/\partial\Delta[n]$,
+        where the quotient is done degreewise. \varqed
+    \end{itms}
+\end{example}
+
+\begin{proposition}
+    The category $\cat{sSet}$ admits all (small) colimits and limits, 
+    which are defined degreewise, e.g.
+    \[ (X\times Y)_n:=X_n\times Y_n. \]
+\end{proposition}
+
+\begin{proof}
+    Exercise for the reader.
+\end{proof}
+
+For example, the product $\Delta[1]\times\Delta[1]$ is a solid square, which looks like
+\[\begin{tikzcd}
+    \bullet\ar[d]\ar[r]\ar[dr] & \bullet\ar[d] \\
+    \bullet\ar[r] & \bullet\rlap{\ ,}
+\end{tikzcd}\]
+% \xymatrix{ \bullet\ar[d]\ar[r]\ar[dr] & \bullet\ar[d] \\ \bullet\ar[r] & \bullet\rlap{\ ,} }
+with $2$ non-degenerate $2$-simplices and $5$ non-degenerate $1$-simplices,
+but actually it has $3\times3=9=5+4$ possibly degenerate $1$-simplices in total.
+
+\subsection{Geometric realisation}
+
+In our mind, a simplicial set is thought of as
+a simplicial complex together with an ordering of vertices for each simplex.
+The idea of geometric realisation is that one can
+forget the ordering and get a topological space.
+In fact, geometric realisation is a much more general construction
+which can not only give topological spaces,
+but any kind of objects we want. Let us explain this.
+
+\begin{proposition}
+    Every simplicial set can be obtained from $\emptyset$
+    by attaching $\Delta[n]$ along its boundary $\partial\Delta[n]$ and taking colimits. \qed
+\end{proposition}
+
+In the category $\cat{Top}$, we have the standard $n$-simplex $\Delta^n$, as a topological space.
+Moreover, $\Delta^\bullet$ is a cosimplicial object in $\cat{Top}$
+which specifies ``how $\Delta[n]$ should look like in $\cat{Top}$''.
+Given this data, we can easily define a functor
+\[ |{\bullet}|\:\cat{sSet}\to\cat{Top} \]
+by sending $\Delta[n]$ to $\Delta^n$,
+and extending it to other simplicial sets by taking colimits.
+This functor is called the \term{geometric realisation} functor.
+
+Moreover, the functor $|{\bullet}|$ has a right adjoint called $\operatorname{Sing}$,
+which is defined by 
+\[\operatorname{Sing}X:=\Hom_{\cat{Top}}(\Delta^\bullet,X),\]
+which is exactly as we defined it before.
+
+This construction can be generalised as follows.
+
+\begin{construction}\label{con-3-a}
+    Let $\cat C$ be a category with colimits.
+    If we specify any cosimplicial object $\Delta^\bullet$ in $\cat{C}$,
+    then we know ``how $\Delta[n]$ should look like in $\cat{C}$'',
+    and we can similarly define an adjunction
+    \[\begin{tikzcd}[column sep=5em]
+        \cat{sSet}\ar[r,bend left=20,"\Delta{[n]}\mapsto\Delta^n"]\ar[r,phantom,"\bot"] &
+        \rlap{$\cat{C}$\ .}\phantom{\cat{sSet}}\ar[l,bend left=20,"X\mapsto\Hom_{\cat C}(\Delta^\bullet\comma X)"]
+    \end{tikzcd}\eqno◃\]
+    % \xymatrix @C=5em {\cat{sSet}\ar@/^2ex/[r]^{\Delta{[n]}\mapsto\Delta^n}\ar@{}[r]|{\bot} & \rlap{\cat{C}\ .}\phantom{\cat{sSet}}\ar@/^2ex/[l]^{X\mapsto\Hom_{\cat C}(\Delta^\bullet,X)}}
+\end{construction}
+
+As we will see in the future,
+many constructions related to simplicial sets are special cases of this construction.
+Here is one example.
+
+\begin{example}
+    Let us take $\cat{C}=\cat{Ch}_R$, the category of cochain complexes of $R$-modules,
+    where $R$ is a ring. Take
+    \[\Delta^n:=\quad\Bigl(\cdots\to0\to
+    \underset{(-n)}{R^{\oplus\binom{n+1}{n+1}}}\to
+    \cdots\to
+    \underset{(-1)}{R^{\oplus\binom{n+1}{2}}}\to
+    \underset{(0)}{R^{\oplus(n+1)}}\to0\to\cdots\Bigr)\]
+    to be the simplicial chain complex of the standard $n$-simplex.
+    This construction gives a functor $\cat{sSet}\to\cat{Ch}_R$,
+    which computes the simplicial homology of a simplicial set.
+    The composition
+    \[\cat{Top}\xrightarrow{\operatorname{Sing}}\cat{sSet}\to\cat{Ch}_R\]
+    computes the singular homology of a topological space. \varqed
+\end{example}
+
+Let us go back to the adjunction $|{\bullet}|\dashv\operatorname{Sing}$.
+Actually, this is a Quillen equivalence between model categories.
+
+For $0\leq i\leq n$, we define the simplicial set $\Lambda_i[n]$, called a \term{horn},
+by removing the face of $\partial\Delta[n]$ opposite to the $i$-th vertex.
+
+\begin{theorem}
+    The category $\cat{sSet}$ has a \term{standard model structure}, with
+    \begin{itms}
+        \item $\cat W:=\{$weak homotopy equivalences of topological spaces$\}$.
+        \item $\cat{Cof}:=\{$injections$\}$.
+        \item $\cat{Fib}=\operatorname{RLP}\{\Lambda_i[n]\hookrightarrow\Delta[n]\mid0\leq i\leq n,\ n>0\}$.
+        \item $\cat{Fib\cap W}=\operatorname{RLP}\{\partial\Delta[n]\hookrightarrow\Delta[n]\mid n\geq0\}$.
+    \end{itms}
+\end{theorem}
+
+The proof rather tedious and will not be presented here.
+The reader is referred to~\cite[Theorem~3.6.5]{hovey} for a proof.
+
+Finally, we state without proof the following result.
+
+\begin{theorem}
+    The adjunction $|{\bullet}|\dashv\operatorname{Sing}$
+    is a Quillen equivalence between $\cat{sSet}$ and $\cat{Top}$.
+\end{theorem}
+
+For a proof, see~\cite[Theorem 3.6.7]{hovey}.
+
+As an easy exercise, the reader can show that the adjunction is a Quillen adjunction,
+without using this theorem.
+
+\subsection{Categories as simplicial sets}
+
+Simplicial sets can be seen as a model for categories.
+For example, the simplicial set $\Delta[2]$ can be seen as a diagram
+\[\begin{tikzcd}[row sep=2em,column sep=1em]
+    &\bullet\ar[dr] \\
+    \bullet\ar[ur]\ar[rr]\ar[rr,phantom,bend left=45,"\Downarrow"] && \bullet\rlap{\ ,}
+\end{tikzcd}\]
+% \xymatrix @R=2em @C=1em{ &\bullet\ar[dr] \\ \bullet\ar[ur]\ar[rr]\ar@{}@/^2.5ex/[rr]|{\textstyle\Downarrow} && \bullet\rlap{\ ,} }
+where the double arrow indicates that
+the $2$-simplex ``witnesses'' the composition of the two arrows.
+In an ordinary category, this diagram is just a chain of $2$ arrows
+\[\bullet\to\bullet\to\bullet\ .\]
+As another example, the simplicial set $\Delta[2]\times\Delta[1]$
+corresponds to a diagram
+\[\begin{tikzcd}
+    \bullet\ar[d]\ar[r] & \bullet\ar[d]\ar[r] & \bullet\ar[d] \\
+    \bullet\ar[r] & \bullet\ar[r] & \bullet\rlap{\ .}
+\end{tikzcd}\]
+% \xymatrix{ \bullet\ar[d]\ar[r] & \bullet\ar[d]\ar[r] & \bullet\ar[d] \\ \bullet\ar[r] & \bullet\ar[r] & \bullet\rlap{\ .} }
+
+\begin{definition}
+    Let $\cat C$ be a (small) category.
+    The \term{nerve} of $\cat C$ is a simplicial set denoted by $\operatorname{N}(\cat C)$.
+    Its $n$-simplices are chains of $n$ arrows
+    \[\bullet\to\bullet\to\cdots\to\bullet\]
+    in $\cat C$.
+    Its $0$-th (resp.\ $n$-th) face map is defined by discarding the first arrow (resp.\ the last arrow).
+    For $0<i<n$, its $i$-th face map is defined by composing its $i$-th and $(i+1)$-th maps.
+    Its degeneracy maps are defined by inserting identity morphisms.
+\end{definition}
+
+The reader can verify that, in the above examples,
+the nerve of the categories are the corresponding simplicial sets.
+
+\begin{remark}
+    In fact, this is another special case of (\ref{con-3-a}).
+    Namely, the cosimplicial object $\Delta^\bullet$ in $\cat{Cat}$, given by 
+    \[\Delta^n:=\quad\bullet\to\bullet\to\cdots\to\bullet\]
+    with $n$ consecutive arrows, gives an adjunction
+    \[\begin{tikzcd}
+        \cat{sSet}\ar[r,bend left=30,"\Ho"]\ar[r,phantom,"\bot"] &
+        \rlap{$\cat{Cat}$\ .}\phantom{\cat{sSet}}\ar[l,bend left=30,"\operatorname{N}"]
+    \end{tikzcd}\]
+    % \xymatrix{ \cat{sSet}\ar@/^/[r]^{\Ho}\ar@{}[r]|{\bot} & \cat{Cat}\rlap{\ .}\ar@/^/[l]^{\operatorname{N}} }
+    The right adjoint is precisely the nerve functor defined above. \varqed
+\end{remark}
+
+Note that not all simplicial sets are categories.
+For example, consider $\Lambda_1[2]$, with two arrows that cannot be composed.
+In fact, if we define the \term{spine} $\operatorname{Sp}(n)\subset\Delta[n]$
+to consist of all vertices and the edges $[i,i+1]$ for $0\leq i<n$,
+then a simplicial set $X$ is the nerve of a category,
+if and only if it satisfies the lifting property
+\[\begin{tikzcd}
+    \operatorname{Sp}(n)\ar[d,hook]\ar[r] & X \\
+    \Delta[n]\ar[ur,dashed,"\exists!"']
+\end{tikzcd}\]
+% \xymatrix{ \operatorname{Sp}(n)\ar[d]\ar[r] & X \\ \Delta[n]\ar@{-->}[ur] }
+for all $n\geq 0$.
+
+\subsection{Kan complexes and quasi-categories}
+
+Kan complexes are simplicial sets that looks like topological spaces,
+and will be used to model $\infty$-groupoids.
+
+\begin{definition}
+    A \term{Kan complex} is a fibrant simplicial set.
+    In other words, it satisfies the \term{horn extension property},
+    that is, the lifting property
+    \[\begin{tikzcd}
+        \Lambda_i[n]\ar[d,hook]\ar[r] & X \\
+        \Delta[n]\ar[ur,dashed]
+    \end{tikzcd}\]
+    % \xymatrix{ \Lambda_i[n]\ar[d]\ar[r] & X \\ \Delta[n]\ar@{-->}[ur] }
+    for all $0\leq i\leq n$, $n>0$.
+\end{definition}
+
+
+\begin{example}
+    The simplicial set $\Delta[n]$ is \emph{not} a Kan complex if $n\geq1$.
+    Namely, consider the horn
+    \[\begin{aligned}
+        \Lambda_0[2] &\to \Delta[n], \\
+        0,1,2 &\mapsto 0,1,0.
+    \end{aligned}\]
+    Then it is impossible to extend this horn to make a $\Delta[2]$.
+    The reason is that $\Delta[n]$, seen as a category,
+    does not have inverses of morphisms. In other words, it does not look like a groupoid,
+    while Kan complexes must look like groupoids. \varqed
+\end{example}
+
+\begin{example}
+    For any topological space $X$, the simplicial set $\operatorname{Sing}X$
+    is a Kan complex, as one can show easily.
+    Therefore, for any simplicial set $S$, the simplicial set
+    $\operatorname{Sing}|S|$
+    can be used as a fibrant replacement of $S$. \varqed
+\end{example}
+
+As we have seen above, Kan complexes look like groupoids with higher structures.
+In a Kan complex, $1$-morphisms are invertible,
+but only up to a $2$-morphism, i.e.\ $2$-simplex.
+The horn extension property ensures that all higher morphisms
+are also invertible, up to even higher morphisms.
+This is exactly what an $\infty$-groupoid should be.
+
+\begin{definition}
+    An \term{$\infty$-groupoid}, or an \term{$(\infty,0)$-category},
+    is a Kan complex.
+\end{definition}
+
+For example, for a topological space $X$,
+the Kan complex $\operatorname{Sing}X$ can be seen as 
+the ``fundamental $\infty$-groupoid'' of $X$.
+
+\begin{definition}
+    A \term{homotopy type} is a homotopy type of $\infty$-groupoids,
+    i.e.\ an element of $\Ho(\cat{sSet})$, which is equivalent to the category
+    $\Ho(\cat{Top})\simeq\cat{hCW}$.
+\end{definition}
+
+Next, we wish to define $(\infty,1)$-categories in a similar way.
+The following table shows that the extension of horns corresponds to 
+properties of a category,
+assuming that we are considering the nerve of an ordinary category.
+\begin{center}
+    \begin{tabular}{cc}
+        \textbf{Horn} & \textbf{Property} \\ \hline
+        $\Lambda_0[2]$ & every morphism is left invertible \\
+        $\Lambda_1[2]$ & composition of morphisms \\
+        $\Lambda_2[2]$ & every morphism is right invertible \\
+        $\Lambda_0[3]$ & every morphism is an epimorphism \\
+        $\Lambda_1[3]$, $\Lambda_2[3]$ & associativity of composition \\
+        $\Lambda_3[3]$ & every morphism is a monomorphism \\
+        otherwise & (satisfied by any category)
+    \end{tabular}
+\end{center}
+As an exercise, the reader should verify everything in the table.
+
+We notice that the extension of
+$\Lambda_0[2]$, $\Lambda_2[2]$, $\Lambda_0[3]$ and $\Lambda_3[3]$
+can not be satisfied by all categories,
+while the extension of ``inner horns'' $\Lambda_i[n]$ for $0<i<n$
+describes properties that any category should satisfy.
+
+\begin{definition}
+    A \term{quasi-category}, or an \term{$(\infty,1)$-category},
+    is a simplicial set having the lifting property
+    \[\begin{tikzcd}
+        \Lambda_i[n]\ar[d,hook]\ar[r] & X \\
+        \Delta[n]\ar[ur,dashed]
+    \end{tikzcd}\]
+    % \xymatrix{ \Lambda_i[n]\ar[d]\ar[r] & X \\ \Delta[n]\ar@{-->}[ur] }
+    for $0<i<n$. In other words, \term{inner horns} can be extended.
+\end{definition}
+
+The terminology is that quasi-categories are 
+one of the various models for $(\infty,1)$-categories.
+For this reason, we will stick to the term ``quasi-categories''.
+Some people also call quasi-categories ``weak Kan complexes''.
+
+\subsection{Roadmap}
+
+A number of models and tools for studying $(\infty,1)$-categories 
+will be used in the sequel. 
+Since we have finished most of the definitions,
+it is a good point now to draw a roadmap
+as a preview of what we will encounter.
+
+For a monoidal category $\cat V$,
+let $\cat{Cat}_{\cat V}$ denote the category of categories enriched over $\cat V$.
+(We ignore the set-theoretic issues here.)
+Let $\cat{Model}$ denote the category of model categories.
+Let $\cat{Model}_{\cat V}$ denote the category of $\cat V$-enriched model categories,
+which we have not defined yet.
+Let $\cat{QsCat}$ denote the category of quasi-categories
+(which should really be replaced by $\cat{sSet}$ in the following diagram).
+
+We have a diagram of categories 
+\[\begin{tikzcd}[row sep=1ex]
+    \cat{Model} \ar[dd,"\text{localise}"']
+    \ar[ddddr,start anchor={[xshift=-.5ex]west},bend right=90,"\Ho"'] &
+    \cat{Model}_{\cat{sSet}} \ar[l,"\text{forget}"'] 
+    \ar[dd,"\text{forget}"'] \\ 
+%
+    && \cat{Cat}_{\cat{sMod}_R} \ar[r,bend left=20,"\text{Dold--Kan}"]
+    \ar[r,phantom,"\bot\rlap{$\scriptstyle\simeq$}"]
+    \ar[dl,bend left=20,start anchor={[xshift=-1.5ex,yshift=1ex]},
+    end anchor={[yshift=1ex]},pos=.7,"\text{forget}" {rotate=20,inner sep=1pt}] &
+    \rlap{$\cat{Cat}_{\cat{Ch}_R}$\scriptsize\enspace(dg categories)}
+    \phantom{\cat{Cat}_{\cat{sMod}_R}} \ar[l,bend left=20] \\
+%
+    \cat{QsCat} \ar[r,bend left=20,"\mathfrak C"]
+    \ar[r,phantom,"\bot\rlap{$\scriptstyle\simeq$}"] \ar[ddr,bend right,"h"'] &
+    \cat{Cat}_{\cat{sSet}} \ar[l,bend left=20,"\mathfrak N"] \ar[dd,"h"']
+    \ar[ur,bend left=20,start anchor={[xshift=1ex,yshift=1ex]},
+    end anchor={[yshift=.5ex]},pos=.7,"\text{free}" rotate=20]
+    \ar[ur,phantom,yshift=1ex,"\bot" rotate=20]
+    \ar[dr,bend left=20,start anchor={[yshift=-1ex]},
+    end anchor={[xshift=-1.5ex,yshift=-1ex]},pos=.5,"|\bullet|" {rotate=-20,inner sep=1pt}]
+    \ar[dr,phantom,yshift=-1ex,"\bot\scriptstyle\simeq" rotate=-20] \\
+    &&\cat{Cat}_{\cat{Top}} \ar[dl,bend left,"h"]
+    \ar[ul,bend left=20,start anchor={[xshift=-1ex,yshift=-1ex]},
+    end anchor={[xshift=.5ex,yshift=-1ex]},pos=.2,"\operatorname{Sing}" rotate=-20]\\
+%
+    &\cat{Cat}_{\cat{hCW}} \ar[dd,"\pi_0"] \\ \  \\
+    &\cat{Cat}\rlap{\ .}
+\end{tikzcd}\hspace{3em}\]
+Some of the maps are easy to define, while others will be defined later.
+This diagram is ``commutative'', in a sense which will be made precise later on.
+Everything above $\cat{Cat}_{\cat{hCW}}$ can be seen as
+models for $(\infty,1)$-categories.
+Homotopy theory in these categories are called \term{homotopy coherent},
+as opposed to \term{homotopy commutative}, 
+which refers to commutative diagrams in $\cat{Cat}_{\cat{hCW}}$.
+
+As we can see in the diagram, homological algebra, which is done in a dg (differential graded) category,
+is related to $(\infty,1)$-category theory.
+This relationship will be studied a few sections later.
+

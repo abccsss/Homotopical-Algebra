@@ -1,0 +1,162 @@
+In infinity categories,
+homotopy equivalent objects are equivalent by definition.
+Therefore, the only well-defined notion of (co)limits 
+is that of homotopy (co)limits.
+It is very difficult to compute homotopy (co)limits
+directly from the definitions.
+However, model categories will give us great help in such computations.
+
+\subsection{Colimits and limits}
+
+The simplest colimit is the empty colimit, that is, the initial object.
+In ordinary category theory, the initial object is characterised by
+the property that it admits a unique morphism to any other object.
+
+The $\infty$-categorical way of saying something is unique 
+is to say that all possible choices form a contractible space,
+i.e.\ a contractible Kan complex.
+
+\begin{definition}
+    Let $\cat C$ be a quasi-category.
+    An object $x\in\cat C$ is called an \term{initial object},
+    if for any $y\in\cat C$, the mapping space $\Hom_{\cat C}(x,y)$ is contractible.
+\end{definition}
+
+The notation $\Hom_{\cat C}(x,y)$ refers to any one of
+\[\Hom_{\cat C}^\vartriangleleft(x,y),\quad
+\Hom_{\cat C}^\vartriangleright(x,y),\quad 
+\Hom_{\mathfrak C\cat C}(x,y),\quad\text{etc.,} \]
+which all have the same homotopy type.
+
+\begin{remark}
+    An initial object of $\cat C$
+    is equivalently an initial object of the $\cat{hCW}$-enriched category $h\cat C$.
+    In fact, most of the notions defined in this section will be equivalent to 
+    the corresponding notions for $\cat{hCW}$-enriched categories. \varqed
+\end{remark}
+
+One should expect that initial objects are unique if they exist.
+As before, uniqueness means being a contractible space.
+
+\begin{proposition}
+    Let $\cat C$ be a quasi-category.
+    \begin{itms}
+        \item An object $x\in\cat C$ is an initial object, if and only if
+        the left fibration
+        \[ \cat C_{x\/}\to\cat C \]
+        is a trivial fibration.
+        \item The full subcategory spanned by the initial objects 
+        is either empty, or a contractible Kan complex.
+    \end{itms}
+\end{proposition}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+Colimits are nothing but initial objects of under-categories.
+
+\begin{definition}
+    Let $\cat C$ be a quasi-category,
+    $K$ a simplicial set,
+    and let $f\:K\to\cat C$ be a diagram.
+    A \term{colimit} of $f$ is an initial object of $\cat C_{K\/}$.
+\end{definition}
+
+We immediately deduce the following.
+
+\begin{corollary}
+    Let $\cat C$ be a quasi-category,
+    $K$ a simplicial set,
+    and let $f\:K\to\cat C$ be a diagram.
+    \begin{itms}
+        \item A map $\bar f\:K^\vartriangleright\to\cat C$
+        is a colimit of $f$, if and only if
+        the induced left fibration
+        \[ \cat C_{K^\vartriangleright\/}\to\cat C_{K\/} \]
+        is a trivial fibration.
+        \item The category of colimits of $f$ 
+        is either empty, or a contractible Kan complex.
+    \end{itms}
+\end{corollary}
+
+\begin{proof}
+    We have an isomorphism of simplicial sets
+    \[ \cat C_{K^\vartriangleright\/}\simeq(\cat C_{K\/})_{x\/}, \]
+    where $x$ denotes the image of the cone point of $K^\vartriangleright$.
+    Everything else is clear.
+\end{proof}
+
+\begin{remark}\label{thm-6-c}
+    The natural map 
+    \[ \cat C_{K^\vartriangleright\/}\to\cat C_{x\/} \]
+    is always a trivial fibration,
+    as can be shown by verifying the lifting property,
+    by transfinite induction on the number of simplices of $K$.
+    Details are left to the reader. \varqed
+\end{remark}
+
+Colimits are not computable via this definition.
+We need to deduce some of their properties to make them computable.
+
+\begin{proposition}
+    Let $\cat C$ be a quasi-category,
+    and let $\{x_\alpha\}$ be a collection of objects in $\cat C$.
+    An object $x\in\cat C$ is a coproduct of the objects $x_\alpha$,
+    if and only if for any $y\in\cat C$, the induced map 
+    \[ \Hom_{\cat C}(x,y)\to\prod_\alpha\Hom_{\cat C}(x_\alpha,y) \]
+    is a homotopy equivalence.
+\end{proposition}
+
+\begin{proof}
+    The right hand side is equivalent to  
+    \[ \prod_\alpha{}(\cat C_{x_\alpha\/})_y
+    \simeq (\cat C_{\{x_\alpha\}\/})_y, \]
+    where the subscript $y$ means taking the fibre of the map to $\cat C$.
+    The left hand side is equivalent to 
+    \[ (\cat C_{x\/})_y\simeq((\cat C_{\{x_\alpha\}\/})_{x\/})_y \]
+    by (\ref{thm-6-c}). Thus $x$ is a coproduct, if and only if the left fibration
+    \[(\cat C_{\{x_\alpha\}\/})_{x\/}\to\cat C_{\{x_\alpha\}\/}\]
+    is a trivial fibration,
+    if and only if it is a DK equivalence (since DK equivalences are weak homotopy equivalences),
+    if and only if their fibres are equivalent, by the next lemma.
+\end{proof}
+
+\begin{lemma}
+    Let $S$ be a simplicial set, and let $X,Y\in\cat{sSet}_{\/S}$
+    be two left fibrations over $S$.
+    Let $f\:X\to Y$ be a map in $\cat{sSet}_{\/S}$.
+    Then $f$ is a DK equivalence if and only if 
+    $f$ induces weak equivalences on each fibre.
+\end{lemma}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+This result on coproducts is a special case of a general theorem,
+which we state below.
+
+Let $\cat K$ be a category enriched over Kan complexes.
+We denote by $\cat K^\vartriangleright$ the $\cat{Kan}$-enriched category obtained
+by adjoining a terminal object $\infty$, with 
+\[ \Hom_{\cat K^\vartriangleright}(x,\infty)=\{*\}\quad(x\in\cat K^\vartriangleright),\quad
+\Hom_{\cat K^\vartriangleright}(\infty,x)=\emptyset\quad(x\in\cat K).\quad  \]
+
+\begin{definition}
+    Let $\cat C$ and $\cat K$ be categories enriched over Kan complexes,
+    and let $f\:\cat K\to\cat C$ be a functor, which we see as a diagram in $\cat C$.
+    A \term{homotopy colimit} of $f$ is a functor 
+    \[ \bar f\:\cat K^\vartriangleright\to\cat C, \]
+    such that $\bar f|_{\cat K}=f$, and for any $y\in\cat C$, the induced map 
+    \[ \Hom_{\cat C}(x,y)\to\mathop{\operatorname{holim}}\limits_{k\in\cat K}\Hom_{\cat C}(f(k),y) \]
+    is a homotopy equivalence of Kan complexes,
+    where $x:=\bar f(\infty)$, and $\operatorname{holim}$ denotes the homotopy limit of Kan complexes.
+\end{definition}
+
+\tbc
+
+\subsection{Adjoint functors}
+
+\nyw
+

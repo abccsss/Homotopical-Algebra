@@ -1,0 +1,600 @@
+Infinity categories are difficult to study.
+Unlike in classical category theory,
+in order to understand infinity categories,
+one needs to work with various models, instead of a single definition.
+
+In these notes, we will work with two models for $(\infty,1)$-categories:
+quasi-categories, and categories enriched over Kan complexes.
+We have already defined both concepts in previous sections,
+and we have seen why they are able to model infinity categories.
+Now, we will explore the relationships between these two models.
+We will see that these models are equivalent,
+in the sense of a Quillen equivalence.
+
+\subsection{Quasi-categories}
+
+Recall from the previous section that a quasi-category is a simplicial set in which
+inner horns can be extended.
+
+Let $\cat C$ be a quasi-category, 
+Let $x,y\in\cat C_0$ be two points.
+Our first goal is to define the hom-space $\Hom_{\cat C}(x,y)$.
+Instead of being a discrete set, it should contain information
+describing homotopies and higher homotopies, 
+which comprise the higher structure of an infinity category.
+
+We now introduce some terminology for
+a quasi-category $\cat C$.
+\begin{itms}
+    \item We say $x\in\cat C$ is an \term{object} of $\cat C$, if $x\in\cat C_0$.
+    \item We say $f\:x\to y$ is a \term{morphism} of $\cat C$, if $f\in\cat C_1$,
+    and $d_0f=x$, $d_1f=y$.
+    \item The \term{identity morphism} $1_x$ of an object $x\in\cat C$
+    refers to the degenerate $1$-simplex $s_0(x)$.
+    \item For morphisms $f\:x\to y$ and $g\:y\to z$,
+    we say that a morphism $h\:x\to z$
+    is a \term{composition} of $g$ and $f$, if 
+    there is a $2$-simplex $\sigma\in\cat C_2$ such that 
+    $d_0\sigma=g$, $d_2\sigma=f$, and $d_1\sigma=h$.
+    This can be drawn as a diagram
+    \[\begin{tikzcd}[row sep=3ex,column sep=.7em]
+        & y\ar[dr,"g"] \\
+        x\ar[ur,"f"]\ar[rr,"h"'] && z
+    \end{tikzcd}\]
+    % \[\xymatrix @R=1.5em @C=.7em{ & y\ar[dr]^g \\ x\ar[ur]^f\ar[rr]_h && z }\]
+    in $\cat C$. Note that composition is not unique in a quasi-category.
+\end{itms}
+
+\begin{definition}
+    Let $f,g\:x\to y$ be two morphisms in $\cat C$.
+    We say that $f$ and $g$ are \term{homotopic},
+    if the following equivalent conditions hold.
+    \begin{itms}
+        \item There is a $2$-simplex \enspace
+        \begin{tikzcd}[row sep=.5ex,column sep=1.5em]
+            x\ar[dd,"1_x"']\ar[dr,pos=.3,"f"] \\
+            & y \\
+            x\ar[ur,pos=.3,"g"']
+        \end{tikzcd}
+        % \vcenter{\xymatrix @R=.2em @C=1.5em { x\ar[dd]_{1_x}\ar[dr]^(.4)f \\ & y \\ x\ar[ur]_(.4)g }}
+        \enspace in $\cat C$.
+        \item There is a $2$-simplex \enspace
+        \begin{tikzcd}[row sep=.5ex,column sep=1.5em]
+            x\ar[dd,"1_x"']\ar[dr,pos=.3,"g"] \\
+            & y \\
+            x\ar[ur,pos=.3,"f"']
+        \end{tikzcd}
+        % \vcenter{\xymatrix @R=.2em @C=1.5em { x\ar[dd]_{1_x}\ar[dr]^(.4)g \\ & y \\ x\ar[ur]_(.4){\vphantom{g}\smash{f}} }}
+        \enspace in $\cat C$.
+        \item There is a $2$-simplex \enspace
+        \begin{tikzcd}[row sep=.5ex,column sep=1.5em]
+            & y\ar[dd,"1_y"] \\
+            x\ar[ur,pos=.7,"f"]\ar[dr,pos=.7,"g"'] \\
+            & y
+        \end{tikzcd}
+        % \vcenter{\xymatrix @R=.2em @C=1.5em { & y\ar[dd]^{1_y} \\ x\ar[ur]^(.6)f\ar[dr]_(.6)g \\ & y }}
+        \enspace in $\cat C$.
+        \item There is a $2$-simplex \enspace
+        \begin{tikzcd}[row sep=.5ex,column sep=1.5em]
+            & y\ar[dd,"1_y"] \\
+            x\ar[ur,pos=.7,"g"]\ar[dr,pos=.7,"f"'] \\
+            & y
+        \end{tikzcd}
+        % \vcenter{\xymatrix @R=.2em @C=1.5em { & y\ar[dd]^{1_y} \\ x\ar[ur]^(.6)g\ar[dr]_(.6){\vphantom{g}\smash{f}} \\ & y }}
+        \enspace in $\cat C$.
+        \item There is a square \enspace
+        \begin{tikzcd}[row sep=2.5ex,column sep=1.5em]
+            x\ar[d,"1_x"']\ar[r,"f"] & y\ar[d,"1_y"] \\
+            x\ar[r,"g"'] & y
+        \end{tikzcd}
+        % \vcenter{\xymatrix @R=1.2em @C=1.5em { x\ar[d]_{1_x}\ar[r]^f & y\ar[d]^{1_y} \\ x\ar[r]_g & y }}
+        \enspace in $\cat C$, which is a map $\Delta[1]\times\Delta[1]\to\cat C$.
+        \item There is a square \enspace
+        \begin{tikzcd}[row sep=2.5ex,column sep=1.5em]
+            x\ar[d,"1_x"']\ar[r,"g"] & y\ar[d,"1_y"] \\
+            x\ar[r,"f"'] & y
+        \end{tikzcd}
+        % \vcenter{\xymatrix @R=1.2em @C=1.5em { x\ar[d]_{1_x}\ar[r]^g & y\ar[d]^{1_y} \\ x\ar[r]_{\vphantom{g}\smash{f}} & y }}
+        \enspace in $\cat C$.
+    \end{itms}
+\end{definition}
+
+Using the horn extension property for $\Lambda_1[3]$ and $\Lambda_2[3]$,
+one can show that all the above conditions are equivalent.
+We leave this as an exercise for the reader.
+
+\begin{proposition}
+    Homotopy of morphisms is an equivalence relation,
+    and respects composition of morphisms.
+    In particular, composition is unique up to homotopy.
+\end{proposition}
+
+\begin{proof}
+    Exercise for the reader.
+\end{proof}
+
+\begin{definition}
+    Let $\cat C$ be a quasi-category.
+    The \term{homotopy category} of $\cat C$
+    is an ordinary category $\Ho(\cat C)$, defined as follows.
+    \begin{itms}
+        \item Its objects are objects of $\cat C$.
+        \item Its morphisms are homotopy classes of morphisms in $\cat C$.
+    \end{itms}
+\end{definition}
+
+We regard $\Ho(\cat C)$ as obtained from $\cat C$
+by forgetting its higher structure.
+
+\begin{theorem}[Joyal]\label{thm-4-j}
+    Let $\cat C$ be a quasi-category.
+    Then $\cat C$ is a Kan complex if and only if $\Ho(\cat C)$ is a groupoid.
+\end{theorem}
+
+It is easy to see that if $\cat C$ is a Kan complex, i.e.\ an $\infty$-groupoid,
+then $\Ho(\cat C)$ is a groupoid.
+But the converse is a non-trivial result.
+
+Our next step is to assign a ``higher structure'', i.e.\ a homotopy type,
+to every hom-space $\Hom_{\cat C}(x,y)$,
+as a way to describe higher homotopies between morphisms.
+
+\begin{definition}
+    Let $\cat C$ be a quasi-category, and let $x,y\in\cat C$ be two objects.
+
+    \begin{itms}
+        \item The simplicial set $\Hom^{\vartriangleright}_{\cat C}(x,y)$ is defined as follows.
+        Its $n$-simplices are 
+        \[\Hom^{\vartriangleright}_{\cat C}(x,y)_n:=
+        \bigl\{\sigma\in\cat C_{n+1}\bigmid\sigma|_{\Delta\{0,\dotsc,n\}}=x,\ \sigma(n+1)=y\bigr\},\]
+        where $\sigma$ is regarded as a map $\Delta[n+1]\to\cat C$,
+        and $\Delta\{0,\dotsc,n\}\subset\Delta[n+1]$ is the face spanned by the vertices $0,\dotsc,n$.
+    
+        \item Dually, we define the simplicial set $\Hom^{\vartriangleleft}_{\cat C}(x,y)$ by
+        \[\Hom^{\vartriangleleft}_{\cat C}(x,y)_n:=
+        \bigl\{\sigma\in\cat C_{n+1}\bigmid\sigma(0)=x,\ \sigma|_{\Delta\{1,\dotsc,n+1\}}=y\bigr\}.\]
+    
+        \item There is yet another version of the hom-space
+        $\Hom_{\cat C}^{\square}(x,y)$, defined by
+        \[\Hom^{\square}_{\cat C}(x,y)_n:=
+        \bigl\{\sigma\:\Delta[n]\times\Delta[1]\to\cat C\bigmid
+        \sigma|_{\Delta[n]\times\{0\}}=x,\ \sigma|_{\Delta[n]\times\{1\}}=y\bigr\}.\]
+    \end{itms}
+\end{definition}
+
+These three constructions do not give isomorphic simplicial sets in general.
+However, we will see that these three simplicial sets 
+are homotopy equivalent Kan complexes,
+so that the hom-space has a well-defined homotopy type.
+
+Note that none of these constructions can produce a category 
+enriched over simplicial sets.
+The reason is that composition can not be well-defined.
+However, we will soon construct a simplicial category 
+whose hom-spaces are homotopy equivalent to these ones.
+
+\begin{proposition}
+    The simplicial sets $\Hom^{\vartriangleright}_{\cat C}(x,y)$,
+    $\Hom^{\vartriangleleft}_{\cat C}(x,y)$ and
+    $\Hom^{\square}_{\cat C}(x,y)$ are Kan complexes.
+\end{proposition}
+
+\begin{proof}
+    For $\Hom^{\vartriangleright}_{\cat C}(x,y)$,
+    it is not difficult to see that it has the horn extension property 
+    for the horns $\Lambda_i[n]$ for $0<i\leq n$.
+    Therefore, it is a quasi-category.
+    Moreover, in its homotopy category, every morphism has a left inverse.
+    This implies that its homotopy category is a groupoid,
+    so that by (\ref{thm-4-j}), it is a Kan complex.
+    The same argument shows that
+    $\Hom^{\vartriangleleft}_{\cat C}(x,y)$ is also a Kan complex.
+
+    For $\Hom^{\square}_{\cat C}(x,y)$,
+    the proof uses the Joyal model structure on $\cat{sSet}$,
+    and will be presented later.
+\end{proof}
+
+\subsection{Simplicial categories}
+
+Recall from the first section that intuitively,
+an $(\infty,1)$-category can be seen as a category enriched over
+the category of $(\infty,0)$-categories,
+which are modelled with Kan complexes.
+Therefore, categories enriched over Kan complexes
+should be another model for $(\infty,1)$-categories.
+We generalise this a bit by considering categories 
+enriched over all simplicial sets.
+
+\begin{definition}
+    A \term{simplicial category} is a category 
+    enriched over $\cat{sSet}$.
+\end{definition}
+
+In a simplicial category,
+we regard the $0$-simplices of the hom-spaces as morphisms,
+the $1$-simplices as homotopies between morphisms,
+and higher dimensional simplices as higher homotopies.
+
+For example, the category $\cat{sSet}$ is a simplicial category,
+equipped with the following simplicial structure on its hom-spaces.
+
+\begin{definition}
+    Let $X,Y$ be two simplicial sets.
+    The \term{mapping space} $\operatorname{Map}(X,Y)$
+    is the simplicial set whose $n$-simplices are maps
+    from $X\times\Delta[n]$ to $Y$.
+\end{definition}
+
+The category $\cat{Top}$ can also be seen as a simplicial category,
+by taking the $\operatorname{Sing}$ of all its mapping spaces,
+equipped with the compact open topology.
+
+It is very easy to define the homotopy category of a simplicial category.
+
+\begin{construction}
+    Let $\cat C$ be a simplicial category. The functors
+    \[ \cat{sSet}\xrightarrow{h}\cat{hCW}\xrightarrow{\pi_0}\cat{Set} \]
+    assign $\cat C$ with an $\cat{hCW}$-enriched category $h\cat C$,
+    and an ordinary category denoted by $\Ho(\cat C):=\pi_0h\cat C$.
+    The latter is called the \term{homotopy category} of $\cat C$. \varqed
+\end{construction}
+
+Although the definition of an enriched category requires
+strict (i.e.\ unique) composition and strict associativity,
+many other things can be done in the non-strict, or ``up to homotopy'' way,
+and it is often good to think of simplicial categories in the non-strict way.
+Here is an example.
+
+\begin{definition}
+    A \term{simplicial groupoid} is a simplicial category
+    whose homotopy category is a groupoid.
+    A \term{simplicial group} is a simplicial groupoid with a unique object.
+\end{definition}
+
+Compare (\ref{thm-4-j}).
+In this definition, although composition is strict,
+taking the inverse is non-strict, i.e.\ up to homotopy.
+
+Next, we aim to define a pair of adjoint functors
+\[\begin{tikzcd}
+    \cat{sSet}\ar[r,bend left,"\mathfrak C"]\ar[r,phantom,"\bot"] &
+    \rlap{$\cat{Cat}_{\cat{sSet}}$\ ,}\phantom{\cat{sSet}}\ar[l,bend left,"\mathfrak N"]
+\end{tikzcd}\]
+% \[\xymatrix { \cat{sSet}\ar@/^2ex/[r]^{\mathfrak C}\ar@{}[r]|{\bot} & \rlap{\cat{Cat}_{\cat{sSet}}\ ,}\phantom{\cat{sSet}}\ar@/^2ex/[l]^{\mathfrak N} }\hspace{1.2em}\]
+as a conversion between quasi-categories and simplicial categories.
+We will see that this adjunction is a Quillen equivalence,
+given suitable model structures on both sides.
+
+To define such an adjunction, by (\ref{con-3-a}),
+we only need to specify what $\mathfrak C\Delta[n]$ is.
+Intuitively, it should look like a chain of $n$ arrows
+\[0\to1\to\cdots\to n\ ,\]
+whose nerve is $\Delta[n]$.
+However, we need to modify it in order to allow 
+the composition law, e.g.\ $(0\to1\to2)=(0\to2)$,
+to hold only up to homotopy. This motivates the following construction.
+
+\begin{construction}
+    Let $n\geq0$ be an integer. The simplicial category $\mathfrak C^n$ is defined as follows.
+    \begin{itms}
+        \item It has $(n+1)$ objects, which we call $0,1,\dotsc,n$.
+        \item Its hom-spaces are given by $\Hom(i,j)=N(P_{ij})$, where 
+        \[P_{ij}:=\begin{cases}
+            \ \emptyset, & i>j,\\
+            \ \text{poset of subsets of $\{i,i+1,\dotsc,j\}$ containing $i,j$}, & i\leq j,
+        \end{cases}\]
+        where a poset is naturally regarded as a category.
+        Composition is defined by union of sets. \varqed
+    \end{itms}
+\end{construction}
+
+For example, $\mathfrak C^2$ is the simplicial category 
+\[\begin{tikzcd}[column sep=2em]
+    & 1 \arrow{dr}[inner sep=0pt]{
+    \begin{tikzpicture}[every node/.style={inner sep=1pt},
+                        every label/.style={inner sep=0pt}]
+        \node[label=right:12]{\bullet};
+    \end{tikzpicture}} \\
+    0 \arrow{ur}[inner sep=0pt]{
+    \begin{tikzpicture}[every node/.style={inner sep=1pt},
+                        every label/.style={inner sep=0pt}]
+        \node[label=left:01]{\bullet};
+    \end{tikzpicture}}
+    \arrow{rr}[swap]{
+    \begin{tikzpicture}[node distance=2.5em,
+                        every node/.style={inner sep=1pt},
+                        every label/.style={inner sep=0pt}]
+        \node(02)[label=below:02]{\bullet}; 
+        \node(012)[right of=02,label=below:012]{\bullet};
+        \draw[->](02)--(012);
+    \end{tikzpicture}}
+    && 2\rlap{\ ,}
+\end{tikzcd}\]
+where the composition $12\circ01$ gives the map $012\:0\to2$,
+which is homotopic, but not equal to, the map $02\:0\to2$
+which we regard as going directly (not passing $1$) from $0$ to $2$.
+
+Likewise, $\mathfrak C^3$ is the simplicial category
+\[\begin{tikzcd}[row sep=6em,column sep=4em]
+    & 1 \arrow{rr}[inner sep=0pt]{
+    \begin{tikzpicture}[every node/.style={inner sep=1pt},
+                        every label/.style={inner sep=0pt}]
+        \node[label=above:12]{\bullet};
+    \end{tikzpicture}}
+    \arrow[start anchor=south east]{drrr}[pos=.5,swap,inner sep=0pt]{
+    \begin{tikzpicture}[node distance=2em,
+                        every node/.style={inner sep=1pt},
+                        every label/.style={inner sep=0pt}]
+        \node(13)[label=left:13]{\bullet}; 
+        \node(123)[below of=13,label=left:123]{\bullet};
+        \draw[->](13)--(123);
+    \end{tikzpicture}}
+    && 2 \arrow{dr}[inner sep=0pt]{
+    \begin{tikzpicture}[every node/.style={inner sep=1pt},
+                        every label/.style={inner sep=0pt}]
+        \node[label=right:23]{\bullet};
+    \end{tikzpicture}} \\
+    0 \arrow{ur}[inner sep=0pt]{
+    \begin{tikzpicture}[every node/.style={inner sep=1pt},
+                        every label/.style={inner sep=0pt}]
+        \node[label=left:01]{\bullet};
+    \end{tikzpicture}}
+    \arrow[crossing over,crossing over clearance=1ex,end anchor=south west]{urrr}
+    [pos=.4,swap,inner sep=0pt]{
+    \begin{tikzpicture}[node distance=2em,
+                        every node/.style={inner sep=1pt},
+                        every label/.style={inner sep=0pt}]
+        \node(02)[label=below:02]{\bullet}; 
+        \node(012)[right of=02,label=below:012]{\bullet};
+        \draw[->](02)--(012);
+    \end{tikzpicture}}
+    \arrow{rrrr}[swap]{
+    \begin{tikzpicture}[node distance=2em,
+                        every node/.style={inner sep=1pt},
+                        every label/.style={inner sep=0pt}]
+        \node(03)[label=left:03]{\bullet}; 
+        \node(023)[below of=03,label=left:023]{\bullet};
+        \node(013)[right of=03,label=right:013]{\bullet}; 
+        \node(0123)[below of=013,label=right:0123]{\bullet};
+        \draw[->](03)--(013);
+        \draw[->](03)--(023);
+        \draw[->](013)--(0123);
+        \draw[->](023)--(0123);
+        \draw[->](03)--(0123);
+    \end{tikzpicture}}
+    &&&& 3\rlap{\ ,}
+\end{tikzcd}\]
+where the mapping space $N(P_{03})$
+is isomorphic to $\Delta[1]\times\Delta[1]$.
+As we can see, the $4$ points in this space 
+correspond to the $4$ ways to go from $0$ to $4$ along the arrows,
+namely, $0\to3$, $0\to1\to3$, $0\to2\to3$, and $0\to1\to2\to3$.
+All these $4$ maps from $0$ to $3$ are homotopic.
+
+In general, the mapping space $\Hom_{\mathfrak C^n}(i,j)$
+is the space of all ways to go from $i$ to $j$ along the arrows.
+If $i<j$, then it is isomorphic to $\Delta{[1]}^{j-i-1}$. 
+
+\begin{definition}
+    The cosimplicial object $\mathfrak C^\bullet$ in $\cat{Cat}_{\cat{sSet}}$
+    determines an adjunction
+    \[\begin{tikzcd}
+        \cat{sSet}\ar[r,bend left,"\mathfrak C"]\ar[r,phantom,"\bot"] &
+        \rlap{$\cat{Cat}_{\cat{sSet}}$\ ,}\phantom{\cat{sSet}}\ar[l,bend left,"\mathfrak N"]
+    \end{tikzcd}\]
+    % \[\xymatrix { \cat{sSet}\ar@/^2ex/[r]^{\mathfrak C}\ar@{}[r]|{\bot} & \rlap{\cat{Cat}_{\cat{sSet}}\ ,}\phantom{\cat{sSet}}\ar@/^2ex/[l]^{\mathfrak N} }\hspace{1.2em}\]
+    in the sense of \textup{(\ref{con-3-a})}.
+    The right adjoint $\mathfrak N$ is called the \term{simplicial nerve} functor,
+    or the \term{homotopy coherent nerve} functor.
+\end{definition}
+
+Now we can prove that categories enriched over Kan complexes 
+are converted to quasi-categories under this construction.
+
+\begin{proposition}
+    If $\cat C$ is a category enriched over Kan complexes,
+    then $\mathfrak N\cat C$ is a quasi-category.
+\end{proposition}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+\subsection{Equivalence of the two models}
+
+For a quasi-category or a simplicial category $\cat C$,
+we have defined a mapping space $\Hom_{\cat C}(x,y)$ for each
+pair of objects $x,y$ in $\cat C$.
+In fact, the homotopy type of the mapping space 
+is preserved by the above conversion between the two models.
+
+\begin{theorem}\label{thm-4-h}
+    We have the following.
+    \begin{itms}
+        \item If $\cat C$ is a quasi-category,
+        then we have a weak equivalence of simplicial sets 
+        \[ \Hom_{\cat C}^{(*)}(x,y)\simeq\Hom_{\mathfrak C\cat C}(x,y) \]
+        for each pair of objects $x,y\in\cat C$,
+        where $(*)$ can be $\vartriangleleft$, $\vartriangleright$, or $\square$.
+        \item If $\cat C$ is a category enriched over Kan complexes,
+        then we have a homotopy equivalence of Kan complexes
+        \[ \Hom_{\cat C}(x,y)\simeq\Hom_{\mathfrak N\cat C}^{(*)}(x,y) \]
+        for each pair of objects $x,y\in\cat C$,
+        where $(*)$ can be $\vartriangleleft$, $\vartriangleright$, or $\square$.
+    \end{itms}
+\end{theorem}
+
+The proof of the theorem will be given in the next section.
+Note that weak equivalences between Kan complexes
+are homotopy equivalences,
+by Whitehead's theorem (\ref{thm-2-w}).
+
+Thus, for a quasi-category $\cat C$, we can define the 
+$\cat{hCW}$-enriched category $h\cat C$ to be $h\mathfrak C\cat C$.
+It has the same objects and the same homotopy types of mapping spaces as $\cat C$.
+
+Next, we describe the adjoint pair $(\mathfrak C\dashv\mathfrak N)$
+as a Quillen equivalence,
+so that the two models are really equivalent.
+
+\begin{definition}
+    Let $\cat C,\cat D$ be two quasi-categories, or two simplicial categories.
+    A map $f\:\cat C\to\cat D$ is called a \term{Dwyer--Kan equivalence},
+    or a \term{categorical equivalence}, if $h(f)\:h\cat C\to h\cat D$
+    is an equivalence of $\cat{hCW}$-enriched categories, i.e.\ the following holds.
+    \begin{itms}
+        \item $f$ is fully faithful, i.e.\ induces weak equivalences of mapping spaces.
+        \item $f$ is essentially surjective, i.e.\ $\pi_0h(f)=\Ho(f)$
+        is an essentially surjective functor between ordinary categories.
+    \end{itms}
+\end{definition}
+
+Recall that a functor $f\:\cat C\to\cat D$ between ordinary categories is an \term{isofibration},
+if for any $x\in\cat C$ and any isomorphism $\alpha\:f(x)\to y$ in $\cat D$,
+there exists $\tilde\alpha\:x\to\tilde y$ in $\cat C$ such that $\alpha=f(\tilde\alpha)$.
+
+\begin{theorem}
+    The category $\cat{sSet}$ has the \term{Joyal model structure}, with 
+    \begin{itms}
+        \item $\cat W=\{$Dwyer--Kan equivalences$\}$.
+        \item $\cat{Cof}=\{$injections$\}$.
+        \item The fibrant objects are quasi-categories.
+    \end{itms}
+    The category $\cat{Cat}_{\cat{sSet}}$ has the \term{Bergner model structure}, with
+    \begin{itms}
+        \item $\cat W=\{$Dwyer--Kan equivalences$\}$.
+        \item $\cat{Fib}=\{$isofibrations that are fibrations on mapping spaces$\}$.
+        \item The fibrant objects are categories enriched over Kan complexes.
+    \end{itms}
+    Using these model structures, the adjunction
+    \[\begin{tikzcd}
+        \cat{sSet}\ar[r,bend left,"\mathfrak C"]\ar[r,phantom,"\bot"] &
+        \rlap{$\cat{Cat}_{\cat{sSet}}$}\phantom{\cat{sSet}}\ar[l,bend left,"\mathfrak N"]
+    \end{tikzcd}\]
+    is a Quillen equivalence.
+\end{theorem}
+
+For a proof, see \cite[Theorem~2.2.5.1]{htt}.
+
+\begin{remark}
+    We do not use the standard model structure on $\cat{sSet}$
+    when we study quasi-categories, and here is a reason.
+    Let $\cat C$ be a quasi-category.
+    In many cases, $\cat C$ contains an initial object $x$,
+    and thus, the geometric realisation of $\cat C$ 
+    can be contracted to $x$ linearly.
+    Therefore, the homotopy type of $\cat C$ is trivial.
+    On the other hand, the Joyal model structure 
+    captures the internal information of a quasi-category,
+    rather than the global homotopy type. \varqed
+\end{remark}
+
+\subsection{Examples}
+
+Let us look at a few examples of $(\infty,1)$-categories,
+modelled as quasi-categories.
+We are now able to talk about these objects in a rigorous way.
+
+\begin{proposition}\label{thm-4-x}
+    Let $X,Y$ be two simplicial sets.
+    \begin{itms}
+        \item If $Y$ is a Kan complex,
+        then $\operatorname{Map}(X,Y)$ is a Kan complex.
+        \item If $Y$ is a quasi-category,
+        then $\operatorname{Map}(X,Y)$ is a quasi-category.
+    \end{itms}
+\end{proposition}
+
+\begin{proof}
+    Exercise for the reader.
+\end{proof}
+
+\begin{example}
+    The \term{quasi-category of spaces} is defined to be
+    \[\cat S:=\mathfrak N(\cat{Kan}),\]
+    where $\cat{Kan}$ is the simplicial category of Kan complexes,
+    which is enriched over Kan complexes by (\ref{thm-4-x}).
+    \varqed
+\end{example}
+
+\begin{example}
+    The $\cat{Kan}$-enriched category $\cat{QsCat}$
+    is defined as follows.
+    \begin{itms}
+        \item The objects are quasi-categories.
+        \item The morphism space $\Hom(\cat C,\cat D)$
+        is the maximal Kan complex in the simplicial set $\operatorname{Map}(\cat C,\cat D)$.
+    \end{itms}
+    Such a maximal Kan complex exists,
+    since by (\ref{thm-4-x}) and (\ref{thm-4-j}),
+    it is the sub-simplicial set spanned by all the invertible edges.
+
+    The \term{quasi-category of quasi-categories} is defined to be 
+    \[\cat{Cat}_\infty:=\mathfrak N(\cat{QsCat}).\]
+
+    Note that we have taken the maximal Kan complex, instead of a fibrant replacement.
+    This is because the edges in the mapping space are natural transformations,
+    and we discard those natural transformations that are not invertible,
+    rather than inverting them.
+
+    This means that in order to get an $(\infty,1)$-category of $(\infty,1)$-categories,
+    we have to discard some information.
+    The essential reason is that $(\infty,1)$-categories should form an $(\infty,2)$-category.
+    This can be seen as follows:
+    in our model, the simplicial category of quasi-categories
+    is naturally enriched over quasi-categories,
+    making it an $(\infty,2)$-category. \varqed
+\end{example}
+
+\begin{example}
+    Let $\cat A$ be an abelian category.
+    The simplicial category $\cat{Ch}_{\cat A}$ of cochain complexes in $\cat A$
+    is defined as follows.
+    Recall that for a map $f\:X\to Y$ of cochain complexes (not necessarily a chain map),
+    we defined 
+    \[ df:=d\circ f-(-1)^{|f|}f\circ d, \]
+    where $|f|=k$ if $f$ sends $X^n$ to $Y^{n+k}$.
+    \begin{itms}
+        \item The $0$-simplices of $\Hom(X,Y)$ are those maps $f\:X\to Y$
+        such that 
+        \[ |f|=0\quad\text{and}\quad df=0. \]
+        In other words, they are chain maps.
+        \item A $1$-simplex between two $0$-simplices $f,g$ is a map $a\:X\to Y$
+        such that 
+        \[ |a|=-1\quad\text{and}\quad da=f-g. \]
+        In other words, they are chain homotopies.
+        \item An $n$-simplex consists of the data $(\sigma,\sigma_0,\dotsc,\sigma_n)$,
+        where each $\sigma_i$ is an $(n-1)$-simplex,
+        and $\sigma\:X\to Y$ is a map satisfying
+        \[ |\sigma|=-n\quad\text{and}\quad d\sigma=\sigma_0-\sigma_1+\sigma_2-\cdots\pm\sigma_n. \]
+        The $\sigma_i$ are the faces of $\sigma$, and we require that
+        the faces of the $\sigma_i$ are compatible with each other.
+        In other words, an $n$-simplex is a map 
+        \[ C_\bullet^{\textrm{cell}}(\Delta^n)\to\sHom(X,Y) \]
+        from the cellular chain complex of $\Delta^n$
+        to the chain complex $\sHom(X,Y)$ defined in (\ref{eg-1-c}).
+    \end{itms}
+    We define 
+    \[\cat K_\infty(\cat A):=\mathfrak N(\cat{Ch}_{\cat A})\]
+    to be the \term{quasi-category of cochain complexes} in $\cat A$.
+    If $\cat{Ch}_{\cat A}$ has a suitable model structure,
+    e.g.\ if $\cat A$ is the category of modules over a ring, then we define 
+    \[\cat D_\infty(\cat A):=\mathfrak N(\cat{Ch}_{\cat A,\mathrm{cf}})\]
+    to be the \term{derived quasi-category} of $\cat A$. \varqed
+\end{example}
+
+\begin{remark}
+    We have seen that localising a category with weak equivalences
+    gives rise to $\infty$-categories.
+    It turns out that if $\cat C$ is a model category,
+    together with a simplicial enrichment,
+    satisfying some extra compatibility conditions,
+    then we have an equivalence of quasi-categories
+    \[ \cat C[\cat W^{-1}]\simeq\mathfrak N(\cat C_{\mathrm{cf}}). \]
+    Such a simplicial structure can be found in all the examples that we have seen.
+    Therefore, we have
+    \[ \cat S\simeq\cat{sSet}[\cat W^{-1}]\quad\text{and}\quad
+    \cat D_\infty(\cat A)\simeq\cat{Ch}_{\cat A}[\cat W^{-1}], \]
+    as examples of $\infty$-categorical localisations. \varqed
+\end{remark}

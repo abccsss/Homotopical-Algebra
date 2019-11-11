@@ -1,0 +1,438 @@
+In algebraic topology,
+we have seen the following analogy between topology and homological algebra.
+
+\begin{center}
+    \begin{tabular}{cc}
+        \textbf{Topology} & \textbf{Homological Algebra} \\\hline
+        spaces & chain complexes over $R$ \\
+        homotopies & chain homotopies \\
+        homotopy equivalences & chain homotopy equivalences \\
+        homotopy groups $\pi_n(X)\simeq[S^n,X]$ & homology groups $H^n(X)\simeq[\text{``}S^n\text{''},X]$ \\
+        weak homotopy equivalences & quasi-isomorphisms \\
+        CW approximation & projective/injective resolutions \\
+        homotopy category $\cat{hCW}$ & derived category $\cat{D}(R)$ \\
+        suspension and looping $\Sigma\dashv\Omega$ & shifting $[1]\dashv[-1]$ \\
+        \dots\dots & \dots\dots
+    \end{tabular}%
+    \medskip
+
+    {\leftskip=1.5em \rightskip=1.5em \small
+    ($R$ is a commutative ring;
+    $[\ ,\ ]$ denotes the set of homotopy classes of maps;
+    and ``$S^n$'' denotes the chain complex
+    whose only non-zero term is $R$ at its $n$-th place.)
+
+    }
+\end{center}
+
+Homotopical algebra is a language that unifies these two theories.
+It is a general theory that also applies to many other situations.
+
+\subsection{What is an \texorpdfstring{$\infty$}{∞}-category?}
+
+The language of $\infty$-categories is the modern language for homotopical algebra.
+It encodes data describing the ``higher structures'' of a category
+that can not be seen in ordinary category theory.
+
+Roughly speaking, an $\infty$-category consists of a class of objects,
+a class of morphisms between them,
+and moreover, there are higher morphisms between these morphisms.
+For example, there are $2$-morphisms between ordinary morphisms,
+which can be seen as ``homotopies'' between morphisms.
+There are $3$-morphisms between $2$-morphisms,
+which can be seen as ``homotopies between homotopies'', and so on.
+
+We will not give the definition for an $\infty$-category
+until a few sections later, since defining them requires some work.
+However, the idea of $\infty$-categories
+can be seen through the following examples of $\infty$-categories.
+
+\begin{example} \label{eg-1-top}
+    Consider the category $\cat{Top}$ of topological spaces.
+    Seen as an $\infty$-category, it will consist of the following data.
+    \begin{itms}
+        \item Objects: topological spaces.
+        \item $1$-Morphisms: continuous maps between topological spaces.
+        \item $2$-Morphisms (between $1$-morphisms): homotopies between two maps
+        with the same source and target.
+        \item $3$-Morphisms (between $2$-morphisms): homotopies between homotopies of maps.
+        \item \dots\dots \varqed
+    \end{itms}
+\end{example}
+
+\begin{example}
+    For a commutative ring $R$, consider the category $\cat{Ch}_R$ of cochain complexes over $R$.
+    As an $\infty$-category, it will consist of the following data.
+    \begin{itms}
+        \item Objects: cochain complexes over $R$.
+        \item $1$-Morphisms: chain maps between cochain complexes.
+        \item $2$-Morphisms: chain homotopies between chain maps.
+        \item $3$-Morphisms: chain homotopies between chain homotopies.
+        \item \dots\dots \varqed
+    \end{itms}
+\end{example}
+
+\begin{example}
+    For a topological space $X$, consider the fundamental groupoid of $X$, denoted by $\cat{Π}(X)$.
+    As an $\infty$-category, it will consist of the following data.
+    \begin{itms}
+        \item Objects: points of $X$.
+        \item $1$-Morphisms: paths connecting two points.
+        \item $2$-Morphisms: homotopies between paths, fixing endpoints.
+        \item $3$-Morphisms: homotopies between homotopies.
+        \item \dots\dots
+    \end{itms}
+    Note that the associativity law $f\circ(g\circ h)=(f\circ g)\circ h$
+    does not hold in this example; it only holds ``up to homotopy''.
+    This is one of the difficulties we will encounter in studying $\infty$-categories.
+    \varqed
+\end{example}
+
+\subsection{Homotopy categories}
+
+In many cases, $\infty$-categories arise as homotopy categories of ordinary categories with certain extra data.
+We will now demonstrate this procedure through a concrete example.
+
+\begin{definition}
+    The category $\cat{hTop}$ consists of
+    \begin{itms}
+        \item Objects: topological spaces.
+        \item Morphisms: homotopy classes of maps.
+    \end{itms}
+\end{definition}
+
+A key observation is that $\cat{hTop}$ is obtained from $\cat{Top}$
+by ``inverting the homotopy equivalences''. Let us make this precise.
+
+\begin{definition}
+    A \term{category with weak equivalences}
+    is a pair $(\cat{C},\cat{W})$,
+    where $\cat{C}$ is a category,
+    and $\cat{W}\subset\operatorname{Mor}(\cat C)$ is a class of morphisms, such that
+    \begin{itms}
+        \item All isomorphisms of $\cat{C}$ are in $\cat{W}$.
+        \item $\cat{W}$ satisfies \term{two-out-of-three}: for any diagram
+        \[ \begin{tikzcd}[column sep=10pt,row sep=15pt]
+            & \bullet\ar[rd,"g"] &   \\
+            \bullet\ar[rr,"g\circ f"']\ar[ru,"f"] &   & \bullet 
+        \end{tikzcd} \]
+        in $\cat{C}$, if two of the arrows $f,g,g\circ f$ are in $\cat{W}$, then so is the third.
+    \end{itms}
+\end{definition}
+
+For example, the pair $(\cat{Top},\cat{HoEq})$ is a category with weak equivalences,
+where $\cat{HoEq}$ is the class of homotopy equivalences in $\cat{Top}$.
+
+\begin{definition}
+    Let $(\cat C,\cat W)$ be a category with weak equivalences.
+    The \term{localisation} of $\cat C$ with respect to $\cat W$
+    is a category $\cat C[\cat W^{-1}]$,
+    together with a functor $\cat C\to\cat C[\cat W^{-1}]$,
+    with the following universal property:
+    \begin{itms}
+        \item For any functor $F\:\cat C\to\cat D$ sending $\cat W$ to isomorphisms,
+        there is a unique functor $\tilde F\:\cat C[\cat W^{-1}]\to\cat D$,
+        such that the diagram
+        \[ \begin{tikzcd}[column sep=10pt]
+            \cat C\ar[rr,"F"]\ar[dr] & & \cat D\\
+            & \cat C[\cat W^{-1}]\ar[ur,dashed,"\exists!\ \tilde F"']
+        \end{tikzcd} \]
+        commutes up to a natural isomorphism.
+    \end{itms}
+\end{definition}
+
+Roughly speaking, the category $\cat C[\cat W^{-1}]$
+is obtained from $\cat C$ by inverting all the arrows in $\cat W$.
+In fact, this idea can be formulated into an explicit construction
+of the localisation $\cat C[\cat W^{-1}]$.
+
+\begin{construction}
+    Let $(\cat C,\cat W)$ be a category with weak equivalences.
+    Define $\cat C[\cat W^{-1}]$ to be the category with the same objects as $\cat C$,
+    with $\Hom_{\cat C[\cat W^{-1}]}(X,Y)$
+    the set of all possible sequences
+    \[ X\to Z_1\gets Z_2\to\cdots \gets Z_n\to Y \]
+    in $\cat C$,
+    where all arrows going leftward are in $\cat W$,
+    quotiented by the following relations:
+    identity arrows can be dropped;
+    adjacent arrows pointing to the same direction can be composed;
+    adjacent arrows pointing to different directions can also be dropped
+    if they represent the same morphism.
+    It is then almost obvious that
+    our construction does give a localisation with the desired universal property.
+
+    The only problem is that $\Hom_{\cat C[\cat W^{-1}]}(X,Y)$
+    may be too large to be a set; 
+    however, we do not care about this problem for now, 
+    and it is easily overcome by switching to a larger universe. \varqed
+\end{construction}
+
+\begin{proposition}
+    $\cat{hTop}\simeq\cat{Top}[\cat{HoEq}^{-1}]$.
+\end{proposition}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+In fact, we will see that localisation gives rise to higher structure.
+In this example, the ordinary category $\cat{hTop}$
+is just the first layer of information that we get from localisation.
+The full information is retained in an $\infty$-category,
+which is, in this case, the $\infty$-category $\cat{Top}$ 
+given in (\ref{eg-1-top}).
+
+We are not very interested in this example,
+because the higher structure has a very clear description.
+What we are more interested in is how to
+invert the weak homotopy equivalences,
+or in homological algebra,
+invert the quasi-isomorphisms,
+and get the $\infty$-categorical version of the derived category.
+
+It is painful to study localisation directly from the definitions.
+We will need the help of \emph{model categories},
+which are categories with weak equivalences,
+together with some extra structures
+that will help us substantially in computations related to $\infty$-categories.
+Here is our mind-map.
+\[ \begin{tikzcd}[column sep=3em,row sep=2em]
+    \overset{\text{model category}}{(\cat C,\cat W,\cat{Cof},\cat{Fib})} \ar[dr,"\text{present }(\text{easier})"] \\
+    (\cat C,\cat W) \ar[u,dashed,"\text{find a structure}"] \ar[r,"\text{localise}","(\text{hard to describe})"']
+    & \infty\text{-category }\cat C[\cat W^{-1}] \ar[d,"\text{forget}"] \\
+    & \text{ordinary category }\cat C[\cat W^{-1}]
+\end{tikzcd} \]
+
+\subsection{A naive attempt on higher categories}
+
+We will now try to give a simple, but ``wrong'',
+definition of higher categories.
+Keeping in mind that higher categories
+are just categories with higher dimensional arrows,
+we will formulate this idea into a rigorous definition.
+
+\begin{definition}
+    A \term{monoidal category} is a category $\cat C$, together with
+    \begin{itms}
+        \item An object $1\in\cat C$, called the \term{unit}.
+        \item A functor $\otimes\:\cat C\times\cat C\to\cat C$,
+    \end{itms}
+    such that there are natural isomorphisms
+    \[\setlength{\arraycolsep}{.2em} \begin{array}{rrl}
+        a\:&(X\otimes Y)\otimes Z&\simto X\otimes(Y\otimes Z),\\[3pt]
+        l\:&1\otimes X&\simto X,\\[3pt]
+        r\:&X\otimes 1&\simto X,
+    \end{array} \]
+    so that the diagrams
+    \[ \begin{tikzcd}[column sep=-5em]
+        & & \hspace*{2em}(X\otimes Y)\otimes(Z\otimes W)\hspace*{2em}\ar[rrd] \\
+        ((X\otimes Y)\otimes Z)\otimes W\ar[rru]\ar[dr] &&&& X\otimes(Y\otimes(Z\otimes W))\\
+        & (X\otimes (Y\otimes Z))\otimes W\ar[rr] && X\otimes((Y\otimes Z)\otimes W)\rlap{\ ,}\ar[ur]
+    \end{tikzcd} \]
+    \[ \begin{tikzcd}[column sep=0]
+        (X\otimes 1)\otimes Y\ar[dr]\ar[rr]&&X\otimes(1\otimes Y)\ar[dl]\\
+        &X\otimes Y\rlap{\ ,}
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}
+        1\otimes 1\ar[d,bend left,"r"]\ar[d,bend right,"l"'] \\ 1
+    \end{tikzcd}
+    \]
+    are commutative for any $X,Y,Z,W\in\cat C$.
+\end{definition}
+
+The first diagram is also called the \emph{pentagon axiom}.
+One can prove that even if we have more than $4$ objects,
+the pentagon axiom ensures that the ``associahedron'' diagrams are commutative.
+
+For example, the following triples $(\cat C,\otimes,1)$
+are all examples of monoidal categories:
+\begin{itms}
+    \item $(\cat{Set},\times,*)$, where $*$ denotes the singleton set.
+    \item $(\cat{Set},\sqcup,\emptyset)$, where $\sqcup$ denotes disjoint union.
+    \item $(\text{any category with products},\times,*)$, where $*$ denotes the terminal object, i.e.\ the empty product.
+    \item $(\text{any category with coproducts},\sqcup,\emptyset)$, where $\emptyset$ denotes the initial object, i.e.\ the empty coproduct.
+    \item $(\cat{Ch}_R,\otimes,R)$,
+    where the unit $R$ is concentrated in degree $0$, and the tensor product is given by
+    \[ (C\otimes D)^n\coloneq\bigoplus_{p+q=n}C^p\otimes_R D^q. \]
+\end{itms}
+
+\begin{definition}
+    Let $\cat V$ be a monoidal category.
+    A \term{$\cat V$-enriched category} $\cat C$
+    consists of the following data.
+    \begin{itms}
+        \item A class of objects.
+        \item For any $X,Y\in\cat C$, a hom-object $\Hom_{\cat C}(X,Y)\in\cat V$.
+        \item For any $X,Y,Z\in\cat C$, a composition map
+        \[\circ\ \:\Hom_{\cat C}(Y,Z)\otimes\Hom_{\cat C}(X,Y)\to\Hom_{\cat C}(X,Z)\]
+        in $\cat V$.
+        \item For any $X\in\cat C$, an identity morphism \[\mathbb1_X:1\to\Hom_{\cat C}(X,X)\]
+        in $\cat V$.
+        We think of $\mathbb1_X$ as an ``element'' of $\Hom_{\cat C}(X,X)$,
+        but since this object is not a set,
+        we consider morphisms $1\to\Hom_{\cat C}(X,X)$
+        as its ``elements''.
+    \end{itms}
+    They satisfy the following conditions.
+    \begin{itms}
+        \item Composition is associative.
+        \item Composing with the identity morphism gives the original morphism.
+    \end{itms}
+    We leave it to the reader to formulate these two axioms rigorously.
+\end{definition}
+
+For example,
+an ordinary category is a category
+enriched over $(\cat{Set},\times,*)$.
+
+When we have a forgetful functor $\cat V\to\cat{Set}$
+preserving the monoidal structure,
+we may think of a $\cat V$-enriched category
+as a category with extra structures,
+as in the following examples.
+
+\begin{example}
+    The category $\cat{Top}$ is enriched over itself,
+    since for $X,Y\in\cat{Top}$,
+    the set $\Hom_{\cat{Top}}(X,Y)$ can be given a natural topology,
+    namely the compact open topology,
+    so that composition is continuous. \varqed
+\end{example}
+
+\begin{example}\label{eg-1-c}
+    The category $\cat{Ch}_R$ is enriched over itself.
+    For $X,Y\in\cat{Ch}_R$, we define a cochain complex $\sHom(X,Y)$ by
+    \[ \sHom(X,Y)^n:=\{f=\{f^k\:X^k\to Y^{k+n}\}_{k\in\mathbb Z}\}, \]
+    where $f$ is not necessarily a chain map,
+    and the differential is given by
+    \[ df:=d\circ f-(-1)^{\deg f}f\circ d. \]
+    The chain maps are the $0$-cocycles of this cochain complex.
+    Such a cocycle corresponds to a chain map
+    from the unit $1\in\cat{Ch}_R$ to this cochain complex, which is,
+    in a sense, an ``element'' of this cochain complex. \varqed
+\end{example}
+
+\begin{example}
+    The category $\cat{Cat}$ of all (small) categories
+    is enriched over itself.
+    This is because for any two categories $X,Y$,
+    we may form their functor category $\cat{Fun}(X,Y)$,
+    whose objects are functors $X\to Y$,
+    and morphisms are natural transformations between these functors. \varqed
+\end{example}
+
+Using the language of enriched categories,
+we can now give a first definition of higher categories.
+
+\begin{definition}
+    A \term{strict $2$-category} is a category enriched over $\cat{Cat}$.
+\end{definition}
+
+For example, $\cat{Cat}$ itself is a strict $2$-category.
+We may think of functors as its $1$-morphisms,
+and natural transformations as its $2$-morphisms.
+
+Any $\cat{Top}$-enriched category can be regarded as a
+strict $2$-category,
+since we may replace its hom-spaces by
+their fundamental groupoids.
+In this case, the $2$-morphisms are just
+paths connecting the $1$-morphisms in the hom-space.
+For example, $\cat{Top}$ itself is a strict $2$-category.
+Its $2$-morphisms are homotopies between maps.
+
+However, for a topological space $X$,
+the fundamental groupoid $\cat{Π}(X)$ is NOT a strict $2$-category.
+This is because, as we have mentioned,
+the composition in $\cat{Π}(X)$ is not strictly associative.
+This indicates that our definition is too strict,
+and is somehow ``wrong''.
+
+\begin{definition}
+    Inductively, we define a \term{strict $n$-category} as
+    a category enriched over the category of $(n-1)$-categories.
+\end{definition}
+
+This gives rise to a definition of an $\infty$-category,
+which is too strict and will not be used in the future.
+
+\begin{definition}
+    A \term{strict $\omega$-category} is a sequence
+    \[ \cat C_1\hookrightarrow\cat C_2\hookrightarrow\cat C_3\hookrightarrow\cdots, \]
+    where $\cat C_n$ is a strict $n$-category,
+    such that $\cat C_{n-1}$ is obtained from $\cat C_n$
+    by discarding all the $n$-arrows.
+\end{definition}
+
+\subsection{\texorpdfstring{$(n,r)$}{(n, r)}-categories}
+
+Although we have not defined $n$-categories and $\infty$-categories in general,
+we now have some intuitive ideas about what they are,
+and we can talk about them in a semi-rigorous way.
+
+\begin{definition}
+    Let $0\leq r\leq n$ and $n>0$.
+    An \term{$(n,r)$-category}
+    is an $n$-category in which
+    all $r+1,r+2,\dotsc,n$-morphisms are invertible.
+\end{definition}
+
+Since we are not only talking about strict $n$-categories,
+``invertible'' actually means ``invertible up to a higher homotopy'',
+or in other words, ``having a homotopy inverse''.
+Let us look at some examples.
+
+\begin{itms}
+    \item An ordinary category is a $(1,1)$-category.
+    \item An ordinary groupoid is a $(1,0)$-category.
+    \item The strict $n$-categories defined above are $(n,n)$-categories.
+    A strict $\omega$-category is an $(\infty,\infty)$-category.
+    \item $(\infty,0)$-categories are called $\infty$-groupoids.
+    They are very important objects, since they correspond to homotopy types.
+    In fact, there is a theory called Homotopy Type Theory (HoTT),
+    which aims to rebuild the foundations of mathematics,
+    using $\infty$-groupoids instead of sets as the basic building blocks.
+    \item A category enriched over the category of $(n,r)$-categories
+    is an $(n+1,r+1)$-category.
+    \item $\cat{Top}$ is an $(\infty,1)$-category,
+    since every homotopy is invertible.
+    Namely, a homotopy composed with its own inverse
+    is homotopic to the identity homotopy.
+    \item $\cat{Ch}_R$ is an $(\infty,1)$-category,
+    since composition of homotopies is addition of
+    maps between cochain complexes,
+    and for a chain homotopy,
+    adding its additive inverse gives the zero map,
+    which corresponds to the identity homotopy.
+    \item For a topological space $X$,
+    the fundamental groupoid $\cat{Π}(X)$ is
+    an example of an $\infty$-groupoid.
+    It describes the homotopy type of $X$.
+\end{itms}
+
+Regarding the fifth point,
+we may extend the notion of $(n,r)$-categories to the case $n<1$.
+In fact, we will see in the future
+that the correct notions are as follows.
+\begin{itms}
+    \item $(0,0)$-categories are sets.
+    \item $(0,1)$-categories are partially ordered sets.
+    \item $(-1,0)$-categories are either $\emptyset$ or singleton sets. In other words, they are truth values.
+    \item $(-2,0)$-categories are singleton sets.
+\end{itms}
+
+Higher category theorists believe that
+the bottom layer should be $-2$,
+and they think that it is more natural to renumber everything
+so that $-2$ becomes $0$.
+Thus, in the skyscraper of mathematics,
+logic lives on the 1st floor;
+set theory lives on the 2nd floor;
+and category theory lives on the 3rd floor.
+
+From this viewpoint,
+it seems more natural to consider all the floors as a whole.
+That is possibly why homotopy type theorists wish to replace set theory by
+higher category theory as the foundation of mathematics.
