@@ -391,9 +391,28 @@ For a general $S\in\cat{sSet}$, we have the following result.
 
 For a proof, see \cite[Theorem~2.2.1.2]{htt}.
 
-In particular, $\operatorname{Un}_S$ preserves fibrant objects,
-and hence it sends functors $\mathfrak CS\to\cat{Kan}$
-to left fibrations over $S$.
+In particular, we have the following observations.
+
+\begin{itms}
+    \item 
+    Let $F\:\mathfrak CS\to\cat{Kan}$ be a functor.
+    Since $\operatorname{Un}_S$ preserves fibrant objects,
+    the object $\operatorname{Un}_SF\in\cat{sSet}_{\/S}$
+    is a left fibrations over $S$.
+    Moreover, we have
+    \[ \operatorname{St}_S\operatorname{Un}_SF
+    \simeq \operatorname{St}_SQ\operatorname{Un}_SF\simeq F, \]
+    where the first equivalence is by taking $Q$ to be the identity functor,
+    and the second is by (\ref{thm-2-z}).
+
+    \item Let $X\to S$ be a left fibration.
+    Then the corresponding functor to $\cat{Kan}$ is given by $R\operatorname{St}_SX$,
+    where $R$ can be taken as composition with
+    the fibrant replacement functor of $\cat{sSet}$.
+    We have 
+    \[ \operatorname{Un}_SR\operatorname{St}_SX\simeq X \]
+    in the covariant model structure, by (\ref{thm-2-z}).
+\end{itms}
 
 \begin{remark}
     Dually, for right fibrations, we have the \term{contravariant model structure}
@@ -414,9 +433,15 @@ which states that the Grothendieck construction
 gives back the fibres of a left fibration.
 
 \begin{proposition}\label{thm-5-s}
-    If $X\to S$ is a left fibration,
-    then for any $s\in S$, there is a weak homotopy equivalence
-    \[ (\operatorname{St}_SX)(s)\simeq X_s. \]
+    We have the following.
+    \begin{itms}
+        \item Let $X\to S$ be a left fibration.
+        then for any $s\in S$, there is a weak homotopy equivalence
+        \[ (\operatorname{St}_SX)(s)\simeq X_s. \]
+        \item Let $F\:\mathfrak CS\to\cat{Kan}$ be a functor.
+        then for any $s\in S$, there is a homotopy equivalence of Kan complexes
+        \[ (\operatorname{Un}_SF)_s\simeq F(s). \]
+    \end{itms}
 \end{proposition}
 
 \begin{proof}
