@@ -138,23 +138,128 @@ This result on coproducts is a special case of a general theorem,
 which we state below.
 
 Let $\cat K$ be a category enriched over Kan complexes.
+Then the category of simplicially enriched functors
+\[ \operatorname{Fun}_{\cat{sSet}}(\cat K,\cat{sSet}) \]
+carries two model structures:
+\begin{itms}
+    \item The \term{projective model structure},
+    with weak equivalences and fibrations defined pointwise,
+    and cofibrations defined by the lifting property.
+    \item The \term{injective model structure},
+    with weak equivalences and cofibrations defined pointwise,
+    and fibrations defined by the lifting property.
+\end{itms}
+The constant functor
+\[ \operatorname{const}\:\cat{sSet}\to\operatorname{Fun}_{\cat{sSet}}(\cat K,\cat{sSet}) \]
+is right Quillen with respect to the projective model structure,
+and left Quillen with respect to the injective model structure.
+Therefore, the colimit functor 
+\[ \operatorname{colim}\:\operatorname{Fun}_{\cat{sSet}}(\cat K,\cat{sSet})\to\cat{sSet} \]
+is left Quillen with respect to the projective model structure,
+as it is the left adjoint of the constant functor.
+The limit functor 
+\[ \operatorname{lim}\:\operatorname{Fun}_{\cat{sSet}}(\cat K,\cat{sSet})\to\cat{sSet} \]
+is right Quillen with respect to the injective model structure,
+as it is the right adjoint of the constant functor.
+
+\begin{definition}
+    Let $\cat K$ be a category enriched over Kan complexes.
+    \begin{itms}
+        \item The \term{homotopy colimit} functor
+        \[ \operatorname{hocolim}\:\Ho(\operatorname{Fun}_{\cat{sSet}}(\cat K,\cat{sSet}))\to\Ho(\cat{sSet}) \]
+        is the left derived functor of the left Quillen functor 
+        \[ \operatorname{colim}\:\operatorname{Fun}_{\cat{sSet}}(\cat K,\cat{sSet})\to\cat{sSet}, \]
+        where $\operatorname{Fun}_{\cat{sSet}}(\cat K,\cat{sSet})$
+        is equipped with the projective model structure.
+
+        \item The \term{homotopy limit} functor
+        \[ \operatorname{holim}\:\Ho(\operatorname{Fun}_{\cat{sSet}}(\cat K,\cat{sSet}))\to\Ho(\cat{sSet}) \]
+        is the right derived functor of the right Quillen functor 
+        \[ \operatorname{lim}\:\operatorname{Fun}_{\cat{sSet}}(\cat K,\cat{sSet})\to\cat{sSet}, \]
+        where $\operatorname{Fun}_{\cat{sSet}}(\cat K,\cat{sSet})$
+        is equipped with the injective model structure.
+    \end{itms}
+\end{definition}
+
+\begin{example}
+    The homotopy pushout
+    \[ \{*\}\mathop{\sqcup}_{\{*,*\}}\{*\} \]
+    is the homotopy type of $S^1$, as is familiar in topology.
+    \varqed
+\end{example}
+
+We can now use homotopy limits of simplicial sets 
+to define homotopy (co)limits in categories enriched over Kan complexes.
+
+Let $\cat K$ be a category enriched over Kan complexes.
 We denote by $\cat K^\vartriangleright$ the $\cat{Kan}$-enriched category obtained
 by adjoining a terminal object $\infty$, with 
 \[ \Hom_{\cat K^\vartriangleright}(x,\infty)=\{*\}\quad(x\in\cat K^\vartriangleright),\quad
 \Hom_{\cat K^\vartriangleright}(\infty,x)=\emptyset\quad(x\in\cat K).\quad  \]
+Let $\cat K^\vartriangleleft$ be defined dually.
 
 \begin{definition}
     Let $\cat C$ and $\cat K$ be categories enriched over Kan complexes,
-    and let $f\:\cat K\to\cat C$ be a functor, which we see as a diagram in $\cat C$.
-    A \term{homotopy colimit} of $f$ is a functor 
-    \[ \bar f\:\cat K^\vartriangleright\to\cat C, \]
-    such that $\bar f|_{\cat K}=f$, and for any $y\in\cat C$, the induced map 
-    \[ \Hom_{\cat C}(x,y)\to\mathop{\operatorname{holim}}\limits_{k\in\cat K}\Hom_{\cat C}(f(k),y) \]
-    is a homotopy equivalence of Kan complexes,
-    where $x:=\bar f(\infty)$, and $\operatorname{holim}$ denotes the homotopy limit of Kan complexes.
+    and let $f\:\cat K\to\cat C$ be a functor.
+    \begin{itms}
+        \item A \term{homotopy colimit} of $f$ is a functor 
+        \[ \bar f\:\cat K^\vartriangleright\to\cat C, \]
+        such that $\bar f|_{\cat K}=f$, and for any $y\in\cat C$, the induced map 
+        \[ \Hom_{\cat C}(\bar f(\infty),y)\to\mathop{\operatorname{holim}}\limits_{k\in\cat K}\Hom_{\cat C}(f(k),y) \]
+        is a weak homotopy equivalence.
+
+        \item A \term{homotopy limit} of $f$ is a functor 
+        \[ \bar f\:\cat K^\vartriangleleft\to\cat C, \]
+        such that $\bar f|_{\cat K}=f$, and for any $y\in\cat C$, the induced map 
+        \[ \Hom_{\cat C}(y,\bar f(\infty))\to\mathop{\operatorname{holim}}\limits_{k\in\cat K}\Hom_{\cat C}(y,f(k)) \]
+        is a weak homotopy equivalence.
+    \end{itms}
 \end{definition}
 
-\tbc
+This definition can be seen as the definition of $\infty$-(co)limits 
+in the model of categories enriched over Kan complexes.
+The following theorem states that
+(co)limits in quasi-categories coincide with homotopy (co)limits in this sense.
+
+\begin{theorem}
+    Let $\cat C$ and $\cat K$ be categories enriched over Kan complexes,
+    and let $f\:\cat K\to\cat C$ be a functor.
+    Then the functor between quasi-categories
+    \[ \mathfrak Nf\:\mathfrak N\cat K\to\mathfrak N\cat C \]
+    has a (co)limit,
+    if and only if $f$ has a homotopy (co)limit,
+    and in this case, they coincide.
+\end{theorem}
+
+See \cite[Theorem~4.2.4.1]{htt}.
+
+Of course, this also means that if $f\:\cat K\to\cat C$
+is a functor of quasi-categories, then its (co)limits are computed by
+the homotopy (co)limit of the functor
+\[ R\mathfrak Cf\:R\mathfrak C\cat K\to R\mathfrak C\cat C \]
+between $\cat{Kan}$-enriched categories.
+This is because (co)limits are preserved by DK equivalences,
+i.e.\ categorical equivalences.
+
+\begin{example}
+    When $\cat K=\Lambda_0[2]$, one has an isomorphism
+    $\cat K^\vartriangleright\simeq\Delta[1]\times\Delta[1]$.
+    The colimit of a diagram $\cat K\to\cat C$ is called a (homotopy) \term{pushout},
+    which is a square in $\cat C$, i.e.\ a map $\Delta[1]\times\Delta[1]\to\cat C$.
+    We denote pushouts by the usual notation $y\sqcup_xz$.
+    By the theorem, we have 
+    \[ \Hom_{\cat C}\bigl(y\mathop{\sqcup}_xz,w\bigr)\simeq
+    \Hom_{\cat C}(y,w)\mathop{\times}_{\Hom_{\cat C}(x,w)}\Hom_{\cat C}(z,w) \]
+    for any $w\in\cat C$,
+    where the right hand side denotes a homotopy pullback of Kan complexes. 
+    
+    In particular, if the map $\Hom_{\cat C}(y,w)\to \Hom_{\cat C}(x,w)$,
+    then the homotopy pullback coincides with the usual pullback in the ordinary category $\cat{sSet}$.
+    This is the case, for example,
+    when $x\to y$ is a cofibration of simplicial sets,
+    or a cofibration of topological spaces.
+    \varqed
+\end{example}
 
 \subsection{Adjoint functors}
 

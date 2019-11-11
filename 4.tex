@@ -450,11 +450,18 @@ so that the two models are really equivalent.
     \end{itms}
 \end{definition}
 
+\begin{remark}
+    Dwyer--Kan equivalences are the $\infty$-categorical notion
+    of a categorical equivalence.
+    We regard two $\infty$-categories as equivalent,
+    whenever they are Dwyer--Kan equivalent. \varqed
+\end{remark}
+
 Recall that a functor $f\:\cat C\to\cat D$ between ordinary categories is an \term{isofibration},
 if for any $x\in\cat C$ and any isomorphism $\alpha\:f(x)\to y$ in $\cat D$,
 there exists $\tilde\alpha\:x\to\tilde y$ in $\cat C$ such that $\alpha=f(\tilde\alpha)$.
 
-\begin{theorem}
+\begin{theorem}\label{thm-4-e}
     The category $\cat{sSet}$ has the \term{Joyal model structure}, with 
     \begin{itms}
         \item $\cat W=\{$Dwyer--Kan equivalences$\}$.
@@ -476,6 +483,31 @@ there exists $\tilde\alpha\:x\to\tilde y$ in $\cat C$ such that $\alpha=f(\tilde
 \end{theorem}
 
 For a proof, see \cite[Theorem~2.2.5.1]{htt}.
+
+Since $\mathfrak N$ is right Quillen,
+it sends category enriched over Kan complexes to quasi-categories.
+However, $\mathfrak C$ does not necessarily
+send a quasi-category to a category enriched over Kan complexes.
+Given a quasi-category $\cat C$,
+its corresponding category enriched over Kan complexes should be 
+\[ R\mathfrak C\cat C, \]
+where $R$ denotes the fibrant replacement functor of $\cat{sSet}$.
+For example, one may take $R$ to be the functor $\operatorname{Sing}|\cdot|$.
+
+Let $\cat C$ be a quasi-category, and let $\cat D$ be a category 
+enriched over Kan complexes. The unit and counit maps
+\[ \mathfrak NR\mathfrak C\cat C\to\cat C\quad\text{and}\quad\cat D\to\mathfrak CQ\mathfrak N\cat D \]
+are always Dwyer--Kan equivalences,
+as is a standard fact in model category theory \cite[Theorem~1.3.13]{hovey}.
+Here we may take $Q$ to be the identity functor, 
+which implies that the functors
+\[ \mathfrak NR\mathfrak C\cat C\to\cat C\quad\text{and}\quad\cat D\to R\mathfrak C\mathfrak N\cat D \]
+are Dwyer--Kan equivalences.
+
+This discussion shows that one can convert between
+quasi-categories and categories enriched over Kan complexes,
+using the functors $R\mathfrak C$ and $\mathfrak N$,
+in a way that preserves Dwyer--Kan equivalences.
 
 \begin{remark}
     We do not use the standard model structure on $\cat{sSet}$
