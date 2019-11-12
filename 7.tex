@@ -33,13 +33,100 @@ we are also talking about the behaviour of an intrinsic notion of $(\infty,1)$-c
 which is independent of models.
 However, we only provide rigorous formulations for quasi-categories.
 
-\subsection{Definition and examples}
+\subsection{Stable categories}
 
-\nyw
+\begin{definition}
+    An $\infty$-category $\cat C$ is said to be \term{pointed},
+    if it has a zero object $0\in\cat C$,
+    i.e.\ an object that is both initial and terminal.
+\end{definition}
 
-\subsection{Homotopy category}
+\begin{definition}
+    Let $\cat C$ be a pointed $\infty$-category.
+    \begin{itms}
+        \item A \term{triangle} in $\cat C$ is a diagram 
+        \[\begin{tikzcd}
+            X\ar[d]\ar[r] & Y\ar[d] \\
+            0\ar[r] & Z\rlap{\ .}
+        \end{tikzcd}\]
+        
+        \item A \term{cofibre sequence} in $\cat C$
+        is a triangle that is also a pushout square.
+        In this case, we say that $Z$ is the
+        \term{homotopy cofibre} of the map $X\to Y$.
+        
+        \item A \term{fibre sequence} in $\cat C$
+        is a triangle that is also a pullback square.
+        In this case, we say that $X$ is the
+        \term{homotopy fibre} of the map $Y\to Z$.
+    \end{itms}
+\end{definition}
 
-\nyw
+\begin{definition}
+    A \term{stable $\infty$-category} is a pointed $\infty$-category $\cat C$,
+    such that
+    \begin{itms}
+        \item Every morphism in $\cat C$ has a homotopy cofibre and a homotopy fibre.
+        \item A triangle in $\cat C$ is a cofibre sequence
+        if and only if it is a fibre sequence.
+    \end{itms}
+\end{definition}
+
+\begin{definition}
+    Let $\cat C$ be a pointed $\infty$-category.
+    The functors $\Sigma\:\cat C\to\cat C$ and $\Omega\:\cat C\to\cat C$
+    are defined by 
+    \[ \Sigma X:=0\underset{X}{\sqcup}0
+    \quad\text{and}\quad
+    \Omega X:=0\underset{X}{\times}0. \]
+\end{definition}
+
+As one might expect, $\Sigma$ and $\Omega$ are adjoint to each other, 
+since for any $X,Y\in\cat C$, one has 
+\[ \Hom_{\cat C}(\Sigma X,Y)\simeq
+\{*\}\underset{\Hom_{\cat C}(X,Y)}{\times}\{*\}
+\simeq\Hom_{\cat C}(X,\Omega Y). \]
+
+If $\cat C$ is stable, then $\Sigma$ and $\Omega$ are inverse to each other.
+In this case, we denote 
+\[ X[1]:=\Sigma X\quad\text{and}\quad X[-1]:=\Omega X. \]
+For a non-negative integer $n$, we denote
+\[ X[n]:=\Sigma^nX\quad\text{and}\quad X[-n]:=\Omega^nX. \]
+
+\begin{proposition}
+    Let $\cat C$ be a pointed $\infty$-category 
+    that admits pushouts and pullbacks. Then the following are equivalent.
+    \begin{itms}
+        \item $\Sigma$ is an equivalence.
+        \item $\Omega$ is an equivalence.
+        \item $\cat C$ is stable.
+        \item A square in $\cat C$ is a pushout square,
+        if and only if it is a pullback square.
+    \end{itms}
+\end{proposition}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+\begin{definition}
+    Let $\cat C,\cat D$ be stable $\infty$-categories.
+    A functor $f\:\cat C\to\cat D$ is said to be \term{exact},
+    if it preserves the zero object,
+    and preserves (co)fibre sequences.
+\end{definition}
+
+\subsection{Homotopy category of a stable category}
+
+Our goal in this subsection is to prove the following theorem.
+
+\begin{theorem}
+    Let $\cat C$ be a stable $\infty$-category.
+    Then the homotopy category $\operatorname{Ho}(\cat C)$
+    carries a natural structure of a triangulated category.
+\end{theorem}
+
+\tbc
 
 \subsection{Spectra and stable homotopy theory}
 
