@@ -122,9 +122,35 @@ Our goal in this subsection is to prove the following theorem.
 
 \begin{theorem}
     Let $\cat C$ be a stable $\infty$-category.
-    Then the homotopy category $\operatorname{Ho}(\cat C)$
+    Then the homotopy category $\Ho(\cat C)$
     carries a natural structure of a triangulated category.
 \end{theorem}
+
+\begin{proof}
+    First, we need to show that $\Ho(\cat C)$ is an additive category.
+
+    \begin{itms}
+        \item \emph{$\Ho(\cat C)$ has finite coproducts.}
+        
+        By (\ref{thm-6-z}), a coproduct in $\cat C$ gives rise to a coproduct in $\Ho(\cat C)$.
+        By definition, $\cat C$ has an initial object.
+        Thus it suffices to show that for any $X,Y\in\cat C$, the coproduct $X\sqcup Y$ exists.
+        We form the pushout diagram 
+        \[ \begin{tikzcd}
+            X[-1]\ar[r,"0"]\ar[d]\ar[dr,phantom,"\ulcorner" pos=.15,"\lrcorner" pos=.75] & Y\ar[d] \\
+            0\ar[r] & Z
+        \end{tikzcd} \]
+        in $\cat C$. Then $Z$ is the coproduct $X\sqcup Y$, since
+        \[ \begin{aligned}
+            Z &\simeq \operatorname{cofibre}(X[-1]\xrightarrow0Y) \\
+            &\simeq \operatorname{cofibre}(X[-1]\to0)\sqcup\operatorname{cofibre}(0\to Y) \\
+            &\simeq X\sqcup Y,
+        \end{aligned} \]
+        where the second step uses the fact that taking the cofibre 
+        commutes with colimits,
+        as can be checked by the definition of homotopy colimits.
+    \end{itms}
+\end{proof}
 
 \tbc
 

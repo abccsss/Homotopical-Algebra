@@ -366,7 +366,7 @@ For a general $S\in\cat{sSet}$, we have the following result.
     \begin{itms}
         \item $\cat{W}$ is the class of maps $X\to Y$ such that the induced map 
         \[ X^\vartriangleleft\mathop{\sqcup}_XS\to Y^\vartriangleleft\mathop{\sqcup}_YS \]
-        is a Dwyer--Kan equivalence.
+        is a categorical equivalence.
         \item $\cat{Cof}=\{$injections$\}$.
         \item $\cat{Fib}\subset\{$left fibrations$\}$.
         \item The fibrant objects are left fibrations over $S$.
@@ -389,30 +389,40 @@ For a general $S\in\cat{sSet}$, we have the following result.
     is a Quillen equivalence.
 \end{theorem}
 
-For a proof, see \cite[Theorem~2.2.1.2]{htt}.
+See \cite[Theorem~2.2.1.2]{htt}.
 
-In particular, we have the following observations.
+\begin{corollary}[Grothendieck construction]
+    The functors 
+    \[\begin{tikzcd}
+        \smash{\cat{LFib}_{\/S}}\vphantom{1_1}\ar[r,bend left,start anchor=north east,end anchor=north west,"R\operatorname{St}_S"] &
+        \operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{Kan})\ar[l,bend left,start anchor=south west,end anchor=south east,"\operatorname{Un}_S"]
+    \end{tikzcd}\]
+    are inverses of each other up to weak equivalences, where 
+    \begin{itms}
+        \item $R$ denotes the fibrant replacement functor on
+        $\operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{sSet})$.
+        \item $\cat{LFib}_{\/S}$ is the category of left fibrations over $S$,
+        as a full subcategory of $\cat{sSet}_{\/S}$.
+        \item The weak equivalences on $\cat{LFib}_{\/S}$
+        are fibrewise homotopy equivalences.
+        \item The weak equivalences on 
+        $\operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{Kan})$
+        are pointwise homotopy equivalences.
+    \end{itms}
+\end{corollary}
 
-\begin{itms}
-    \item 
-    Let $F\:\mathfrak CS\to\cat{Kan}$ be a functor.
-    Since $\operatorname{Un}_S$ preserves fibrant objects,
-    the object $\operatorname{Un}_SF\in\cat{sSet}_{\/S}$
-    is a left fibrations over $S$.
-    Moreover, we have
-    \[ \operatorname{St}_S\operatorname{Un}_SF
-    \simeq \operatorname{St}_SQ\operatorname{Un}_SF\simeq F, \]
-    where the first equivalence is by taking $Q$ to be the identity functor,
-    and the second is by (\ref{thm-2-z}).
-
-    \item Let $X\to S$ be a left fibration.
-    Then the corresponding functor to $\cat{Kan}$ is given by $R\operatorname{St}_SX$,
-    where $R$ can be taken as composition with
-    the fibrant replacement functor of $\cat{sSet}$.
-    We have 
-    \[ \operatorname{Un}_SR\operatorname{St}_SX\simeq X \]
-    in the covariant model structure, by (\ref{thm-2-z}).
-\end{itms}
+\begin{proof}
+    Let $X\to S$ be a left fibration, and let $F\:\mathfrak CS\to\cat{Kan}$ be a functor.
+    The unit and counit maps
+    \[ \operatorname{Un}_SR\operatorname{St}_SX\to X\quad\text{and}\quad F\to\operatorname{St}_SQ\operatorname{Un}_SF \]
+    are categorical equivalences (\ref{thm-2-z}).
+    Here we may take $Q$ to be the identity functor, 
+    which implies that the functors
+    \[ \operatorname{Un}_SR\operatorname{St}_SX\to X\quad\text{and}\quad F\to R\operatorname{St}_S\operatorname{Un}_SF \]
+    are weak equivalences.
+    The statement on weak equivalences on $\cat{LFib}_{\/S}$
+    will follow from (\ref{thm-5-s}) below.
+\end{proof}
 
 \begin{remark}
     Dually, for right fibrations, we have the \term{contravariant model structure}
@@ -648,11 +658,30 @@ We denote $(\cat{sSet}^+)_{\/{S^\sharp}}$ by $\cat{sSet}^+_{\/S}$.
         to cocartesian fibrations.
         \item $\operatorname{St}_S^+$ gives back the fibres
         for cocartesian fibrations,
-        up to a DK equivalence.
+        up to a categorical equivalence.
     \end{itms}
 \end{theorem}
 
 See \cite[Theorem~3.2.0.1]{htt}.
+
+\begin{corollary}[Grothendieck construction]
+    The functors 
+    \[\begin{tikzcd}
+        \smash{\cat{CocFib}_{\/S}}\vphantom{1_1}\ar[r,bend left,start anchor=north east,end anchor=north west,"R\operatorname{St}_S^+"] &
+        \operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{QsCat})\ar[l,bend left,start anchor=south west,end anchor=south east,"\operatorname{Un}_S^+"]
+    \end{tikzcd}\]
+    are inverses of each other up to weak equivalences, where 
+    \begin{itms}
+        \item $R$ denotes the fibrant replacement functor on
+        $\operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{sSet}^+)$.
+        \item $\cat{CocFib}_{\/S}$ is the category of cocartesian fibrations over $S$.
+        \item The weak equivalences on $\cat{CocFib}_{\/S}$
+        are fibrewise categorical equivalences.
+        \item The weak equivalences on 
+        $\operatorname{Fun}_{\cat{sSet}}(\mathfrak CS,\cat{QsCat})$
+        are pointwise categorical equivalences. \qed
+    \end{itms}
+\end{corollary}
 
 \begin{example}
     Let $S=\cat{Cat}_\infty$ be the category of quasi-categories,
@@ -667,12 +696,8 @@ See \cite[Theorem~3.2.0.1]{htt}.
     \[ f:=\operatorname{St}_T^+X\:T\to\cat{Cat}_\infty, \]
     so that 
     \[ X\simeq f^*\mathscr Z. \]
-    Roughly speaking, this is because of the diagram 
-    \[ \begin{tikzcd}[column sep=.5em]
-        f^*\operatorname{Un}_S^+F \ar[r,phantom,"\simeq"] &
-        \operatorname{Un}_T^+G \ar[rr]\ar[d]\ar[drr,phantom,very near start,"\ulcorner"] & \ &
-        \operatorname{Un}_S^+F\ar[d] \\
-        f^*S \ar[r,phantom,"\simeq"] & T\ar[rr] && S\rlap{\ ,}
-    \end{tikzcd} \]
-    where $G:=f$. \varqed
+    Roughly speaking, this is because
+    $X$ and $f^*\mathscr Z$ both are cocartesian fibrations over $S$,
+    and they have the same fibres.
+    \varqed
 \end{example}

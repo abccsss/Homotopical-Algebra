@@ -1,13 +1,25 @@
-\def\:{\colon}
-\def\/{{∕}}
-\def\bfDelta{{𝚫}}
-\def\bigmid{\mathrel{\big|}}
-\def\biggmid{\mathrel{\bigg|}}
-\def\cat#1{\mathsf{#1}}
-\def\comma{,}
-\def\Ho{\operatorname{Ho}}
-\def\Hom{\operatorname{Hom}}
-\def\op{^{\mathrm{op}}}
-\def\sHom{\mathscr{H}\mkern-3mu\mathit{om}}
-\def\simto{\mathrel{\rlap{\raisebox{.8ex}{$\mkern2mu\sim$}}{\to}}}
-\def\square{\mathbin{◻}}
+% math commands
+\renewcommand{\:}{\colon}
+\renewcommand{\/}{{∕}}
+\newcommand{\bfDelta}{{𝚫}}
+\newcommand{\bigmid}{\mathrel{\big|}}
+\newcommand{\biggmid}{\mathrel{\bigg|}}
+\newcommand{\cat}[1]{\mathsf{#1}}
+\newcommand{\comma}{,}
+\newcommand{\Ho}{\operatorname{Ho}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\op}{^{\mathrm{op}}}
+\newcommand{\sHom}{\mathscr{H}\mkern-3mu\mathit{om}}
+\newcommand{\simto}{\mathrel{\rlap{\raisebox{.8ex}{$\mkern2mu\sim$}}{\to}}}
+\newcommand{\square}{\mathbin{◻}}
+
+% text commands
+\newcommand{\term}[1]{\textbf{\textup{#1}}}
+
+\def\tagtext#1{\ifvmode\par\noindent\fi\raisebox{-3pt}{\tikz{
+  \node[rectangle,rounded corners=5pt,fill=gray!10,inner ysep=0pt,inner xsep=4pt,outer sep=0]
+    {\textcolor{gray!50}{\small\bf\SourceSans\strut #1}};
+}}}
+\newcommand{\nyw}{\tagtext{Not yet written}}
+\newcommand{\tbc}{\tagtext{To be continued}}
+\newcommand{\nex}{\tagtext{Needs expanding}}

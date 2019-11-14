@@ -5,17 +5,8 @@
 % unicode math
 \usepackage{amsmath}
 \usepackage{unicode-math}
-% \setmainfont{XITS}
-% \setmathfont{XITS Math}
 \setmainfont{STIX Two Text}
 \setmathfont{STIX Two Math}
-% \setmainfont{Baskerville}
-% \setsansfont[Scale=.9]{Avenir LT 45 Book}
-% \setmathfont{XITS Math}
-% \setmathfont[range={\mathup,\mathpunct}]{Baskerville}
-% \setmathfont[range=\mathit]{Baskerville Math Italic}
-% \setmathfont[range=\mathsfup,Scale=.9]{Avenir LT 45 Book}
-% \setmathfont[range={\int,\sum,\prod,\coprod}]{STIX Two Math}
 \newfontfamily\SourceSans{Source Sans Pro}[Scale=MatchLowercase]
 
 % environments
@@ -53,17 +44,6 @@
 
 \def\thesection{\arabic{section}\texorpdfstring{}{.}} % pdf bookmark numbering
 \setcounter{secnumdepth}{1} % suppress subsection numbering
-
-% text commands
-\def\term#1{\textbf{\textup{#1}}}
-
-\def\tagtext#1{\ifvmode\par\noindent\fi\raisebox{-3pt}{\tikz{
-  \node[rectangle,rounded corners=5pt,fill=gray!10,inner ysep=0pt,inner xsep=4pt,outer sep=0]
-    {\textcolor{gray!50}{\small\bf\SourceSans\strut #1}};
-}}}
-\def\nyw{\tagtext{Not yet written}}
-\def\tbc{\tagtext{To be continued}}
-\def\nex{\tagtext{Needs expanding}}
 
 \usepackage{tikz}
 \usepackage{tikz-cd}

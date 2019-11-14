@@ -433,15 +433,16 @@ by Whitehead's theorem (\ref{thm-2-w}).
 Thus, for a quasi-category $\cat C$, we can define the 
 $\cat{hCW}$-enriched category $h\cat C$ to be $h\mathfrak C\cat C$.
 It has the same objects and the same homotopy types of mapping spaces as $\cat C$.
+In fact, this definition works when $\cat C$ is any simplicial set.
 
 Next, we describe the adjoint pair $(\mathfrak C\dashv\mathfrak N)$
 as a Quillen equivalence,
 so that the two models are really equivalent.
 
 \begin{definition}
-    Let $\cat C,\cat D$ be two quasi-categories, or two simplicial categories.
-    A map $f\:\cat C\to\cat D$ is called a \term{Dwyer--Kan equivalence},
-    or a \term{categorical equivalence}, if $h(f)\:h\cat C\to h\cat D$
+    Let $\cat C,\cat D$ be two simplicial sets, or two simplicial categories.
+    A map $f\:\cat C\to\cat D$ is called a \term{categorical equivalence},
+    if $h(f)\:h\cat C\to h\cat D$
     is an equivalence of $\cat{hCW}$-enriched categories, i.e.\ the following holds.
     \begin{itms}
         \item $f$ is fully faithful, i.e.\ induces weak equivalences of mapping spaces.
@@ -451,10 +452,12 @@ so that the two models are really equivalent.
 \end{definition}
 
 \begin{remark}
-    Dwyer--Kan equivalences are the $\infty$-categorical notion
+    This defines the $\infty$-categorical notion
     of a categorical equivalence.
-    We regard two $\infty$-categories as equivalent,
-    whenever they are Dwyer--Kan equivalent. \varqed
+    Any reasonable property of $\infty$-categories
+    should be preserved by categorical equivalences.
+    Otherwise, we will regard that property as ill-defined.
+    \varqed
 \end{remark}
 
 Recall that a functor $f\:\cat C\to\cat D$ between ordinary categories is an \term{isofibration},
@@ -464,13 +467,13 @@ there exists $\tilde\alpha\:x\to\tilde y$ in $\cat C$ such that $\alpha=f(\tilde
 \begin{theorem}\label{thm-4-e}
     The category $\cat{sSet}$ has the \term{Joyal model structure}, with 
     \begin{itms}
-        \item $\cat W=\{$Dwyer--Kan equivalences$\}$.
+        \item $\cat W=\{$categorical equivalences$\}$.
         \item $\cat{Cof}=\{$injections$\}$.
         \item The fibrant objects are quasi-categories.
     \end{itms}
     The category $\cat{Cat}_{\cat{sSet}}$ has the \term{Bergner model structure}, with
     \begin{itms}
-        \item $\cat W=\{$Dwyer--Kan equivalences$\}$.
+        \item $\cat W=\{$categorical equivalences$\}$.
         \item $\cat{Fib}=\{$isofibrations that are fibrations on mapping spaces$\}$.
         \item The fibrant objects are categories enriched over Kan complexes.
     \end{itms}
@@ -482,37 +485,39 @@ there exists $\tilde\alpha\:x\to\tilde y$ in $\cat C$ such that $\alpha=f(\tilde
     is a Quillen equivalence.
 \end{theorem}
 
-For a proof, see \cite[Theorem~2.2.5.1]{htt}.
+See \cite[Theorem~2.2.5.1]{htt}.
 
-Since $\mathfrak N$ is right Quillen,
-it sends category enriched over Kan complexes to quasi-categories.
-However, $\mathfrak C$ does not necessarily
-send a quasi-category to a category enriched over Kan complexes.
-Given a quasi-category $\cat C$,
-its corresponding category enriched over Kan complexes should be 
-\[ R\mathfrak C\cat C, \]
-where $R$ denotes the fibrant replacement functor of $\cat{sSet}$.
-For example, one may take $R$ to be the functor $\operatorname{Sing}|\cdot|$.
+This theorem has the following important corollary,
+which states that one can convert between quasi-categories 
+and categories enriched between Kan complexes, up to 
+a categorical equivalence.
 
-Let $\cat C$ be a quasi-category, and let $\cat D$ be a category 
-enriched over Kan complexes. The unit and counit maps
-\[ \mathfrak NR\mathfrak C\cat C\to\cat C\quad\text{and}\quad\cat D\to\mathfrak CQ\mathfrak N\cat D \]
-are always Dwyer--Kan equivalences (\ref{thm-2-z}).
-Here we may take $Q$ to be the identity functor, 
-which implies that the functors
-\[ \mathfrak NR\mathfrak C\cat C\to\cat C\quad\text{and}\quad\cat D\to R\mathfrak C\mathfrak N\cat D \]
-are Dwyer--Kan equivalences.
+\begin{corollary}[Conversion between the two models]
+    The functors 
+    \[\begin{tikzcd}
+        \cat{QsCat}\ar[r,bend left,start anchor=north east,end anchor=north west,"R\mathfrak C"] &
+        \cat{Cat}_{\cat{Kan}}\ar[l,bend left,start anchor=south west,end anchor=south east,"\mathfrak N"]
+    \end{tikzcd}\]
+    are inverses of each other up to categorical equivalences,
+    where $R$ denotes the fibrant replacement functor of $\cat{sSet}$.
+\end{corollary}
 
-This discussion shows that one can convert between
-quasi-categories and categories enriched over Kan complexes,
-using the functors $R\mathfrak C$ and $\mathfrak N$,
-in a way that preserves Dwyer--Kan equivalences.
+\begin{proof}
+    Let $\cat C$ be a quasi-category, and let $\cat D$ be a category 
+    enriched over Kan complexes. The unit and counit maps
+    \[ \mathfrak NR\mathfrak C\cat C\to\cat C\quad\text{and}\quad\cat D\to\mathfrak CQ\mathfrak N\cat D \]
+    are categorical equivalences (\ref{thm-2-z}).
+    Here we may take $Q$ to be the identity functor, 
+    which implies that the functors
+    \[ \mathfrak NR\mathfrak C\cat C\to\cat C\quad\text{and}\quad\cat D\to R\mathfrak C\mathfrak N\cat D \]
+    are categorical equivalences.
+\end{proof}
 
 \begin{remark}
     We do not use the standard model structure on $\cat{sSet}$
     when we study quasi-categories, and here is a reason.
     Let $\cat C$ be a quasi-category.
-    In many cases, $\cat C$ contains an initial object $x$,
+    In many examples, $\cat C$ will contain an initial object $x$,
     and thus, the geometric realisation of $\cat C$ 
     can be contracted to $x$ linearly.
     Therefore, the homotopy type of $\cat C$ is trivial.

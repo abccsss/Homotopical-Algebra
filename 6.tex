@@ -99,7 +99,7 @@ We immediately deduce the following.
 Colimits are not computable via this definition.
 We need to deduce some of their properties to make them computable.
 
-\begin{proposition}
+\begin{proposition}\label{thm-6-z}
     Let $\cat C$ be a quasi-category,
     and let $\{x_\alpha\}$ be a collection of objects in $\cat C$.
     An object $x\in\cat C$ is a coproduct of the objects $x_\alpha$,
@@ -118,7 +118,7 @@ We need to deduce some of their properties to make them computable.
     by (\ref{thm-6-c}). Thus $x$ is a coproduct, if and only if the left fibration
     \[(\cat C_{\{x_\alpha\}\/})_{x\/}\to\cat C_{\{x_\alpha\}\/}\]
     is a trivial fibration,
-    if and only if it is a DK equivalence (since DK equivalences are weak homotopy equivalences),
+    if and only if it is a categorical equivalence (since categorical equivalences are weak homotopy equivalences),
     if and only if their fibres are equivalent, by the next lemma.
 \end{proof}
 
@@ -126,7 +126,7 @@ We need to deduce some of their properties to make them computable.
     Let $S$ be a simplicial set, and let $X,Y\in\cat{sSet}_{\/S}$
     be two left fibrations over $S$.
     Let $f\:X\to Y$ be a map in $\cat{sSet}_{\/S}$.
-    Then $f$ is a DK equivalence if and only if 
+    Then $f$ is a categorical equivalence if and only if 
     $f$ induces weak equivalences on each fibre.
 \end{lemma}
 
@@ -239,8 +239,7 @@ is a functor of quasi-categories, then its (co)limits are computed by
 the homotopy (co)limit of the functor
 \[ R\mathfrak Cf\:R\mathfrak C\cat K\to R\mathfrak C\cat C \]
 between $\cat{Kan}$-enriched categories.
-This is because (co)limits are preserved by DK equivalences,
-i.e.\ categorical equivalences.
+This is because (co)limits are preserved by categorical equivalences.
 
 \begin{example}
     When $\cat K=\Lambda_0[2]$, one has an isomorphism
@@ -452,7 +451,7 @@ of adjoint functors.
     \[ p\:M\to\Delta[1], \]
     such that 
     \begin{itms}
-        \item There are DK equivalences
+        \item There are categorical equivalences
         $p^{-1}(0)\simeq\cat C$ and $p^{-1}(1)\simeq\cat D$.
         \item $p$ is a cocartesian fibration.
         \item $p$ is a cartesian fibration.
