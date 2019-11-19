@@ -149,10 +149,62 @@ Our goal in this subsection is to prove the following theorem.
         where the second step uses the fact that taking the cofibre 
         commutes with colimits,
         as can be checked by the definition of homotopy colimits.
-    \end{itms}
-\end{proof}
 
-\tbc
+        \item \emph{$\Ho(\cat C)$ is an additive category.}
+        
+        For any $X,Y\in\cat{C}$, note that 
+        \[\begin{aligned}
+            \Hom_{\cat{C}}(X[1],Y)
+            &\simeq \Hom_{\cat{C}}(0,Y) \underset{\Hom_{\cat{C}}(X,Y)}{\times} \Hom_{\cat{C}}(0,Y) \\
+            &\simeq \Omega\Hom_{\cat{C}}(X,Y).
+        \end{aligned}\]
+        Therefore,
+        \[
+            \pi_0\Hom_{\cat{C}}(X,Y)\simeq 
+            \pi_1\Hom_{\cat{C}}(X[-1],Y)\simeq 
+            \pi_2\Hom_{\cat{C}}(X[-2],Y)\simeq\cdots
+        \]
+        is an abelian group.
+        We leave it to the reader to check that 
+        composition is bilinear.
+
+        \item \emph{For a map $f\:X\to Y$, what is $-f$?}
+        
+        A map from $X$ to $Y$ can be seen as a diagram
+        \[\begin{tikzcd}
+            X[-1]\ar[r]\ar[d] & 0\ar[d] \\
+            0\ar[r] & Y\rlap{\ .}
+        \end{tikzcd}\]
+        If we swap the two $0$'s, the map will reverse its sign.
+        Precisely, if this square corresponds to the map $f$,
+        then the transpose of this square will correspond to $-f$.
+        This is because the group structure is defined by the identification
+        \[\Hom_{\cat{C}}(X,Y)\simeq\{*\}\underset{\Hom_{\cat{C}}(X[-1],Y)}{\times}\{*\}
+        \simeq\Omega\Hom_{\cat{C}}(X[-1],Y),\]
+        and if the two $\{*\}$'s are swapped,
+        then the loop space will have its loops reversed.
+    \end{itms}
+
+    Next, we define a triangulated structure on $\Ho(\cat{C})$,
+    and we verify the axioms of a triangulated category.
+
+    \begin{itms}
+        \item \emph{Distinguished triangles.}
+        
+        We define a triangle $X\to Y\to Z\to X[1]$ in $\Ho(\cat{C})$
+        to be a distinguished triangle,
+        if it is isomorphic to one that can be lifted to a diagram 
+        \[\begin{tikzcd}
+            X\ar[r]\ar[d]\ar[dr,phantom,"\ulcorner" pos=.25,"\lrcorner" pos=.75] &
+            Y\ar[r]\ar[d]\ar[dr,phantom,"\ulcorner" pos=.25,"\lrcorner" pos=.75] & 0\ar[d] \\
+            0\ar[r] & Z\ar[r] & W
+        \end{tikzcd}\]
+        in $\cat{C}$, where $W$ is equivalent to $X[-1]$
+        since the outer square is a pushout-pullback.
+    \end{itms}
+
+    \tbc
+\end{proof}
 
 \subsection{Spectra and stable homotopy theory}
 
