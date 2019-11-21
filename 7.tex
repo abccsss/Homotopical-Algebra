@@ -201,9 +201,66 @@ Our goal in this subsection is to prove the following theorem.
         \end{tikzcd}\]
         in $\cat{C}$, where $W$ is equivalent to $X[-1]$
         since the outer square is a pushout-pullback.
+
+        \item (TR 1)
+        \begin{itms}
+            \item \emph{Distinguished triangles are stable under isomorphisms.}
+            \item \emph{For any object $X$, the following triangle is distinguished:
+            \[X\xrightarrow{1_X}X\to0\to X[1].\]}
+            \item \emph{Every map $X\to Y$ extends to a distinguished triangle \[X\to Y\to Z\to X[1].\]}
+        \end{itms}
+
+        These properties are all obvious.
+
+        \item (TR 2)
+        \emph{If
+        \[X\xrightarrow{f}Y\xrightarrow{g}Z\xrightarrow{h}X[1]\]
+        is a distinguished triangle, so is
+        \[Y\xrightarrow{g}Z\xrightarrow{h}X[1]\xrightarrow{-f[1]}Y[1].\]}%
+
+        To prove this, let us form the diagram 
+        \[\begin{tikzcd}
+            X\ar[r]\ar[d]\ar[dr,phantom,"\ulcorner" pos=.25,"\lrcorner" pos=.75] &
+            Y\ar[r]\ar[d]\ar[dr,phantom,"\ulcorner" pos=.25,"\lrcorner" pos=.75] & 0\ar[d] \\
+            0\ar[r] &
+            Z\ar[r]\ar[d]\ar[dr,phantom,"\ulcorner" pos=.25,"\lrcorner" pos=.75] &
+            W\ar[d] \\
+            & 0\ar[r] & V
+        \end{tikzcd}\]
+        in $\cat{C}$.
+        The two outer rectangles establish equivalences $W\simeq X[1]$ and $V\simeq Y[1]$.
+        The map $W\to V$ in the diagram is $f[1]$,
+        since it is induced by the map of diagrams
+        \[\begin{tikzcd}
+            X\ar[r]\ar[d] & 0 \\ 0
+        \end{tikzcd}
+        \quad\longrightarrow\quad
+        \begin{tikzcd}
+            Y\ar[r]\ar[d] & 0 \\ 0
+        \end{tikzcd}\]
+        in $\cat C$. However, after transposing the diagram 
+        to match the definition of distinguished triangles,
+        the map $W\to V$ becomes $-f[1]$.
+
+        \item (TR 3)
+        \emph{Given a diagram}
+        \[\begin{tikzcd}
+            X\ar[r]\ar[d,"f"'] & Y\ar[r]\ar[d] & Z\ar[r]\ar[d,dashed] & X[1]\ar[d,"f\lbrack1\rbrack"] \\
+            X'\ar[r] & Y'\ar[r] & Z'\ar[r] & X'[1]
+        \end{tikzcd}\]
+        \emph{without the dashed arrow, where the two rows are distinguished triangles,
+        there exists a dashed arrow making the diagram commute.}
+
+        This is because taking cofibres in $\cat{C}$ is functorial.
+
+        \item (TR 4)
+        \emph{The octahedral axiom.}
+
+        We omit the proof here, but it is not difficult.
     \end{itms}
 
-    \tbc
+    We conclude that $\Ho(\cat{C})$
+    is a triangulated category.
 \end{proof}
 
 \subsection{Spectra and stable homotopy theory}
