@@ -265,7 +265,123 @@ Our goal in this subsection is to prove the following theorem.
 
 \subsection{Spectra and stable homotopy theory}
 
-\nyw
+In this section, we review the classical theory of
+topological spectra and stable homotopy theory,
+as a model for the stabilisation procedure that will
+apply to general stable $\infty$-categories.
+
+Stable homotopy theory is concerned with properties of a topological space 
+that stabilise after applying the suspension functor sufficiently many times.
+For example, the \term{stable homotopy groups} of a pointed topological space~$X$
+are defined by 
+\[\pi_n^{\mathrm s}(X):=
+\mathop{\operatorname{colim}}_{k\to+\infty} \pi_{n+k}(\Sigma^kX)\]
+for all $n\in\mathbb{Z}$.
+For example, the Freudenthal suspension theorem states that 
+\[\pi_n^{\mathrm s}(S^0)\simeq\pi_{2n+2}(S^{n+2})
+\simeq\pi_{2n+3}(S^{n+3})\simeq\cdots.\]
+Topological spectra contain the data that encodes
+these stabilised properties of a topological space.
+
+\begin{definition}
+    A \term{spectrum}~$E$ consists of
+    \begin{itms}
+        \item A series of pointed topological spaces 
+        \[E_0,E_1,E_2,\dotsc.\]
+        \item For each $n\geq0$, a map 
+        \[\sigma_n\:\Sigma E_n\to E_{n+1}.\]
+    \end{itms}
+    A \term{map of spectra}~$f$ between two spectra $E$~and~$F$
+    consists of a map
+    \[f_n\:E_n\to F_n\]
+    for each $n\geq0$,
+    such that $\sigma_n\circ\Sigma f_n=f_{n+1}\circ\sigma_n$ for all $n\geq0$.
+\end{definition}
+
+The category of spectra is denoted by~$\cat{Sp}$.
+
+\begin{example}
+    Let~$X$ be a pointed topological space.
+    The \term{suspension spectrum}~$\Sigma^\infty X$ is defined by 
+    \[ (\Sigma^\infty X)_n:=\Sigma^nX, \]
+    with $\sigma_n:=1_{\Sigma^{n+1}X}$.
+    The purpose of the notation~$\Sigma^\infty$ is to signify that 
+    we are looking for the properties of~$\Sigma^nX$ as $n\to\infty$.
+
+    The \term{sphere spectrum}~$\mathbb{S}$ is defined by
+    \[ \mathbb{S}:=\Sigma^\infty S^0, \]
+    so that $\mathbb{S}_n\simeq S^n$. \varqed
+\end{example}
+
+\begin{definition}
+    The \term{stable homotopy groups} of a spectrum $E$ are defined by 
+    \[\pi_n^{\mathrm s}(E):=
+    \mathop{\operatorname{colim}}_{k\to+\infty} \pi_n(E_k)\]
+    for all $n\in\mathbb{Z}$.
+\end{definition}
+
+For example, we have 
+\[ \pi_n(\Sigma^\infty X)\simeq\pi_n^{\mathrm s}(X) \]
+for any pointed topological space $X$.
+
+Note that the suspension functor~$\Sigma$
+and the shifting functor~$[1]$
+induce the same maps on stable homotopy groups.
+We will see that they are equivalent up to homotopy,
+given a certain model structure on~$\cat{Sp}$.
+
+\begin{definition}
+    A spectrum~$E$ is called an \term{$\Omega$-spectrum},
+    if the maps 
+    \[E_n\to\Omega E_{n+1}\]
+    corresponding to $\sigma_n$
+    are weak equivalences for all $n\geq0$.
+\end{definition}
+
+In this case, we write $\Omega^\infty E:=E_0$.
+For any $n\geq0$, we have $\pi_n(E)\simeq\pi_n(E_0)$.
+
+\begin{theorem}
+    The category~$\cat{Sp}$ has the \term{stable model structure}, with 
+    \begin{itms}
+        \item $\cat{W}=\{$maps that induce isomorphisms of all
+        stable homotopy groups$\}$.
+        \item $\cat{Cof}=\{$degreewise cofibrations$\}$.
+        \item The fibrant objects are precisely the $\Omega$-spectra.
+    \end{itms}
+    Moreover, the adjoint pair 
+    \[\begin{tikzcd}
+        \cat{Sp}
+        \ar[r,bend left,"\Sigma"]
+        \ar[r,phantom,"\bot"] &
+        \cat{Sp}
+        \ar[l,bend left,"\Omega"]
+    \end{tikzcd}\]
+    is a Quillen equivalence, and their derived functors
+    are isomorphic to the shifting functors:
+    \[ \mathbb{L}\Sigma\simeq[1]
+    \quad\text{and}\quad
+    \mathbb{R}\Omega\simeq[-1]. \]
+\end{theorem}
+
+\begin{corollary}
+    The $\infty$-category of spectra,
+    presented by the model category of spectra,
+    is a stable $\infty$-category.
+\end{corollary}
+
+\begin{proof}
+    It suffices to check the existence of homotopy (co)fibres.
+    However, by definition, every model category admits arbitrary (co)limits.
+\end{proof}
+
+As a result, the homotopy category $\Ho(\cat{Sp})$
+has a triangulated structure.
+
+Spectra can also be viewed from another perspective,
+namely, as representing objects of generalised cohomology theories.
+
+\tbc
 
 \subsection{Stabilisation}
 
