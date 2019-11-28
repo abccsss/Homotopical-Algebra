@@ -421,9 +421,9 @@ to the category of generalised cohomology theories of topological spaces.
 
 Let $\cat C$ be an $\infty$-category with finite limits.
 The goal of this subsection is to construct
-a stable $\infty$-category $\cat{Sp(C)}$ of \emph{spectrum objects} of $\cat C$,
+a stable $\infty$-category $\operatorname{Sp}(\cat{C})$ of \emph{spectrum objects} of $\cat C$,
 together with a functor
-\[\Omega^\infty\:\cat{Sp(C)}\to\cat{C},\]
+\[\Omega^\infty\:\operatorname{Sp}(\cat{C})\to\cat{C},\]
 which is universal in the sense that for any stable $\infty$-category $\cat D$,
 every functor $\cat{D}\to\cat{C}$ preserving finite limits 
 will factor through the functor $\Omega^\infty$ uniquely.
@@ -433,9 +433,12 @@ let us introduce another perspective
 from which topological spectra can be viewed.
 
 Let $E$ be an $\Omega$-spectrum.
-Then we define a functor 
-\[F\:\cat{Top}_*\to\cat{Top}_*,\]
-sending $S^n$ to the space $E_n$.
+Let $\cat{Top}_*^{\mathrm{fin}}$ be the category 
+of pointed topological spaces which are homotopy equivalent
+to finite CW~complexes.
+Then we may define a functor 
+\[F\:\cat{Top}_*^{\mathrm{fin}}\to\cat{Top}_*,\]
+sending $S^n$ to the space~$E_n$.
 To define such a functor,
 notice that such a functor sends a pushout square to a pullback square:
 \[\begin{tikzcd}
@@ -449,12 +452,99 @@ notice that such a functor sends a pushout square to a pullback square:
 \end{tikzcd}\]
 If we require that $F$ sends any pushout square to a pullback square,
 then $F$ will be uniquely defined (up to an equivalence),
-assuming that the spaces $E_n$ can be delooped arbitrarily many times.
+assuming that the spaces~$E_n$ can be delooped arbitrarily many times,
+which is the case since we assumed that $E$ is an $\Omega$-spectrum.
 (The reader may prove this as an exercise.)
 
 The requirement that $F$ should send a pushout square to a pullback square
 is analogous to the excision property of classical homology theories.
 Therefore, spectra may be seen as ``homology theories'' of topological spaces,
 with values in topological spaces.
+
+In general, we will define a \emph{spectrum object} of $\cat{C}$
+to be a ``homology theory'' of topological spaces,
+with values in $\cat{C}$.
+
+\begin{definition}
+    Let $\cat{C}$ and $\cat{D}$ be $\infty$-categories.
+    \begin{itms}
+        \item Suppose $\cat{C}$ has pushouts.
+        A functor $F\:\cat{C}\to\cat{D}$ is \term{excisive}
+        if it sends pushout squares to pullback squares.
+        \item Suppose $\cat{C}$ has a zero object.
+        A functor $F\:\cat{C}\to\cat{D}$ is \term{reduced}
+        if $F$ preserves the zero object.
+    \end{itms}
+    We denote by 
+    \[\operatorname{Fun}_*(\cat{C},\cat{D})\quad\text{and}\quad
+    \operatorname{Exc}_*(\cat{C},\cat{D})\]
+    the categories of reduced functors and reduced excisive functors 
+    from $\cat{C}$ to $\cat{D}$, respectively,
+    as full subcategories of $\operatorname{Fun}(\cat{C},\cat{D})$.
+\end{definition}
+
+Recall that the category of spaces was defined to be
+$\cat{S}:=\mathfrak{N}(\cat{Kan})$.
+
+\begin{definition}
+    The category of \term{finite spaces}, denoted by $\cat{S}^{\mathrm{fin}}$,
+    is defined to be the full subcategory of $\cat{S}$
+    consisting of Kan complexes whose geometric realisations
+    are equivalent to finite CW complexes. Let
+    \[\cat{S}_*^{\mathrm{fin}}:=(\cat{S}^{\mathrm{fin}})_{\{*\}\/}\]
+    be the category of pointed finite spaces.
+\end{definition}
+
+\begin{definition}
+    Let $\cat{C}$ be an $\infty$-category.
+    The category of \term{spectrum objects} of $\cat{C}$
+    is defined by 
+    \[\operatorname{Sp}(\cat{C}):=
+    \operatorname{Exc}_*(\cat{S}_*^{\mathrm{fin}},\cat{C}).\]
+    The functor 
+    \[\Omega^\infty\:\operatorname{Sp}(\cat{C})\to\cat{C}\]
+    is defined by evaluating at $S^0\in\cat{S}_*^{\mathrm{fin}}$.
+\end{definition}
+
+For example, the above discussion suggests that we should have
+\[\cat{Sp}\simeq\operatorname{Sp}(\cat{S}_*)\simeq\operatorname{Sp}(\cat{Top}_*).\]
+
+\begin{proposition}
+    The category $\operatorname{Sp}(\cat{C})$ is stable
+    if $\cat{C}$ admits finite limits.
+
+    More generally, the category $\operatorname{Exc}_*(\cat{C},\cat{D})$
+    is stable if $\cat{C}$ admits finite colimits and 
+    $\cat{D}$ admits finite limits.
+\end{proposition}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+\begin{proposition}
+    Let $\cat{C}$ be an $\infty$-category with finite limits.
+    Then $\cat{C}$ is stable if and only if the functor 
+    $\Omega^\infty\:\operatorname{Sp}(\cat{C})\to\cat{C}$
+    is an equivalence.
+\end{proposition}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+\begin{proposition}
+    Let $\cat{C}$ and $\cat{D}$ be $\infty$-categories.
+
+    \begin{itms}
+        \item 
+        If $\cat{C}$ is stable and $\cat{D}$ has finite limits, then
+        \[\operatorname{Fun}^{\mathrm{l.ex.}}(\cat{C},\operatorname{Sp}(\cat{D}))
+        \simeq\operatorname{Fun}^{\mathrm{l.ex.}}(\cat{C},\cat{D})\]
+        \item 
+        More generally, if $\cat{C}$ is pointed and has finite limits,
+        and $\cat{D}$ has finite limits, then 
+    \end{itms}
+\end{proposition}
 
 \tbc
