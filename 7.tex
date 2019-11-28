@@ -381,8 +381,80 @@ has a triangulated structure.
 Spectra can also be viewed from another perspective,
 namely, as representing objects of generalised cohomology theories.
 
-\tbc
+\begin{definition}
+    A \term{generalised cohomology theory}
+    is a family of functors
+    \[ \widetilde E^n\:\cat{Top}\op_*\to\cat{Ab}, \]
+    where $n\in\mathbb Z$,
+    and $\cat{Top}_*$ denotes the category of pointed topological spaces,
+    satisfying the following axioms.
+    \begin{itms}
+        \item \textup{(Homotopy)} If $f\:X\to Y$ is a weak homotopy equivalence,
+        then $\widetilde E^\bullet(f)$ is an isomorphism.
+        \item \textup{(Exactness)} A homotopy cofibre sequence $X\to Y\to Z$ induces an exact sequence
+        \[ \widetilde E^\bullet(Z)\to\widetilde E^\bullet(Y)\to\widetilde E^\bullet(X). \]
+        \item \textup{(Suspension)} There is a natural isomorphism
+        \[ \widetilde E^{\bullet+1}(\Sigma X)\simeq\widetilde E^\bullet(X). \]
+        \item \textup{(Additivity)} $\widetilde E^\bullet$ takes coproducts to products:
+        \[\textstyle \widetilde E^\bullet\bigl(\bigvee_\alpha X_\alpha\bigr)\simeq
+        \prod_\alpha\widetilde E^\bullet(X_\alpha). \]
+    \end{itms}
+\end{definition}
+
+For example, reduced singular cohomology with coefficients in any abelian group 
+is a generalised cohomology theory.
+$K$-theory is also a generalised cohomology theory.
+
+\begin{theorem}[Brown]
+    Every generalised cohomology theory $\widetilde{E}^\bullet$
+    is represented by a spectrum $E$, in the sense that 
+    \[\widetilde{E}^n(X)\simeq\Hom_{\Ho(\cat{Sp})}(\Sigma^\infty X[-n],E)\]
+    for any topological space $X$.
+\end{theorem}
+
+Therefore, the category of spectra,
+which we regard as a ``stabilisation'' of the category of topological spaces,
+is equivalent (in the homotopical sense)
+to the category of generalised cohomology theories of topological spaces.
 
 \subsection{Stabilisation}
 
-\nyw
+Let $\cat C$ be an $\infty$-category with finite limits.
+The goal of this subsection is to construct
+a stable $\infty$-category $\cat{Sp(C)}$ of \emph{spectrum objects} of $\cat C$,
+together with a functor
+\[\Omega^\infty\:\cat{Sp(C)}\to\cat{C},\]
+which is universal in the sense that for any stable $\infty$-category $\cat D$,
+every functor $\cat{D}\to\cat{C}$ preserving finite limits 
+will factor through the functor $\Omega^\infty$ uniquely.
+
+Before we give the general construction, 
+let us introduce another perspective
+from which topological spectra can be viewed.
+
+Let $E$ be an $\Omega$-spectrum.
+Then we define a functor 
+\[F\:\cat{Top}_*\to\cat{Top}_*,\]
+sending $S^n$ to the space $E_n$.
+To define such a functor,
+notice that such a functor sends a pushout square to a pullback square:
+\[\begin{tikzcd}
+    S^n\ar[r]\ar[d]\ar[dr,phantom,pos=.75,"\lrcorner"] & 0\ar[d] \\
+    0\ar[r] & S^{n+1}
+\end{tikzcd}
+\quad\overset{F}{\longmapsto}\quad
+\begin{tikzcd}
+    E_n\ar[r]\ar[d]\ar[dr,phantom,pos=.25,"\ulcorner"] & 0\ar[d] \\
+    0\ar[r] & E_{n+1}\rlap{\ .}
+\end{tikzcd}\]
+If we require that $F$ sends any pushout square to a pullback square,
+then $F$ will be uniquely defined (up to an equivalence),
+assuming that the spaces $E_n$ can be delooped arbitrarily many times.
+(The reader may prove this as an exercise.)
+
+The requirement that $F$ should send a pushout square to a pullback square
+is analogous to the excision property of classical homology theories.
+Therefore, spectra may be seen as ``homology theories'' of topological spaces,
+with values in topological spaces.
+
+\tbc
