@@ -473,7 +473,7 @@ with values in $\cat{C}$.
         if it sends pushout squares to pullback squares.
         \item Suppose $\cat{C}$ has a zero object.
         A functor $F\:\cat{C}\to\cat{D}$ is \term{reduced}
-        if $F$ preserves the zero object.
+        if it preserves the zero object.
     \end{itms}
     We denote by 
     \[\operatorname{Fun}_*(\cat{C},\cat{D})\quad\text{and}\quad
@@ -510,12 +510,18 @@ For example, the above discussion suggests that we should have
 \[\cat{Sp}\simeq\operatorname{Sp}(\cat{S}_*)\simeq\operatorname{Sp}(\cat{Top}_*).\]
 
 \begin{proposition}
-    The category $\operatorname{Sp}(\cat{C})$ is stable
-    if $\cat{C}$ admits finite limits.
+    Let $\cat{C}$ and $\cat{D}$ be $\infty$-categories.
 
-    More generally, the category $\operatorname{Exc}_*(\cat{C},\cat{D})$
-    is stable if $\cat{C}$ admits finite colimits and 
-    $\cat{D}$ admits finite limits.
+    \begin{itms}
+        \item
+        The category $\operatorname{Sp}(\cat{C})$ is stable
+        if $\cat{C}$ admits finite limits.
+
+        \item
+        More generally, the category $\operatorname{Exc}_*(\cat{C},\cat{D})$
+        is stable if $\cat{C}$ admits finite colimits and 
+        $\cat{D}$ admits finite limits.
+    \end{itms}
 \end{proposition}
 
 \begin{proof}
@@ -538,13 +544,54 @@ For example, the above discussion suggests that we should have
 
     \begin{itms}
         \item 
-        If $\cat{C}$ is stable and $\cat{D}$ has finite limits, then
+        If $\cat{C}$ is stable and $\cat{D}$ has finite limits,
+        then the functor $\Omega^\infty\:\operatorname{Sp}(\cat{C})\to\cat{C}$
+        induces an equivalence
         \[\operatorname{Fun}^{\mathrm{l.ex.}}(\cat{C},\operatorname{Sp}(\cat{D}))
-        \simeq\operatorname{Fun}^{\mathrm{l.ex.}}(\cat{C},\cat{D})\]
+        \simeq\operatorname{Fun}^{\mathrm{l.ex.}}(\cat{C},\cat{D}),\]
+        where $\operatorname{Fun}^{\mathrm{l.ex.}}$
+        denotes the category of \term{left exact} functors,
+        i.e.\ functors that preserve finite limits.
         \item 
         More generally, if $\cat{C}$ is pointed and has finite limits,
-        and $\cat{D}$ has finite limits, then 
+        and $\cat{D}$ has finite limits, then the functor
+        $\Omega^\infty\:\operatorname{Sp}(\cat{D})\to\cat{D}$
+        induces an equivalence
+        \[\operatorname{Exc}_*(\cat{C},\operatorname{Sp}(\cat{D}))
+        \simeq\operatorname{Exc}_*(\cat{C},\cat{D}).\]
     \end{itms}
 \end{proposition}
 
-\tbc
+\begin{proof}
+    \nyw
+\end{proof}
+
+Therefore, we have proved the following.
+
+\begin{theorem}
+    There is a pair of adjoint functors 
+    \[\begin{tikzcd}
+        \cat{Cat}_{\infty}^{\mathrm{stable}}
+        \ar[r,bend left,start anchor=north east,end anchor=north west,"i"]
+        \ar[r,phantom,"\bot"] &
+        \cat{Cat}_{\infty}^{\mathrm{fin.lim.}}\rlap{\ ,}
+        \ar[l,bend left,start anchor=south west,end anchor=south east,"\operatorname{Sp}"]
+    \end{tikzcd}\]
+    where
+    \begin{itms}
+        \item $\cat{Cat}_{\infty}^{\mathrm{stable}}$
+        denotes the subcategory of $\cat{Cat}_\infty$
+        consisting of stable $\infty$-categories and exact functors between them.
+        \item $\cat{Cat}_{\infty}^{\mathrm{fin.lim.}}$
+        denotes the subcategory of $\cat{Cat}_\infty$
+        consisting of $\infty$-categories having finite limits
+        and left exact functors between them.
+        \item $i$ denotes the inclusion functor,
+        and $\operatorname{Sp}$ is the functor constructed above,
+        called the \term{stabilisation functor}. \qed
+    \end{itms}
+\end{theorem}
+
+In fact, this can be seen as an adjunction of $(\infty,2)$-categories,
+since we have shown the equivalence of mapping spaces as $(\infty,1)$-categories,
+not just as homotopy types.
