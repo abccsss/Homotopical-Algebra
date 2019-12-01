@@ -17,6 +17,9 @@ on improving them.
 7. Stable categories
 8. Dold&ndash;Kan correspondence
 9. Derived categories
+10. Operads
+11. Associative algebras
+12. Little disks and factorisation algebras
 
 ## Online version
 
