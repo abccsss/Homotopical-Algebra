@@ -67,22 +67,165 @@ where $\tau^{\leq n}$ and $\tau^{\geq n}$ are the truncation functors, defined b
 \begin{notation}
     Sometimes it is more convenient to use homological indexing instead of cohomological indexing.
     Therefore, we introduce the following notation.
-    For a triangulated category $\cat{C}$ with a t-structure, we denote 
+    For a triangulated category~$\cat{C}$ with a t-structure, we denote 
     \[ \cat{C}_{\geq n}:=\cat{C}^{\leq-n}\quad\text{and}\quad\cat{C}_{\leq n}:=\cat{C}^{\geq-n}. \]
     Using this notation, we have $\cat{C}_{\geq n}=\cat{C}_{\geq0}[-n]$, etc. \varqed
 \end{notation}
 
 \begin{definition}
     Let $\cat{C}$ be a stable $\infty$-category.
-    A \term{t-structure} on $\cat{C}$ is a t-structure on
-    the triangulated category $\Ho(\cat{C})$.
+    A \term{t-structure} on~$\cat{C}$ is a t-structure on
+    the triangulated category~$\Ho(\cat{C})$.
 \end{definition}
 
-\tbc
+An important property of a t-structure is that 
+it establishes $\cat{C}^{\geq n}$ as a \emph{localisation} of~$\cat{C}$,
+in the sense that it is equivalent to $\cat{C}[\cat{W}^{-1}]$ 
+for some collection~$\cat{W}$ of arrows in~$\cat{C}$.
+
+\begin{definition}
+    A functor $f\:\cat{C}\to\cat{D}$ between $\infty$-categories
+    is called a \term{localisation functor}, if 
+    it has a fully faithful right adjoint.
+\end{definition}
+
+\begin{remark}
+    This definition of localisation
+    is narrower than what we called localisations before,
+    i.e.\ functors obtained by inverting some of the arrows.
+    In fact, if $f$ is a localisation functor in this new sense,
+    then $f$ is obtained by inverting all morphisms in~$\cat{C}$
+    which are sent to equivalences in~$\cat{D}$.
+    For a proof of this fact, see \cite[Proposition~5.2.7.12]{htt}. \varqed
+\end{remark}
+
+\begin{theorem}
+    Let $\cat{C}$ be a stable $\infty$-category with a t-structure,
+    and let $n\in\mathbb Z$. Then there exists a localisation functor
+    \[ \tau^{\geq n}\:\cat{C}\to\cat{C}^{\geq n}, \]
+    called the \term{truncation functor}, which is left adjoint
+    to the inclusion functor.
+\end{theorem}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+As a corollary, the subcategory $\cat{C}^{\geq n}$ of $\cat{C}$
+is stable under limits which exist in $\cat{C}$.
+Dually, $\cat{C}^{\leq n}$ is stable under colimits.
+
+\begin{definition}
+    Let $\cat{C}$ be a stable $\infty$-category with a t-structure.
+    The \term{heart} of $\cat{C}$ is defined to be 
+    \[ \cat{C}^\heartsuit:=\cat{C}^{\geq0}\cap\cat{C}^{\leq0}\subset\cat{C}. \]
+    We define a family of functors
+    \[ \pi_n\:\cat{C}\to\cat{C}^\heartsuit \]
+    by $\pi_0:=\tau^{\geq0}\tau^{\leq0}\simeq\tau^{\leq0}\tau^{\geq0}$,
+    and $\pi_n:=\pi_0\circ[-n]$.
+\end{definition}
+
+For a proof of $\tau^{\geq0}\tau^{\leq0}\simeq\tau^{\leq0}\tau^{\geq0}$,
+see \cite[Proposition~1.2.1.10]{ha}.
+
+For example, if $\cat{C}=\cat{Ch}(\cat{A})$,
+then $\cat{C}^\heartsuit\simeq\cat{A}$,
+and $\pi_n$ takes the $(-n)$-th cohomology group,
+i.e.\ the $n$-th homology group, of a chain complex.
 
 \subsection{Dold--Kan correspondence}
 
-\nyw
+Let $\cat{A}$ be an abelian category.
+In this section, we will define a functor 
+\[\operatorname{DK}\:\cat{Ch}(\cat{A})_{\geq0} \to \operatorname{Fun}(\bfDelta\op,\cat{A}),\]
+and we will prove that this functor 
+is an equivalence of categories.
+
+\begin{construction}
+    Let $\cat{A}$ be an abelian category,
+    and let $X_\bullet\in\cat{Ch}(\cat{A})$.
+    The simplicial object 
+    \[\operatorname{DK}_\bullet(X)\in\operatorname{Fun}(\bfDelta\op,\cat{A})\]
+    is represented by the following picture.
+    
+    \begin{center}
+        \begin{tikzpicture}[>={Straight Barb}, line width=.5pt]
+            \node (P0) at (0,0) {};
+            \node (P1) at (3.5,-1) {};
+            \node (P2) at (5,.2) {};
+            \node (P3) at (2.8,3.7) {};
+
+            \node (X0) at (-.3,-.2) {$X_0$};
+            \node (X1) at (1.4,-.7) {$X_1$};
+            \node (X2) at (2.8,-.4) {\smash{$X_2$}};
+            \node (X3) at (2.6,1.1) {$X_3$};
+            \node (X4) at (1.6,1.4) {$\cdots$};
+            \node at (3.5,-1.3) {$0$};
+            \node at (5.3,.2) {$0$};
+            \node at (2.8,4) {$0$};
+            \node at (4.4,-.6) {$0$};
+            \node at (2.2,-.1) {$0$};
+            \node at (1.2,2) {$0$};
+            \node at (3.3,1.8) {$0$};
+            \node at (4.2,2) {$0$};
+
+            \fill (P0) ellipse (.05);
+            \fill (P1) ellipse (.05);
+            \fill (P2) ellipse (.05);
+            \fill (P3) ellipse (.05);
+
+            \draw [->] (X2) to[bend left=40] (X1);
+
+            \draw [line width=5pt, white, shorten <=10pt, shorten >=10pt] (P1) -- (P0);
+            \draw [->, shorten <=5pt, shorten >=3pt] (P1) -- (P0);
+            \draw [->, shorten <=5pt, shorten >=3pt] (P2) -- (P0);
+            \draw [->, shorten <=5pt, shorten >=3pt] (P2) -- (P1);
+            \draw [->, shorten <=5pt, shorten >=3pt] (P3) -- (P0);
+            \draw [line width=5pt, white, shorten <=5pt, shorten >=5pt] (P3) -- (P1);
+            \draw [->, shorten <=5pt, shorten >=3pt] (P3) -- (P1);
+            \draw [->, shorten <=5pt, shorten >=3pt] (P3) -- (P2);
+
+            \draw [->] (X1) to[bend left=40] (X0);
+            \draw [line width=5pt, white, shorten >=5pt] (X3) to[bend left=20] (X2);
+            \draw [->, shorten >=5pt] (X3) to[bend left=20] (X2);
+            \draw [->, dashed] (X4) to[bend left=40] (X3);
+
+            \node at (.6,-1.1) {$\scriptstyle d_0=\partial_1$};
+            \node at (2.2,-1.1) {$\scriptstyle d_0=\partial_2$};
+            \node at (2.45,.4) {$\scriptstyle d_0=\partial_3$};
+        \end{tikzpicture}
+    \end{center}
+
+    A formal definition may go as follows. 
+    \begin{itms}
+        \item For every $n\geq0$, the space of $n$-simplices is given by
+        \[\operatorname{DK}_n(X):=\bigoplus_{\substack{\alpha\:[n]\to[k]\\\text{surjective}}}X_k.\]
+        \item For every morphism $\beta\:[n']\to[n]$ in $\bfDelta$,
+        the induced map
+        \[\beta^*\:\operatorname{DK}_{n}(X)\to\operatorname{DK}_{n'}(X)\]
+        is given by the maps 
+        \[f_{\alpha,\alpha'}\:X_k\to X_{k'}\]
+        for surjective maps $\alpha\:[n]\to[k]$ and $\alpha'\:[n']\to[k']$ in $\bfDelta$,
+        where 
+        \[f_{\alpha,\alpha'}:=\begin{cases}
+            1_{X_k}, & \text{if }k'=k\text{ and }
+            \begin{tikzcd}[cramped, sep=.9em]
+                \scriptstyle[n']\ar[r]\ar[d] & \scriptstyle[n]\ar[d] \\{}
+                \scriptstyle[k']\ar[r] & \scriptstyle[k]
+            \end{tikzcd}\text{ commutes},\\[15pt]
+            \partial_k, & \text{if }k'=k-1\text{ and }
+            \begin{tikzcd}[cramped, sep=.9em]
+                \scriptstyle[n']\ar[r]\ar[d] & \scriptstyle[n]\ar[d] \\{}
+                \scriptstyle[k']\ar[r,"d^0"] & \scriptstyle[k]
+            \end{tikzcd}\text{ commutes},\\
+            0, & \text{otherwise},
+        \end{cases}\]
+        where $\partial_k\:X_k\to X_{k-1}$ denotes the differential,
+        and $d^0\:[k-1]\to[k]$ is the map sending $i\in[k-1]$ to $i+1\in[k]$. \varqed
+    \end{itms}
+\end{construction}
+
+\tbc
 
 \subsection{For \texorpdfstring{$\infty$}{∞}-categories}
 
