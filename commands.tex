@@ -1,7 +1,33 @@
 % math commands
 \renewcommand{\:}{\colon}
 \renewcommand{\/}{{∕}}
-\newcommand{\bfDelta}{{𝚫}}
+\newcommand{\bfDelta}{{
+  \mathchoice{
+    \tikz{
+      \draw[line width=.045em]
+        (0,0)--(.6em,0)--(.37em,1.32ex)--(.23em,1.32ex)--cycle
+        (.23em,1.32ex)--(.46em,0);
+    }
+  }{
+    \tikz{
+      \draw[line width=.045em]
+        (0,0)--(.6em,0)--(.37em,1.32ex)--(.23em,1.32ex)--cycle
+        (.23em,1.32ex)--(.46em,0);
+    }
+  }{
+    \tikz[scale=.7]{
+      \draw[line width=.031em]
+        (0,0)--(.6em,0)--(.37em,1.32ex)--(.23em,1.32ex)--cycle
+        (.23em,1.32ex)--(.46em,0);
+    }
+  }{
+    \tikz[scale=.55]{
+      \draw[line width=.023em]
+        (0,0)--(.6em,0)--(.37em,1.32ex)--(.23em,1.32ex)--cycle
+        (.23em,1.32ex)--(.46em,0);
+    }
+  }
+}}
 \newcommand{\bigmid}{\mathrel{\big|}}
 \newcommand{\biggmid}{\mathrel{\bigg|}}
 \newcommand{\cat}[1]{\mathsf{#1}}

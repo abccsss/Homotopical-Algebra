@@ -265,7 +265,7 @@ Our goal in this subsection is to prove the following theorem.
 
 \subsection{Spectra and stable homotopy theory}
 
-In this section, we review the classical theory of
+In this subsection, we review the classical theory of
 topological spectra and stable homotopy theory,
 as a model for the stabilisation procedure that will
 apply to general stable $\infty$-categories.
@@ -357,6 +357,7 @@ For any $n\geq0$, we have $\pi_n(E)\simeq\pi_n(E_0)$.
         \cat{Sp}
         \ar[l,bend left,"\Omega"]
     \end{tikzcd}\]
+    % \[\xymatrix{ \cat{Sp} \ar@/^2ex/[r]^\Sigma \ar@{}[r]|\bot & \cat{Sp} \ar@/^2ex/[l]^\Omega }\]
     is a Quillen equivalence, and their derived functors
     are isomorphic to the shifting functors:
     \[ \mathbb{L}\Sigma\simeq[1]
@@ -450,6 +451,7 @@ notice that such a functor sends a pushout square to a pullback square:
     E_n\ar[r]\ar[d]\ar[dr,phantom,pos=.25,"\ulcorner"] & 0\ar[d] \\
     0\ar[r] & E_{n+1}\rlap{\ .}
 \end{tikzcd}\]
+% \[\vcenter{\xymatrix{ S^n\ar[r]\ar[d]\ar@{}[dr]|(.7){\textstyle\lrcorner} & 0\ar[d] \\ 0\ar[r] & S^{n+1} }} \quad\overset{F}{\longmapsto}\quad \vcenter{\xymatrix{ E_n\ar[r]\ar[d]\ar@{}[dr]|(.3){\textstyle\ulcorner} & 0\ar[d] \\ 0\ar[r] & E_{n+1}\rlap{\ .} }}\]
 If we require that $F$ sends any pushout square to a pullback square,
 then $F$ will be uniquely defined (up to an equivalence),
 assuming that the spaces~$E_n$ can be delooped arbitrarily many times,
@@ -554,7 +556,7 @@ For example, the above discussion suggests that we should have
         i.e.\ functors that preserve finite limits.
         \item 
         More generally, if $\cat{C}$ is pointed and has finite limits,
-        and $\cat{D}$ has finite limits, then the functor
+        and $\cat{D}$ has finite colimits, then the functor
         $\Omega^\infty\:\operatorname{Sp}(\cat{D})\to\cat{D}$
         induces an equivalence
         \[\operatorname{Exc}_*(\cat{C},\operatorname{Sp}(\cat{D}))

@@ -1,0 +1,89 @@
+The following two sections will be focused on 
+the study of homological algebra. 
+Our goal is to establish homological algebra 
+as a special case of homotopical algebra.
+We will construct and study the $\infty$-category of chain complexes,
+and the $\infty$-categorical version of the derived category.
+
+In this section, we start from the Dold--Kan correspondence,
+which is a classical result in homological algebra
+that establishes an equivalence
+between chain complexes in an abelian category~$\cat{A}$
+and simplicial objects in~$\cat{A}$.
+It gives an equivalence of (ordinary) categories
+\[ \cat{Ch}(\cat{A})_{\geq0}\xrightarrow[\textstyle\widetilde{\phantom{......}}]{\operatorname{DK}}
+\operatorname{Fun}(\bfDelta\op,\cat{A}), \]
+where $\cat{Ch}(\cat{A})_{\geq0}$ denotes the full subcategory of~$\cat{Ch}(\cat{A})$
+consisting of chain complexes that terminate at the $0$th term.
+This equivalence will
+relate the homotopy theory of chain complexes
+to the homotopy theory of simplicial sets.
+
+\subsection{t-structures}
+
+\begin{definition}
+    Let $\cat{C}$ be a triangulated category.
+    A \term{t-structure} on~$\cat{C}$ consists of two full subcategories
+    \[ \cat{C}^{\leq0},\ \cat{C}^{\geq0}\subset\cat C, \]
+    satisfying the following axioms: if we denote
+    \[ \cat{C}^{\leq n}:=\cat{C}^{\leq0}[n]\quad\text{and}\quad
+    \cat{C}^{\geq n}:=\cat{C}^{\geq0}[n] \]
+    for $n\in\mathbb Z$, then
+    \begin{itms}
+        \item $\cat{C}^{\leq0}$ and $\cat{C}^{\geq0}$
+        are stable under isomorphisms.
+        \item $\cat{C}^{\leq0}\subset\cat{C}^{\leq1}$ and $\cat{C}^{\geq1}\subset\cat{C}^{\geq0}$.
+        \item If $X\in\cat{C}^{\leq0}$ and $Y\in\cat{C}^{\geq1}$, then
+        $\Hom_{\cat{C}}(X,Y)=0$.
+        \item For every $X\in\cat{C}$, there exists a distinguished triangle 
+        \[X^{\leq0}\to X\to X^{\geq1},\]
+        such that $X^{\leq0}\in\cat{C}^{\leq0}$ and $X^{\geq1}\in\cat{C}^{\geq1}$.
+    \end{itms}
+\end{definition}
+
+For example, if $\cat{C}=\cat{Ch}(\cat{A})$ is the category of
+cochain complexes in an abelian category~$\cat{A}$,
+then we may take $\cat{C}^{\leq0}$ to be those cochain complexes~$X$
+with $X_n=0$ for all $n>0$. Similarly we can define $\cat{C}^{\geq0}$.
+Then the first three axioms are immediate, and for the fourth one, we may take 
+\[ X^{\leq0}:=\tau^{\leq0}X\quad\text{and}\quad X^{\geq1}:=\tau^{\geq1}X, \]
+where $\tau^{\leq n}$ and $\tau^{\geq n}$ are the truncation functors, defined by
+\[ \begin{aligned}
+    \tau^{\leq n}X&:=\bigl(\cdots\to X^{n-2}\xrightarrow{d_{n-2}}X^{n-1}\xrightarrow{d_{n-1}}
+    \operatorname{ker}d_{n}\to0\to\cdots\bigr), \\
+    \tau^{\geq n}X&:=\bigl(\cdots\to0\to\operatorname{coker}d_{n-1}\xrightarrow{d_n}X^{n+1}
+    \xrightarrow{d_{n+1}}X^{n+2}\to\cdots\bigr).
+\end{aligned} \]
+
+\begin{remark}
+    If $X\in\cat{C}^{\leq0}$ and $Y\in\cat{C}^{\geq1}$, we require that
+    $\Hom_{\cat{C}}(X,Y)=0$, but not $\Hom_{\cat{C}}(Y,X)=0$,
+    and here is a justification.
+    Let us look at $\cat{C}=\cat{Ch}(\cat{A})$ as an example.
+    In this case, although the only chain map from $Y$ to $X$ is zero,
+    there may exist nonzero chain homotopies and higher homotopies. \varqed
+\end{remark}
+
+\begin{notation}
+    Sometimes it is more convenient to use homological indexing instead of cohomological indexing.
+    Therefore, we introduce the following notation.
+    For a triangulated category $\cat{C}$ with a t-structure, we denote 
+    \[ \cat{C}_{\geq n}:=\cat{C}^{\leq-n}\quad\text{and}\quad\cat{C}_{\leq n}:=\cat{C}^{\geq-n}. \]
+    Using this notation, we have $\cat{C}_{\geq n}=\cat{C}_{\geq0}[-n]$, etc. \varqed
+\end{notation}
+
+\begin{definition}
+    Let $\cat{C}$ be a stable $\infty$-category.
+    A \term{t-structure} on $\cat{C}$ is a t-structure on
+    the triangulated category $\Ho(\cat{C})$.
+\end{definition}
+
+\tbc
+
+\subsection{Dold--Kan correspondence}
+
+\nyw
+
+\subsection{For \texorpdfstring{$\infty$}{∞}-categories}
+
+\nyw
