@@ -143,7 +143,7 @@ is an equivalence of categories.
 
 \begin{construction}
     Let $\cat{A}$ be an abelian category,
-    and let $X_\bullet\in\cat{Ch}(\cat{A})$.
+    and let $X_\bullet\in\cat{Ch}(\cat{A})_{\geq0}$.
     The simplicial object 
     \[\operatorname{DK}_\bullet(X)\in\operatorname{Fun}(\bfDelta\op,\cat{A})\]
     is represented by the following picture.
@@ -225,8 +225,71 @@ is an equivalence of categories.
     \end{itms}
 \end{construction}
 
-\tbc
+By construction, every non-degenerate simplex in $\operatorname{DK}_n(X)$
+can be written as the sum of a nonzero element in $X_n$
+and a degenerate $n$-simplex.
 
-\subsection{For \texorpdfstring{$\infty$}{∞}-categories}
+\begin{example}
+    Let $X$ be the chain complex whose only nonzero term
+    is a $\mathbb{Z}$ at the $n$-th place. Then 
+    \[\operatorname{DK}_\bullet(X)\simeq
+    \mathbb{Z}\Delta[n]\/\mathbb{Z}\partial\Delta[n],\]
+    where $\mathbb{Z}(-)\:\cat{sSet}\to\cat{sAb}$
+    denotes the free functor.
+    This is quite obvious if we consider the picture above. \varqed
+\end{example}
 
-\nyw
+Next, we construct an inverse to the functor $\operatorname{DK}$,
+sending a simplicial object to its corresponding chain complex.
+
+\begin{definition}
+    Let $X$ be a simplicial object in $\cat{A}$.
+    
+    \begin{itms}
+        \item
+        The \term{simplicial chain complex} of $X$ is the chain complex 
+        \[C_\bullet(X)\in\cat{Ch}(\cat{A})_{\geq0},\]
+        given by 
+        \[C_n(X):=X_n\quad\text{and}\quad\partial_n:=\sum_{i=0}^n(-1)^id_i.\]
+
+        \item 
+        The \term{normalised chain complex} of $X$, or the
+        \term{inverse Dold--Kan construction} of $X$, is the chain complex 
+        \[\KD_\bullet(X)\in\cat{Ch}(\cat{A})_{\geq0},\]
+        given by 
+        \[\KD_n(X):=\bigcap_{0<i\leq n}\ker\bigl(d_i\:X_n\to X_{n-1}\bigr)
+        \quad\text{and}\quad\partial_n:=d_0.\]
+    \end{itms}
+\end{definition}
+
+It might look as if $\KD(X)$ contains less information than $X$.
+However, we will prove that the lost information is inessential,
+and can be recovered from the group structure of $X$
+(referring to the case $\cat{A}=\cat{Ab}$, of course).
+
+\begin{theorem}
+    The functors
+    \[\begin{tikzcd}
+        \cat{Ch}(\cat{A})_{\geq0}
+        \ar[r,bend left,start anchor=north east,end anchor=north west,"\operatorname{DK}"] 
+        \ar[r,phantom,"\simeq"] &
+        \operatorname{Fun}(\bfDelta\op,\cat{A})
+        \ar[l,bend left,start anchor=south west,end anchor=south east,"\KD"]
+    \end{tikzcd}\]
+    are inverse to each other,
+    up to a natural isomorphism.
+\end{theorem}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+\subsection{For stable \texorpdfstring{$\infty$}{∞}-categories}
+
+There is an analogous result of the Dold--Kan correspondence
+in the context of stable $\infty$-categories.
+Namely, for a stable $\infty$-category $\cat{C}$,
+We will define the category $\cat{Ch}(\cat{C})_{\geq0}$ of \emph{filtered objects}
+in $\cat{C}$, and the result states that
+\[ \cat{Ch}(\cat{C})_{\geq0}\simeq\operatorname{Fun}(\mathfrak N\bfDelta\op,\cat{C}) \]
+of $\infty$-categories.
