@@ -289,7 +289,100 @@ and can be recovered from the group structure of $X$
 There is an analogous result of the Dold--Kan correspondence
 in the context of stable $\infty$-categories.
 Namely, for a stable $\infty$-category $\cat{C}$,
-We will define the category $\cat{Ch}(\cat{C})_{\geq0}$ of \emph{filtered objects}
+we will define the category $\cat{Ch}(\cat{C})_{\geq0}$ of \emph{filtered objects}
 in $\cat{C}$, and the result states that
 \[ \cat{Ch}(\cat{C})_{\geq0}\simeq\operatorname{Fun}(\mathfrak N\bfDelta\op,\cat{C}) \]
-of $\infty$-categories.
+as $\infty$-categories.
+
+Let $I$ be a linearly ordered set (typically, one takes
+$I=\mathbb Z$ or $\mathbb Z_{\geq0}$). Denote
+\[I^{[1]}:=\{(i,j)\mid i\leq j\in I\},\] 
+with $(i,j)\leq(i',j')$ if and only if $i\leq i'$ and $j\leq j'$.
+
+\begin{definition}
+    Let $\cat{C}$ be a pointed $\infty$-category,
+    and let $I$ be a linearly ordered set.
+    An \term{$I$-complex} in $\cat{C}$ is a functor 
+    \[F\:\mathfrak{N}(I^{[1]})\to\cat{C},\]
+    such that 
+    \begin{itms}
+        \item For any $i\in I$, we have $F(i,i)\simeq0$.
+        \item For any $i\leq j\leq k$, the diagram 
+        \[\begin{tikzcd}
+            F(i,j)\ar[r]\ar[d]\ar[dr,phantom,pos=.75,"\lrcorner"] & F(i,k)\ar[d] \\
+            \llap{$0\simeq{}$}F(j,j)\ar[r] & F(j,k)
+        \end{tikzcd}\]
+        is a pushout square, i.e.\ a cofibre sequence.
+    \end{itms}
+    Let $\cat{Ch}(I,\cat{C})$ denote the full subcategory of
+    $\operatorname{Fun}(\mathfrak N(I^{[1]}),\cat{C})$
+    spanned by all the $I$-complexes.
+\end{definition}
+
+This terminology is justified by the following example.
+
+\begin{example}
+    Let $\cat{C}$ be a stable $\infty$-category,
+    and let $X\in\cat{\mathbb{Z},\cat{C}}$ be a $\mathbb{Z}$-complex in $\cat{C}$.
+    Then for any $n\in\mathbb{Z}$, we have a diagram
+    \[\begin{tikzcd}
+        X(n-1,n)\ar[r]\ar[d]\ar[dr,phantom,end anchor=north,pos=.75,"\lrcorner"] &
+        X(n-1,n+1)\ar[r]\ar[d]\ar[dr,phantom,end anchor=north,pos=.75,"\lrcorner"] & 0\ar[d] \\
+        0\ar[r] & X(n,n+1)\ar[r,"\partial"] & X(n-1,n)[1]
+    \end{tikzcd}\]
+    in $\cat{C}$. Therefore, if we set 
+    \[X_n:=X(n-1,n)[-n],\]
+    then we obtain a chain complex 
+    \[ \cdots\to X_1\xrightarrow{\partial}X_0\xrightarrow{\partial}X_{-1}\to\cdots \]
+    in $\Ho(\cat{C})$. The fact that $\partial^2=0$ follows from the equalities
+    \[\begin{aligned}
+        \partial^2
+        &=\bigl(X(n,n+1)\to X(n-1,n)[1]\to X(n-2,n-1)[2]\bigr)\\
+        &=\bigl(X(n,n+1)\to X(n-2,n)[1]\to X(n-1,n)[1]\to X(n-2,n-1)[2]\bigr)\\
+        &=\bigl(X(n,n+1)\to X(n-2,n)[1]\smash{{}\xrightarrow0{}}X(n-2,n-1)[2]\bigr)\\
+        &=0
+    \end{aligned}\]
+    in $\Ho(\cat{C})$. \varqed
+\end{example}
+
+\begin{remark}
+    If $I$ has a least object $-\infty$, then
+    \[ \cat{Ch}(I,\cat{C})\simeq\operatorname{Fun}(I\setminus\{-\infty\},\cat{C}), \]
+    since every $I$-complex $X$ is determined by the values $X(-\infty,i)$
+    for all $i\in I\setminus\{-\infty\}$. Namely, one has 
+    \[ X(i,j)\simeq\operatorname{cofibre}\bigl(X(-\infty,i)\to X(-\infty,j)\bigr) \]
+    for all $i\leq j$ in $I$. \varqed
+\end{remark}
+
+\begin{example}
+    Let us consider the case
+    \[I=\mathbb{Z}_{\geq0}\cup\{-\infty\}\quad\text{and}\quad
+    \cat{C}=\cat{Ch}(\cat{Ab}).\]
+    Then by the previous example, 
+    an $I$-complex in $\cat{C}$ can be seen as
+    a chain complex of chain complexes in $\cat{Ab}$.
+    Let $X$ be an $I$-complex, which is a diagram 
+    \[\begin{tikzcd}[column sep={5.5em,between origins}]
+        0\ar[r] & X_0\ar[r]\ar[d]\ar[dr,phantom,end anchor={[xshift=-.5em]north},pos=.75,"\lrcorner"] &
+        X(-\infty,1)\ar[r]\ar[d]\ar[dr,phantom,end anchor={[xshift=-.5em]north},pos=.75,"\lrcorner"] &
+        X(-\infty,2)\ar[r]\ar[d] & \cdots \\
+        & 0\ar[r] & X_1[1]\ar[r]\ar[d]\ar[dr,phantom,end anchor={[xshift=-.5em]north},pos=.75,"\lrcorner"] &
+        X(0,2) \ar[r]\ar[d] & \cdots \\
+        && 0\ar[r] & X_2[2]\ar[r]\ar[d] & \cdots \\
+        &&& 0\ar[r] & \cdots
+    \end{tikzcd}\]
+    in $\cat{C}$. The upper-left pushout square implies that we must have
+    \[X(-\infty,1)\simeq\operatorname{cofibre}\bigl(\partial\:X_1\to X_0\bigr).\]
+    However, as we will show in the next section,
+    the homotopy cofibre in the category of chain complexes 
+    is equivalent to the mapping cone
+    \[\operatorname{cone}(\partial)\simeq X_0\oplus X_1[1],\]
+    where $\simeq$ denotes an isomorphism of graded abelian groups.
+    Therefore, the first row of the diagram may be seen as a sequence 
+    \[0\to X_0\to X_0\oplus X_1[1]\to X_0\oplus X_1[1]\oplus X_2[2]\to\cdots\]
+    of graded abelian groups,
+    in which each term is equipped with a twisted differential.
+    Therefore, an $I$-complex in $\cat{C}$
+    may also be seen as a filtered chain complex 
+    of abelian groups. \varqed
+\end{example}
