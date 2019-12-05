@@ -27,6 +27,8 @@
 \def\restoreqed{\gdef\qed{\showqed}}
 
 \def\varqed{\nolinebreak\hfill$◃$}
+\def\varqedhere{\eqno ◃\noqed}
+
 \newenvironment{example}{\trivlist\item[\hskip\labelsep{\refstepcounter{theorem}\gdef\@currentlabel{\thetheorem}\textbf{Example \thetheorem.}}]}{\endtrivlist}
 \newenvironment{construction}{\trivlist\item[\hskip\labelsep{\refstepcounter{theorem}\gdef\@currentlabel{\thetheorem}\textbf{Construction \thetheorem.}}]}{\endtrivlist}
 \newenvironment{remark}{\trivlist\item[\hskip\labelsep{\refstepcounter{theorem}\gdef\@currentlabel{\thetheorem}\textbf{Remark \thetheorem.}}]}{\endtrivlist}
