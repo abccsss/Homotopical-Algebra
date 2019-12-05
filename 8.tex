@@ -395,3 +395,65 @@ This terminology is justified by the following example.
     may also be seen as a filtered chain complex 
     of abelian groups. \varqed
 \end{example}
+
+In homological algebra, a filtered chain complex produces a spectral sequence,
+which computes the homology of the total complex.
+This generalises to stable $\infty$-categories as well,
+establishing a further connection between homological algebra
+and stable homotopy theory.
+
+\begin{definition}
+    Let $\cat{C}$ be a stable $\infty$-category.
+    A \term{filtered object} in $\cat{C}$ is a functor 
+    \[X\:\mathfrak N(\mathbb{Z})\to\cat{C}.\]
+    We may regard $X$ as a $\mathbb{Z}$-complex
+    by first obtaining a $(\mathbb{Z}\cup\{-\infty\})$-complex,
+    and then restricting to $\mathbb{Z}^{[1]}\subset(\mathbb{Z}\cup\{-\infty\})^{[1]}$.
+\end{definition}
+
+Let $\cat{C}$ be a stable $\infty$-category with a t-structure.
+Suppose that the heart $\cat{C}^\heartsuit$ 
+is equivalent to $\mathfrak{N}(\cat{A})$ for an abelian category $\cat{A}$.
+
+Let $X$ be a filtered object in $\cat{C}$.
+Write
+\[E^r_{p,q}:=\operatorname{im}\Bigl(
+    \pi_{p+q}X(p-r,p)\to\pi_{p+q}X(p-1,p+r-1)
+\Bigr)\in\cat{A}\]
+for all $r\geq1$ and $p,q\in\mathbb{Z}$.
+Define 
+\[d^r\:E^r_{p,q}\to E^r_{p-r,q+r-1}\]
+by the commutative diagram 
+\[\begin{tikzcd}
+    \pi_{p+q}X(p-r,p)\ar[r]\ar[d,"\delta"] & \pi_{p+q}X(p-1,p+r-1)\ar[d,"\delta"] \\
+    \pi_{p+q-1}X(p-2r,p-r)\ar[r] & \pi_{p+q-1}X(p-r-1,p-1)\rlap{\ ,}
+\end{tikzcd}\]
+where $\delta$ denotes the connecting morphism in the long exact sequence 
+\[\cdots\to\pi_nX(i,j)\to\pi_nX(i,k)\to\pi_nX(j,k)\xrightarrow{\delta}\pi_{n-1}X(i,j)\to\cdots\]
+for any $i\leq j\leq k$.
+
+\begin{theorem}
+    The pair 
+    \[ (E^r_{p,q},d^r) \]
+    is a spectral sequence in $\cat{A}$.
+
+    Moreover, if $X(n)\simeq0$ for $n\ll0$, 
+    and if we assume that $\cat{C}_{\leq0}$
+    is stable under $\mathbb{Z}$-indexed colimits,
+    then the spectral sequence converges:
+    \[ E^r_{p,q}\Rightarrow\pi_{p+q}\operatorname{colim}
+    \bigl(X\:\mathfrak{N}(\mathbb{Z})\to\cat{C}\bigr) \]
+\end{theorem}
+
+See \cite[Propositions 1.2.2.7~and~1.2.2.14]{ha}.
+
+There is also a version of Dold--Kan correspondence
+for stable $\infty$-categories.
+
+\begin{theorem}
+    Let $\cat{C}$ be a stable $\infty$-category. Then 
+    \[\operatorname{Fun}(\mathfrak{N}\mathbb{Z}_{\geq0},\cat{C})
+    \simeq\operatorname{Fun}(\mathfrak{N}\bfDelta\op,\cat{C}).\]
+\end{theorem}
+
+See \cite[Theorem~1.2.4.1]{ha}.
