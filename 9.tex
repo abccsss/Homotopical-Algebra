@@ -1,0 +1,139 @@
+In this section, our main goal is to study the category of cochain complexes.
+We will construct the $\infty$-category of cochain complexes, and then, 
+we will invert the quasi-isomorphisms in it, obtaining an $\infty$-categorical
+version of the derived category.
+
+\subsection{Nerve of a dg category}
+
+\begin{definition}
+    Let $R$ be a commutative ring.
+    A \term{dg category} over $R$ is a category enriched over the
+    symmetric monoidal category $(\cat{Ch}_R,\otimes)$
+\end{definition}
+
+The abbreviation ``dg'' stands for ``differential graded''.
+Cochain complexes are also known as dg vector spaces (or modules).
+
+\begin{definition}
+    Let $\cat{C}$ be a dg category over $R$.
+    \begin{itms}
+        \item The \term{underlying category} of $\cat{C}$
+        is obtained from $\cat{C}$ by applying the functor 
+        \[Z^0\:(\cat{Ch}_R,\otimes)\to(\cat{Set},\times),\]
+        taking the set of $0$-cocycles of a cochain complex.
+        \item The \term{homotopy category} of $\cat{C}$
+        is obtained from $\cat{C}$ by applying the functor 
+        \[H^0\:(\cat{Ch}_R,\otimes)\to(\cat{Set},\times),\]
+        taking the $0$-th cohomology of a cochain complex.
+    \end{itms}
+\end{definition}
+
+For example, if $\cat{C}=\cat{Ch}_R$,
+which is enriched over itself, as described in (\ref{eg-1-c}),
+then the underlying category of $\cat{C}$ is just the ordinary
+category of cochain complexes $\cat{Ch}_R$,
+and its homotopy category is the ordinary category $\cat{hCh}_R$.
+The $0$-coboundaries are exactly the chain homotopies.
+
+We now wish to define a quasi-category $\Ndg(\cat{C})$,
+such that the homotopies in this quasi-category are the chain homotopies,
+and the higher homotopies are higher chain homotopies, etc.
+
+A simple idea is to consider the sequence of adjunctions
+\[\begin{tikzcd}
+    \cat{sSet}\ar[r,bend left,start anchor=north east,end anchor=north west,"\mathfrak{C}"]
+    \ar[r,phantom,"\bot"] &
+    \cat{Cat}\smash{_{\cat{sSet}}}
+    \ar[l,bend left,start anchor=south west,end anchor=south east,"\mathfrak{N}"]
+    \ar[r,bend left,start anchor=north east,end anchor=north west,"\text{free}"]
+    \ar[r,phantom,"\bot"] &
+    \cat{Cat}\smash{_{\cat{sMod}_R}}
+    \ar[l,bend left,start anchor=south west,end anchor=south east,"\text{forget}"]
+    \ar[r,bend left,start anchor=north east,end anchor=north west,"\KD"]
+    \ar[r,phantom,"\simeq"] &
+    \cat{Cat}\smash{_{(\cat{Ch}_R)_{\geq0}}}
+    \ar[l,bend left,start anchor=south west,end anchor=south east,"\operatorname{DK}"]
+    \ar[r,bend left,start anchor=north east,end anchor=north west,"i_{\geq0}"]
+    \ar[r,phantom,"\bot"] &
+    \cat{Cat}\smash{_{\cat{Ch}_R}\rlap{\ ,}}
+    \ar[l,bend left,start anchor=south west,end anchor=south east,"\tau_{\geq0}"]
+\end{tikzcd}\]
+and one may define 
+\[ \Ndg:=\mathfrak{N}\circ\text{forget}\circ{\operatorname{DK}}\circ\tau_{\geq0}\:\cat{Cat}_{\cat{Ch}_R}\to\cat{sSet}, \]
+and will see soon that the image lies in $\cat{QsCat}$.
+
+This construction does give the correct quasi-category,
+but there is a more direct way to construct this quasi-category.
+We will first define $\Ndg$ in the more direct way,
+and then we will prove that the two constructions are equivalent.
+
+\begin{construction}
+    Let $\cat{C}$ be a dg category.
+    The quasi-category $\Ndg(\cat{C})$ is constructed as follows.
+    Its $n$-simplices are of the form 
+    \[(\{X_i\}_{i\in[n]},\{f_I\}_{I\subset[n],|I|\geq2}),\]
+    where 
+    \begin{itms}
+        \item $X_0,\dotsc,X_n$ are objects of $\cat{C}$.
+        \item For $0\leq i_0<\cdots<i_{m+1}\leq n$,
+        \[f_{i_0\cdots i_{m+1}}\in\Hom_{\cat{C}}(X_{i_0},X_{i_{m+1}})_m,\]
+        such that 
+        \[df_{i_0\cdots i_{m+1}}=\sum_{j=1}^m(-1)^{m+1-j}
+        \bigl(f_{i_0\cdots\widehat{i_j}\cdots i_{m+1}}-f_{i_j\cdots i_{m+1}}\circ f_{i_0\cdots i_j}\bigr).\]
+    \end{itms}
+    For example,
+    \begin{itms}
+        \item A $0$-simplex is just an object $X\in\cat{C}$.
+        \item A $1$-simplex connecting the objects $X,Y\in\cat{C}$ is a morphism
+        \[f_{01}\in\Hom_{\cat{C}}(X,Y)_0\quad\text{such that}\quad df_{01}=0.\]
+        In other words, $f_{01}$ is just a morphism in the underlying category of $\cat{C}$.
+        \item A $2$-simplex
+        \[\begin{tikzcd}[column sep=1em]
+            & Y\ar[dr,"g"] \\
+            X\ar[ur,"f"]\ar[rr,"h"'] && Z
+        \end{tikzcd}\]
+        is a chain homotopy
+        \[\alpha:=f_{012}\in\Hom_{\cat{C}}(X,Z)_1\quad\text{such that}\quad d\alpha=g\circ f-h.\]
+    \end{itms}
+    We leave it to the reader to define the face and degeneracy maps in $\Ndg(\cat{C})$,
+    and verify that it is a quasi-category. \varqed
+\end{construction}
+
+\begin{proposition}
+    Let $\cat{C}$ be a dg category. Then for any $X,Y\in\cat{C}$,
+    there is an isomorphism of simplicial sets
+    \[\Hom_{\Ndg(\cat{C})}^{\vartriangleright}(X,Y)\simeq\operatorname{DK}(\tau_{\geq0}\Hom_{\cat{C}}(X,Y)).\]
+\end{proposition}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+\begin{corollary}
+    Let $\cat{C}$ be a dg category. Then there is a categorical equivalence
+    \[\Ndg(\cat{C})\simeq
+    \mathfrak{N}\circ\mathrm{forget}\circ{\operatorname{DK}}\circ\tau_{\geq0}(\cat{C}).
+    \qedhere\] \qed
+\end{corollary}
+
+\begin{theorem}
+    The category $\cat{Cat}_{\cat{Ch}_R}$ has the \term{Tabuada model structure}, with
+    \begin{itms}
+        \item A weak equivalence is a functor inducing an equivalence of 
+        homotopy categories, and inducing quasi-isomorphisms on all mapping spaces.
+        \item A fibration is a functor inducing an isofibration of 
+        homotopy categories, and inducing (degreewise) surjections on all mapping spaces.
+    \end{itms}
+    The functor
+    \[\Ndg\:\cat{Cat}_{\cat{Ch}_R}\to\cat{sSet}\]
+    is a right Quillen functor with respect to this model structure,
+    and the Joyal model structure on $\cat{sSet}$.
+\end{theorem}
+
+\subsection{Derived categories}
+
+\nyw 
+
+\subsection{Derived categories as localisations}
+
+\nyw 
