@@ -130,10 +130,112 @@ and then we will prove that the two constructions are equivalent.
     and the Joyal model structure on $\cat{sSet}$.
 \end{theorem}
 
+\subsection{The \texorpdfstring{$\infty$}{∞}-category of cochain complexes}
+
+\begin{definition}
+    Let $\cat{A}$ be an abelian category.
+    The category \[\Ndg(\cat{Ch}(\cat{A}))\]
+    is called the \term{$\infty$-category of cochain complexes} in $\cat{A}$,
+    where $\cat{Ch}(\cat{A})$ is seen as a dg category over $\mathbb{Z}$.
+\end{definition}
+
+In this section, we take a closer look at this particular $\infty$-category,
+and in particular, the pushouts and pullbacks in this category.
+We will show that it is a stable $\infty$-category.
+
+\begin{proposition}
+    Let $f\:X\to Y$ be a morphism in the category $\cat{sAb}$
+    of simplicial abelian groups. Then $f$ is a fibration of simplicial sets,
+    if and only if the map 
+    \[\KD(f)\:\KD(X)\to\KD(Y)\]
+    is a degreewise surjection of chain complexes.
+\end{proposition}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+\begin{corollary}
+    Every simplicial abelian group is a Kan complex. \qed
+\end{corollary}
+
+\begin{corollary}\label{cor-9-o}
+    Let 
+    \[\begin{tikzcd}
+        X\ar[r,"f"]\ar[d]\ar[dr,phantom,pos=.75,"\lrcorner"] & X'\ar[d] \\
+        Y\ar[r] & Y'
+    \end{tikzcd}\]
+    be an ordinary pushout diagram in $\cat{Ch}(\cat{A})$.
+    If $f$ is a degreewise split injection,
+    then this diagram is a homotopy pushout diagram,
+    i.e.\ a pushout diagram in $\Ndg(\cat{Ch}(\cat{A}))$.
+\end{corollary}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
+This corollary enables us to construct 
+homotopy cofibres of cochain complexes in an explicit way. 
+
+For $X\in\cat{Ch}(\cat{A})$, let $X\otimes D^1$ denote the object of $\cat{Ch}(\cat{A})$
+defined by
+\[ (X\otimes D^1)^n:=X^{n+1}\oplus X^n\quad\text{and}\quad d^n:=\begin{pmatrix}
+    -d^{n+1} & 0 \\ 1 & d^n
+\end{pmatrix}. \]
+This is called the \term{cone} over $X$, and is always quasi-isomorphic to $0$,
+i.e.\ exact.
+In fact, if $\cat{A}=\cat{Mod}_R$ for a commutative ring $R$,
+then $X\otimes D^1$ is the tensor product of $X$ and the cochain complex 
+\[D^1:=\Bigl(\cdots\to0\to R\xrightarrow1R\to0\to\cdots\Bigr).\]
+
+\begin{definition}
+    Let $f\:X\to Y$ be a morphism in $\cat{Ch}(\cat{A})$.
+    The \term{mapping cone} of $f$ is a cochain complex $\operatorname{cone}(f)$,
+    defined by the ordinary pushout
+    \[\begin{tikzcd}
+        X\ar[r]\ar[d,"f"']\ar[dr,phantom,pos=.75,"\lrcorner",end anchor={[xshift=-.5em]north}] & X\otimes D^1\ar[d] \\
+        Y\ar[r] & \operatorname{cone}(f)\rlap{\ .}
+    \end{tikzcd}\]
+    Explicitly, one has
+    \[ \operatorname{cone}(f)^n\simeq X^{n+1}\oplus Y^n\quad\text{and}\quad d^n:=\begin{pmatrix}
+        -d^{n+1}_X & 0 \\ f^{n+1} & d^n_Y
+    \end{pmatrix}. \]
+\end{definition}
+
+\begin{proposition}
+    Let $f\:X\to Y$ be a morphism in $\cat{Ch}(\cat{A})$.
+    Then the mapping cone of $f$ is the homotopy cofibre of $f$:
+    \[\begin{tikzcd}
+        X\ar[r]\ar[d,"f"']\ar[dr,phantom,pos=.75,"\lrcorner",end anchor={[xshift=-.5em]north}] & 0\ar[d] \\
+        Y\ar[r] & \operatorname{cone}(f)\rlap{\ .}
+    \end{tikzcd}\]
+    In particular, the suspension of $X$ is homotopy equivalent to
+    the shifted complex $X[1]$,
+    i.e.\ one has the homotopy pushout diagram
+    \[\begin{tikzcd}
+        X\ar[r]\ar[d,"f"']\ar[dr,phantom,pos=.75,"\lrcorner",end anchor={[xshift=-.5em]north}] & 0\ar[d] \\
+        0\ar[r] & X[1]\rlap{\ .}
+    \end{tikzcd}\]
+\end{proposition}
+
+\begin{proof}
+    This follows immediately from (\ref{cor-9-o}).
+\end{proof}
+
+\begin{theorem}
+    The category $\Ndg(\cat{Ch}(\cat{A}))$ is stable.
+\end{theorem}
+
+\begin{proof}
+    \nyw
+\end{proof}
+
 \subsection{Derived categories}
 
-\nyw 
-
-\subsection{Derived categories as localisations}
+In homological algebra, the derived category 
+is obtained from the category of cochain complexes
+by inverting the quasi-isomorphisms.
+In the $\infty$-categorical setting, this can be done as well.
 
 \nyw 

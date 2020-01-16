@@ -16,7 +16,7 @@ on improving them.
 6. Limits and adjunctions
 7. Stable categories
 8. Dold&ndash;Kan correspondence
-9. Derived categories
+9. Homological algebra
 10. Operads
 11. Associative algebras
 12. Little disks and factorisation algebras
