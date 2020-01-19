@@ -13,6 +13,7 @@ on improving them.
 3. Simplicial sets
 4. Models for &infin;-categories
 5. Grothendieck construction
+5. Model categories and localisation
 6. Limits and adjunctions
 7. Stable categories
 8. Dold&ndash;Kan correspondence

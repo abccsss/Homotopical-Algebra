@@ -258,17 +258,14 @@ This is because (co)limits are preserved by categorical equivalences.
 As a corollary, we have the following criterion
 that establishes certain ordinary pushouts as homotopy pushouts.
 
-A \term{simplicial model category}
-is a model category together with a simplicial enrichment,
-together with some (rather strong) compatibility conditions,
-which are satisfied by most examples we know.
-We do not give the precise definition here.
-
 \begin{proposition}
     Let $\cat C$ be a simplicial model category.
-    The homotopy pushout 
-    \[ y\underset{x}{\sqcup}z \]
-    coincides with the ordinary pushout,
+    The ordinary pushout 
+    \[ \begin{tikzcd}
+        x\ar[r]\ar[d]\ar[dr,phantom,pos=.7,"\lrcorner"] & y\ar[d] \\
+        z\ar[r] & y\underset{x}{\sqcup}z
+    \end{tikzcd} \]
+    coincides with the homotopy pushout,
     if the map $x\to y$ is a cofibration.
 \end{proposition}
 

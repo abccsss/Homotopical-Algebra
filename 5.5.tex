@@ -1,0 +1,372 @@
+In the introduction, we mentioned that
+if $(\cat{C},\cat{W})$ is a category with weak equivalences,
+then we get an $\infty$-category $\cat{C}[\cat{W}^{-1}]$
+by inverting the arrows in $\cat{W}$.
+If moreover, the pair $(\cat{C},\cat{W})$ comes from a model structure,
+which is usually the case,
+then this $\infty$-category can be described more easily.
+
+In this section, we aim to reformulate this idea rigorously,
+and we will see in the following sections
+how the model structure is going to help us.
+
+\subsection{Localising an infinity category}
+
+First of all, we describe the process of localising
+a category with weak equivalences $(\cat{C},\cat{W})$
+to get an $\infty$-category $\cat{C}[\cat{W}^{-1}]$.
+We generalise the situation by also allowing $\cat{C}$ to be an $\infty$-category.
+
+\begin{definition}
+    Let $\cat{C}$ be a quasi-category,
+    and let $\cat{W}$ be a set of edges (i.e., $1$-simplices) of $\cat{C}$.
+    The \term{localisation} $\cat{C}[\cat{W}^{-1}]$, if it exists,
+    is a quasi-category defined by the following universal property:
+    \begin{itms}
+        \item For any quasi-category $\cat{D}$, and any diagram without the dashed arrow 
+        \[ \begin{tikzcd} [column sep=1em]
+            \cat{C} \ar[rr,"F"] \ar[dr] && \cat{D} \\
+            & \cat{C}[\cat{W}^{-1}] \rlap{\ ,} \ar[ur,dashed,"\exists!"']
+        \end{tikzcd} \]
+        such that $F$ sends $\cat{W}$ to invertible edges in $\cat{D}$,
+        there exists a `unique' dashed arrow making the diagram commute.
+    \end{itms}
+    The `uniqueness' should be formulated in an $\infty$-categorical way:
+    we require that
+    \[ \operatorname{Fun}(\cat{C}[\cat{W}^{-1}], \cat{D}) \simto
+        \operatorname{Fun}^{\cat{W}\mapsto\mathrm{eq}}(\cat{C},\cat{D}) \]
+    is an equivalence of quasi-categories,
+    where the right hand side denotes the full subcategory of $\operatorname{Fun}(\cat{C},\cat{D})$
+    spanned by those functors sending $\cat{W}$ to invertible edges.
+\end{definition}
+
+As with all things determined by universal properties,
+the localisation is unique up to an equivalence, if it exists.
+
+\begin{remark}
+    In fact, the localisation is unique up to an equivalence,
+    which is unique up to a higher equivalence,
+    which is unique up to an even higher equivalence, and so on. 
+    In ordinary category theory, we often hear people say that 
+    an object is `unique up to a unique isomorphism'.
+    This is a low dimensional truncation of our notion of uniqueness,
+    because no (non-trivial) higher equivalences exist in an ordinary category. \varqed
+\end{remark}
+
+To prove the existence of such a localisation,
+we need to recall the notion of marked simplicial sets.
+
+\begin{definition}
+    A \term{marked simplicial set} is a pair $(X,E)$,
+    where $X$ is a simplicial set,
+    and $E$ is a set of edges of $X$ which contains all degenerate edges.
+    The edges in $E$ are called the \term{marked edges}.
+\end{definition}
+
+Recall that a map of marked simplicial sets from $(X,E)$ to $(Y,F)$
+is a map of simplicial sets $f\:X\to Y$, such that $f(E)\subset F$.
+As we have mentioned in the previous section,
+the category $\cat{sSet}^+$ of all marked simplicial sets 
+carries a model structure, which we shall describe now.
+
+\begin{definition}
+    Let $X$ be a simplicial set.
+    \begin{itms}
+        \item The marked simplicial set $X^\sharp$
+        is the marked version of $X$ in which all edges are marked.
+        \item The marked simplicial set $X^\flat$
+        is the marked version of $X$ in which only the degenerate edges are marked.
+        \item If $X$ is a quasi-category, then the marked simplicial set $X^\natural$
+        is the marked version of $X$ in which the invertible edges are marked.
+    \end{itms}
+\end{definition}
+
+\begin{theorem}
+    The category $\cat{sSet}^+$ has the \term{(co)cartesian model structure}, in which
+    \begin{itms}
+        \item The cofibrations are the injections.
+        \item The weak equivalences are the maps $f\:X\to Y$
+        such that for any quasi-category $Z$, we have an equivalence of quasi-categories
+        \[ \Hom_{\cat{sSet}^+}(Y,Z^\natural) \simto \Hom_{\cat{sSet}^+}(X,Z^\natural), \]
+        where both sides are full subcategories of the mapping spaces of simplicial sets.
+        \item The fibrant objects are those which are isomorphic to $X^\natural$
+        for some quasi-category $X$.
+    \end{itms}
+\end{theorem}
+
+\begin{proof}
+    See \cite[Proposition~3.1.3.7]{htt}.
+\end{proof}
+
+The name of the model structure may seem a little strange.
+In fact, it is a special case of the two model structures on $\cat{sSet}^+_{\/S}$
+when $S=\{*\}$. These two model structures were used in the formulation 
+of Grothendieck construction for (co)cartesian fibrations in the last section.
+
+The existence of localisations follows as an immediate consequence.
+
+\begin{corollary}
+    Let $\cat{C}$ be a quasi-category,
+    and let $\cat{W}$ be a set of edges of $\cat{C}$.
+    Then $\cat{C}[\cat{W}^{-1}]$ exists.
+\end{corollary}
+
+\begin{proof}
+    Without loss of generality, we may assume that $\cat{W}$ contains all degenerate edges.
+    Then $(\cat{C},\cat{W})$ is a marked simplicial set.
+    Let $\cat{C}[\cat{W}^{-1}]:=R(\cat{C},\cat{W})$ be its fibrant replacement,
+    which is a fibrant object, and thus a quasi-category.
+    Then for any quasi-category $\cat{D}$, we have 
+    \[ \Hom_{\cat{sSet}^+}\bigl(\cat{C}[\cat{W}^{-1}],\ \cat{D}^\natural\bigr) \simto
+       \Hom_{\cat{sSet}^+}\bigl((\cat{C},\cat{W}),\ \cat{D}^\natural\bigr), \]
+    as desired.
+\end{proof}
+
+This proof is terribly abstract, and it does not give us a clue on 
+how to work with it in concrete examples.
+However, there is a construction given by Dwyer and Kan \cite{dk-calc} which is 
+much more explicit.
+
+\begin{construction}
+    Let $(\cat{C},\cat{W})$ be a category with weak equivalences,
+    in the ordinary sense.
+    The simplicial category $\cat{L}(\cat{C},\cat{W})$ is constructed as follows.
+    It has the same objects as $\cat{C}$, and for $X,Y\in\cat{C}$,
+    the simplicial set $\Hom_{\cat{L}(\cat{C},\cat{W})}(X,Y)$ is defined by 
+    \[ \Hom_{\cat{L}(\cat{C},\cat{W})}(X,Y)_n := \left\{
+        \begin{tikzcd}[row sep={1.2em,between origins},column sep=2em]
+            & \bullet\ar[dd] & \bullet\ar[l]\ar[r]\ar[dd] & \cdots & \bullet\ar[l]\ar[dd]\ar[dddr] \\\\
+            & \bullet\ar[dd] & \bullet\ar[l]\ar[r]\ar[dd] & \cdots & \bullet\ar[l]\ar[dd]\ar[dr] \\
+            X \ar[uuur]\ar[ur]\ar[dddr] &&&&& Y \\
+            & \vdots\ar[dd] & \vdots\ar[dd] && \vdots\ar[dd] \\\\
+            & \bullet & \bullet\ar[l]\ar[r] & \cdots & \bullet\ar[l]\ar[uuur]
+        \end{tikzcd}
+    \right\}\raisebox{-3em}{$\Bigg/$}\mkern-6mu\raisebox{-3.5em}{$\sim$}, \]
+    where 
+    \begin{itms}
+        \item There are $n+1$ rows and any number of columns.
+        Each bullet represents an object of $\cat{C}$.
+        \item The horizontal arrows may go to the left or the right,
+        but the arrows in the same column must go in the same direction.
+        \item The arrows going downwards or leftwards are in $\cat{W}$.
+        \item The equivalence relation $\sim$ is generated by 
+        composition of adjacent horizontal arrows in the same direction.
+    \end{itms}
+    The simplicial category $\cat{L}(\cat{C},\cat{W})$ is called the 
+    \term{hammock localisation} of $(\cat{C},\cat{W})$,
+    since the above diagram looks like a hammock. \varqed
+\end{construction}
+
+By this construction, we easily see that the homotopy category of $\cat{L}(\cat{C},\cat{W})$
+is the ordinary category which we denoted by $\cat{C}[\cat{W}^{-1}]$ in (\ref{constr-1-locn}).
+
+\begin{theorem}
+    Let $(\cat{C},\cat{W})$ be an ordinary category with weak equivalences.
+    Then there is a weak equivalence of marked simplicial sets 
+    \[ (\cat{C},\cat{W}) \simeq (\mathfrak{N}R\cat{L}(\cat{C},\cat{W}))^\natural, \]
+    where $R$ denotes the fibrant replacement functor
+    from $\cat{Cat}_{\cat{sSet}}$ to $\cat{Cat}_{\cat{Kan}}$.
+    In particular, there is an equivalence of quasi-categories
+    \[ \cat{C}[\cat{W}^{-1}] \simeq \mathfrak{N}R\cat{L}(\cat{C},\cat{W}). \]
+\end{theorem}
+
+\begin{proof}
+    See \cite[\S1.2]{hinich13}.
+\end{proof}
+
+As a corollary, the homotopy category of $\cat{C}[\cat{W}^{-1}]$
+is equivalent to the category defined in (\ref{constr-1-locn}).
+
+\subsection{Simplicial model categories}
+
+The above idea will only work with model categories 
+together with a compatible simplicial structure.
+They are called \emph{simplicial model categories}.
+
+Defining the compatibility conditions between the model structure
+and the simplicial structure will require some
+preliminaries in monoidal category theory and enriched category theory.
+
+For simplicity, we will only be concerned about
+monoidal categories that are \emph{symmetric},
+i.e., the tensor product is commutative.
+
+\begin{definition}
+    A \term{symmetric monoidal category} consists of
+    \begin{itms}
+        \item A monoidal category $\cat{V}$.
+        \item A natural equivalence
+        \[ T_{X,Y} \: X \otimes Y \to Y \otimes X \]
+        for $X,Y \in \cat{V}$,
+    \end{itms}
+    such that
+    \begin{itms}
+        \item $T \circ T = \mathbb{1}$.
+        \item For any $X,Y,Z \in \cat{V}$, the diagram
+        \[ \begin{tikzcd}
+            (X\otimes Y)\otimes Z\ar[r]\ar[d] &
+            (Y\otimes X)\otimes Z\ar[r] &
+            Y\otimes(X\otimes Z)\ar[d] \\
+            X\otimes(Y\otimes Z)\ar[r] &
+            (Y\otimes Z)\otimes X\ar[r] &
+            Y\otimes(Z\otimes X)
+        \end{tikzcd} \]
+        commutes.
+    \end{itms}
+\end{definition}
+
+It can be shown that the last axiom above is enough
+to ensure that all possible ways to form the tensor product 
+of finitely many objects will give a unique result up to 
+a unique isomorphism.
+The essential reason is that $\cat{Cat}$ is a $2$-category 
+and has no higher structure more than the level $2$.
+This will be explained in later sections.
+
+For example, all the examples of monoidal categories
+that we have mentioned above are symmetric.
+
+\begin{example}
+    Let us give an example of a non-symmetric monoidal category.
+    Consider a non-commutative ring $R$,
+    and consider the category of bimodules over $R$,
+    with its monoidal structure given by the tensor product of bimodules.
+    Then this category is a non-symmetric monoidal category.
+    \varqed
+\end{example}
+
+\begin{definition}
+    A symmetric monoidal category $\cat{V}$ is said to be \term{closed},
+    if there exists an \term{internal hom} functor 
+    \[ (-)^{(-)} \: \cat{V} \times \cat{V}\op \to \cat{V}, \]
+    and a natural isomorphism 
+    \[ \Hom_{\cat{V}}(X \otimes Y,\ \cat{Z}) \simeq 
+    \Hom_{\cat{V}}(X,\ Z^Y) \]
+    for $X,Y,Z\in\cat{V}$.
+    In short, the tensor product has a right adjoint.
+\end{definition}
+
+To avoid awkward notation,
+we sometimes write $\Hom_{\cat{V}}(X,Y)$ for $Y^X$.
+
+\begin{example}
+    Here are some examples and non-examples of closed symmetric monoidal categories.
+    \begin{itms}
+        \item The symmetric monoidal category $(\cat{Set},\times)$ is closed,
+        with internal hom given by the powering of sets.
+
+        \item The symmetric monoidal category $(\cat{sSet},\times)$ is closed,
+        with internal hom given by the mapping space of simplicial sets (\ref{def-4-map}).
+
+        \item The symmetric monoidal category $(\cat{Top},\times)$ is \emph{not} closed.
+        This is why algebraic topologists like to use the category of
+        \emph{compactly generated spaces}, which is closed with the $\times$ monoidal structure,
+        with internal hom given by the mapping space with compact open topology. \varqed
+    \end{itms}
+\end{example}
+
+\begin{definition}
+    Let $\cat{V}$ be a closed symmetric monoidal category,
+    and let $\cat{C}$ be a category enriched over $\cat{V}$.
+    \begin{itms}
+        \item $\cat{C}$ is \term{tensored} over $\cat{V}$,
+        if there exists a functor
+        \[ {-}\otimes{-} \: \cat{V}\times\cat{C} \to \cat{C}, \]
+        with a natural isomorphism
+        \[ \Hom_{\cat{C}}(A\otimes X,\ Y) \simeq \Hom_{\cat{V}}\bigl(A,\ \Hom_{\cat{C}}(X,Y)\bigr) \]
+        for $A\in\cat{V}$ and $X,Y\in\cat{C}$, where $\Hom_{\cat{V}}$ denotes the internal hom of $\cat{V}$.
+
+        \item $\cat{C}$ is \term{cotensored}, or \term{powered}, over $\cat{V}$,
+        if there exists a functor
+        \[ (-)^{(-)} \: \cat{C} \times \cat{V}\op \to \cat{C}, \]
+        with a natural isomorphism
+        \[ \Hom_{\cat{C}}(X,\ Y^A) \simeq \Hom_{\cat{V}}\bigl(A,\ \Hom_{\cat{C}}(X,Y)\bigr) \]
+        for $A\in\cat{V}$ and $X,Y\in\cat{C}$, where $\Hom_{\cat{V}}$ denotes the internal hom of $\cat{V}$.
+    \end{itms}
+\end{definition}
+
+\begin{example}
+    \ 
+    \begin{itms}
+        \item As is easily seen, the categories $\cat{Set}$, $\cat{Top}$
+        and $\cat{sSet}$ are tensored and cotensored over $\cat{Set}$.
+
+        \item The simplicial categories $\cat{Top}$ and $\cat{sSet}$
+        are tensored and cotensored over $\cat{sSet}$.
+    \end{itms}
+\end{example}
+
+Now we are ready to define a simplicial model category.
+
+\begin{definition}
+    Let $\cat{C}$ be a simplicial category.
+    The \term{underlying category} $\cat{C}_0$ of $\cat{C}$ is an ordinary category,
+    obtained by regarding the $0$-simplices as arrows,
+    and discarding all higher simplices.
+\end{definition}
+
+\begin{definition}
+    A \term{simplicial model category} consists of 
+    \begin{itms}
+        \item A simplicial category $\cat{C}$.
+        \item A model structure on the underlying category $\cat{C}_0$ of $\cat{C}$,
+    \end{itms}
+    such that
+    \begin{itms}
+        \item $\cat{C}$ is tensored and cotensored over $\cat{sSet}$.
+        \item For every cofibration $i\:A\to B$ in $\cat{sSet}$,
+        and any cofibration $j\:X\to Y$ in $\cat{C}_0$,
+        the obvious map which we denote by
+        \[ i \square j \: A \otimes Y \underset{A\otimes X}{\sqcup} B\otimes X \to B\otimes Y \]
+        is a cofibration in $\cat{C}_0$,
+        and is trivial whenever $i$ or $j$ is trivial.
+    \end{itms}
+\end{definition}
+
+The last criterion above may seem somewhat technical,
+but it is a very natural requirement if we consider the example 
+\[ \begin{aligned}
+    \cat{C} &= \cat{V} = \cat{sSet}, \\
+    A &= \{0\} \subset \Delta[1], & B &= \Delta[1], \\
+    X &= \partial\Delta[2], & Y &= \Delta[2].
+\end{aligned} \]
+The purpose of this criterion is to ensure that the model structures 
+on $\cat{C}$ and on $\cat{V}$ are compatible.
+
+For example, the categories $\cat{Top}$ and $\cat{sSet}$
+are simplicial model categories.
+
+An interesting point about simplicial model categories is that 
+there are two ways to obtain an $\infty$-category from them.
+
+\begin{itms}
+    \item First, a simplicial model category is
+    a simplicial category, which gives rise
+    to an $\infty$-category.
+    \item Second, any category with weak equivalences can be localised 
+    to obtain an $\infty$-category.
+\end{itms}
+Surprisingly, these two $\infty$-categories turn out to be equivalent.
+Therefore, in order to study the localised $\infty$-category,
+one only needs to look at the simplicial structure of the model category,
+which is often quite easy to describe.
+
+\begin{theorem}[Dwyer--Kan]
+    Let $\cat{C}$ be a simplicial model category.
+    Then $\cat{C}_{\mathrm{cf}}$ is enriched over Kan complexes,
+    and there is an equivalence of quasi-categories 
+    \[ \cat{C}[\cat{W}^{-1}] \simeq \mathfrak{N}\cat{C}_{\mathrm{cf}}. \]
+\end{theorem}
+
+\begin{proof}
+    See \cite[Theorem~1.3.4.20]{ha}.
+\end{proof}
+
+\begin{example}
+    As was mentioned in (\ref{rmk-4-locn}),
+    this theorem implies that we have equivalences
+    \[ \cat S\simeq\cat{sSet}[\cat W^{-1}]\quad\text{and}\quad
+    \cat D_\infty(\cat A)\simeq\cat{Ch}_{\cat A}[\cat W^{-1}]. \varqedhere \]
+\end{example}
+
+
