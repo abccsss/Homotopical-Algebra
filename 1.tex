@@ -173,7 +173,18 @@ of the localisation $\cat C[\cat W^{-1}]$.
 \end{proposition}
 
 \begin{proof}
-    \nyw
+    The obvious functor $\cat{Top}\to\cat{hTop}$ sends $\cat{HoEq}$ to isomorphisms.
+    Therefore, it induces a functor 
+    \[ \cat{Top}[\cat{HoEq}^{-1}]\to\cat{hTop}, \]
+    which is clearly full and essentially surjective.
+    To prove that it is faithful, suppose $f,g \: X \to Y$
+    are morphisms in $\cat{Top}$ which are sent to the same morphism in $\cat{hTop}$.
+    Then $f$ and $g$ are homotopic. Let $H$ be the homotopy.
+    Then in $\cat{Top}[\cat{HoEq}^{-1}]$, we have
+    \[ f \quad = \quad
+       X \xleftarrow{\operatorname{pr}_1} X \times I \xrightarrow{H} Y
+       \quad = \quad g, \]
+    where $\operatorname{pr}_1$ denotes projection onto the first factor.
 \end{proof}
 
 In fact, we will see that localisation gives rise to higher structure.
