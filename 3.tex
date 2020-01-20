@@ -77,7 +77,7 @@ in the category $\bfDelta$.
     A \term{simplicial set} is a functor from $\bfDelta\op$ to $\cat{Set}$,
     i.e.\ a contravariant functor from $\bfDelta$ to $\cat{Set}$.
     We denote the category of simplicial sets by
-    \[\cat{sSet}:=\cat{Fun}(\bfDelta\op,\cat{Set}).\]
+    \[\cat{sSet}:=\operatorname{Fun}(\bfDelta\op,\cat{Set}).\]
     More generally, for any category $\cat C$,
     a \term{simplicial object} in $\cat C$ is a functor from $\bfDelta\op$ to $\cat{C}$,
     and a \term{cosimplicial object} in $\cat C$ is a functor from $\bfDelta$ to $\cat{C}$.
@@ -101,7 +101,7 @@ are called the \term{face maps} and the \term{degeneracy maps}, respectively.
         \item Note that $\Delta[\bullet]$ is a cosimplicial object in $\cat{sSet}$.
         \item By removing the only non-degenerate $n$-simplex in $\Delta[n]$,
         we obtain its boundary $\partial\Delta[n]$.
-        \item The simplicial set $S^n$ is defined by $\Delta[n]\/\partial\Delta[n]$,
+        \item The simplicial set $S^n$ is defined to be $\Delta[n]\/\partial\Delta[n]$,
         where the quotient is done degreewise. \varqed
     \end{itms}
 \end{example}
@@ -127,21 +127,18 @@ but actually it has $3\times3=9=5+4$ possibly degenerate $1$-simplices in total.
 
 \subsection{Geometric realisation}
 
-In our mind, a simplicial set is thought of as
+A simplicial set is often pictured as
 a simplicial complex together with an ordering of vertices for each simplex.
 The idea of geometric realisation is that one can
 forget the ordering and get a topological space.
-In fact, geometric realisation is a much more general construction
-which can not only give topological spaces,
-but any kind of objects we want. Let us explain this.
 
 \begin{proposition}
     Every simplicial set can be obtained from $\emptyset$
     by attaching $\Delta[n]$ along its boundary $\partial\Delta[n]$ and taking colimits. \qed
 \end{proposition}
 
-In the category $\cat{Top}$, we have the standard $n$-simplex $\Delta^n$, as a topological space.
-Moreover, $\Delta^\bullet$ is a cosimplicial object in $\cat{Top}$
+In the category $\cat{Top}$, we have the standard $n$-simplex $\Delta^n$.
+If we put all these spaces together, we get a cosimplicial object $\Delta^\bullet$ in $\cat{Top}$,
 which specifies ``how $\Delta[n]$ should look like in $\cat{Top}$''.
 Given this data, we can easily define a functor
 \[ |{\bullet}|\:\cat{sSet}\to\cat{Top} \]
@@ -149,8 +146,7 @@ by sending $\Delta[n]$ to $\Delta^n$,
 and extending it to other simplicial sets by taking colimits.
 This functor is called the \term{geometric realisation} functor.
 
-Moreover, the functor $|{\bullet}|$ has a right adjoint called $\operatorname{Sing}$,
-which is defined by 
+Moreover, the functor $|{\bullet}|$ has a right adjoint called $\operatorname{Sing}$, defined by 
 \[\operatorname{Sing}X:=\Hom_{\cat{Top}}(\Delta^\bullet,X),\]
 which is exactly as we defined it before.
 
@@ -176,10 +172,10 @@ Here is one example.
     Let us take $\cat{C}=\cat{Ch}_R$, the category of cochain complexes of $R$-modules,
     where $R$ is a ring. Take
     \[\Delta^n:=\quad\Bigl(\cdots\to0\to
-    \underset{(-n)}{R^{\oplus\binom{n+1}{n+1}}}\to
+    \underset{\substack{\\[.5em](-n)}}{R^{\oplus\binom{n+1}{n+1}}}\to
     \cdots\to
-    \underset{(-1)}{R^{\oplus\binom{n+1}{2}}}\to
-    \underset{(0)}{R^{\oplus(n+1)}}\to0\to\cdots\Bigr)\]
+    \underset{\substack{\\[.5em](-1)}}{R^{\oplus\binom{n+1}{2}}}\to
+    \underset{\substack{\\[.5em](0)}}{R^{\oplus(n+1)}}\to0\to\cdots\Bigr)\]
     to be the simplicial chain complex of the standard $n$-simplex.
     This construction gives a functor $\cat{sSet}\to\cat{Ch}_R$,
     which computes the simplicial homology of a simplicial set.
@@ -191,8 +187,11 @@ Here is one example.
 Let us go back to the adjunction $|{\bullet}|\dashv\operatorname{Sing}$.
 Actually, this is a Quillen equivalence between model categories.
 
-For $0\leq i\leq n$, we define the simplicial set $\Lambda_i[n]$, called a \term{horn},
-by removing the face of $\partial\Delta[n]$ opposite to the $i$-th vertex.
+\begin{definition}
+    Let $0\leq i\leq n$.
+    The simplicial set $\Lambda_i[n]$, called a \term{horn},
+    is obtained from $\partial\Delta[n]$ by removing the face opposite to the $i$-th vertex.
+\end{definition}
 
 \begin{theorem}
     The category $\cat{sSet}$ has a \term{standard model structure}, with
@@ -205,7 +204,7 @@ by removing the face of $\partial\Delta[n]$ opposite to the $i$-th vertex.
 \end{theorem}
 
 The proof is rather tedious and will not be presented here.
-The reader is referred to~\cite[Theorem~3.6.5]{hovey} for a proof.
+See~\cite[Theorem~3.6.5]{hovey}.
 
 Finally, we state without proof the following result.
 
@@ -214,9 +213,9 @@ Finally, we state without proof the following result.
     is a Quillen equivalence between $\cat{sSet}$ and $\cat{Top}$.
 \end{theorem}
 
-For a proof, see~\cite[Theorem 3.6.7]{hovey}.
+See~\cite[Theorem 3.6.7]{hovey}.
 
-As an easy exercise, the reader can show that the adjunction is a Quillen adjunction,
+The reader can show that the adjunction is a Quillen adjunction,
 without using this theorem.
 
 \subsection{Categories as simplicial sets}
@@ -268,7 +267,7 @@ the nerve of the categories are the corresponding simplicial sets.
 \end{remark}
 
 Note that not all simplicial sets are categories.
-For example, consider $\Lambda_1[2]$, with two arrows that cannot be composed.
+For example, consider $\Lambda_1[2]$, which has two arrows that cannot be composed.
 In fact, if we define the \term{spine} $\operatorname{Sp}(n)\subset\Delta[n]$
 to consist of all vertices and the edges $[i,i+1]$ for $0\leq i<n$,
 then a simplicial set $X$ is the nerve of a category,
@@ -406,9 +405,9 @@ We have a diagram of categories
     \ar[dd,"\text{forget}"'] \\ 
 %
     && \cat{Cat}_{\cat{sMod}_R} \ar[r,bend left=20,"\text{Dold--Kan}"]
-    \ar[r,phantom,"\bot\rlap{$\scriptstyle\simeq$}"]
+    \ar[r,phantom,"\bot"]
     \ar[dl,bend left=20,start anchor={[xshift=-1.5ex,yshift=1ex]},
-    end anchor={[yshift=1ex]},pos=.7,"\text{forget}" {rotate=20,inner sep=1pt}] &
+    end anchor={[yshift=1ex]},pos=.7,"\text{forget}" {rotate=25,inner sep=1pt}] &
     \rlap{$\cat{Cat}_{\cat{Ch}_R}$\scriptsize\enspace(dg categories)}
     \phantom{\cat{Cat}_{\cat{sMod}_R}} \ar[l,bend left=20] \\
 %
@@ -416,14 +415,14 @@ We have a diagram of categories
     \ar[r,phantom,"\bot\rlap{$\scriptstyle\simeq$}"] \ar[ddr,bend right,"h"'] &
     \cat{Cat}_{\cat{sSet}} \ar[l,bend left=20,"\mathfrak N"] \ar[dd,"h"']
     \ar[ur,bend left=20,start anchor={[xshift=1ex,yshift=1ex]},
-    end anchor={[yshift=.5ex]},pos=.7,"\text{free}" rotate=20]
-    \ar[ur,phantom,yshift=1ex,"\bot" rotate=20]
+    end anchor={[yshift=.5ex]},pos=.75,"\text{free}" rotate=25]
+    \ar[ur,phantom,yshift=1ex,"\bot" rotate=25]
     \ar[dr,bend left=20,start anchor={[yshift=-1ex]},
-    end anchor={[xshift=-1.5ex,yshift=-1ex]},pos=.5,"|\bullet|" {rotate=-20,inner sep=1pt}]
-    \ar[dr,phantom,yshift=-1ex,"\bot\scriptstyle\simeq" rotate=-20] \\
+    end anchor={[xshift=-1.5ex,yshift=-1ex]},pos=.45,"|\bullet|" {rotate=-22,inner sep=1pt}]
+    \ar[dr,phantom,yshift=-1ex,"\bot\scriptstyle\simeq" rotate=-22] \\
     &&\cat{Cat}_{\cat{Top}} \ar[dl,bend left,"h"]
     \ar[ul,bend left=20,start anchor={[xshift=-1ex,yshift=-1ex]},
-    end anchor={[xshift=.5ex,yshift=-1ex]},pos=.2,"\operatorname{Sing}" rotate=-20]\\
+    end anchor={[xshift=.5ex,yshift=-1ex]},pos=.25,"\operatorname{Sing}" rotate=-22]\\
 %
     &\cat{Cat}_{\cat{hCW}} \ar[dd,"\pi_0"] \\ \  \\
     &\cat{Cat}\rlap{\ .}

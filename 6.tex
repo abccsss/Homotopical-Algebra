@@ -26,7 +26,7 @@ The notation $\Hom_{\cat C}(x,y)$ refers to any one of
 \[\Hom_{\cat C}^\vartriangleleft(x,y),\quad
 \Hom_{\cat C}^\vartriangleright(x,y),\quad 
 \Hom_{\mathfrak C\cat C}(x,y),\quad\text{etc.,} \]
-which all have the same homotopy type.
+which all have the same homotopy type (\ref{thm-5-h}).
 
 \begin{remark}
     An initial object of $\cat C$
@@ -35,7 +35,7 @@ which all have the same homotopy type.
     the corresponding notions for $\cat{hCW}$-enriched categories. \varqed
 \end{remark}
 
-One should expect that initial objects are unique if they exist.
+One may expect that initial objects are unique if they exist.
 As before, uniqueness means being a contractible space.
 
 \begin{proposition}
@@ -51,7 +51,22 @@ As before, uniqueness means being a contractible space.
 \end{proposition}
 
 \begin{proof}
-    \nyw
+    For the first part, note that $x$ is an initial object 
+    if and only if the map $\cat C_{x\/}\to\cat C$ has contractible fibres.
+    But a left fibration has contractible fibres iff
+    it is a trivial fibration, which is a standard fact which we have not mentioned.
+
+    For the second part, suppose we have a map $f\:\partial\Delta[n]\to\cat{C}$,
+    such that all vertices are sent to initial objects, with $n>0$.
+    We need to show that it can be extended to a map $\Delta[n]\to\cat{C}$.
+    Then we may lift in the diagram 
+    \[ \begin{tikzcd}
+        \partial\Delta[n-1] \ar[d,"\cat{Cof}\ni"'] \ar[r,"f|_{\Lambda_0[n]}"] &
+        \cat{C}_{f(0)\/} \ar[d,"\in\cat{Fib}\cap\cat{W}"] \\
+        \Delta[n-1] \ar[r,"f|_{1\comma\dotsc\comma n}"'] \ar[ur,dashed] &
+        \cat{C}
+    \end{tikzcd} \]
+    to get the desired extension of $f$ to $\Delta[n]$.
 \end{proof}
 
 Colimits are nothing but initial objects of under-categories.

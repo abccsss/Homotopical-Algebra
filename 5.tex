@@ -46,7 +46,7 @@ Let us look at an example arising from algebraic geometry.
     The natural forgetful functor $\cat{QCoh}\to\cat{Sch}\op$
     is the ``fibration'' that we wished to construct.
     This is an example of a \emph{cocartesian fibration},
-    which we will define soon. \varqed
+    which we will define later in this section. \varqed
 \end{example}
 
 \subsection{For ordinary categories}
@@ -321,7 +321,7 @@ form an adjunction
 We will sometimes omit the subscript $S$ and simply write
 $\operatorname{St}$ and $\operatorname{Un}$.
 
-\begin{example}
+\begin{example} \label{eg-5-pt}
     Let us consider the case $S=\{*\}$.
     In this case, the Grothendieck construction converts between
     fibrations onto $\{*\}$ and their fibres. We expect that the adjunction 
@@ -446,16 +446,32 @@ gives back the fibres of a left fibration.
     We have the following.
     \begin{itms}
         \item Let $X\to S$ be a left fibration.
-        then for any $s\in S$, there is a weak homotopy equivalence
+        Then for any $s\in S$, there is a weak homotopy equivalence
         \[ (\operatorname{St}_SX)(s)\simeq X_s. \]
         \item Let $F\:\mathfrak CS\to\cat{Kan}$ be a functor.
-        then for any $s\in S$, there is a homotopy equivalence of Kan complexes
+        Then for any $s\in S$, there is a homotopy equivalence of Kan complexes
         \[ (\operatorname{Un}_SF)_s\simeq F(s). \]
     \end{itms}
 \end{proposition}
 
 \begin{proof}
-    \nyw
+    For the second part, note that by the definition of unstraightening,
+    \[ (\operatorname{Un}_SF)_s \simeq \operatorname{Un}_{\{s\}}F(s) \simeq F(s), \]
+    where the second equivalence uses (\ref{eg-5-pt}).
+
+    For the first part, consider the weak equivalence
+    \[ \operatorname{St} X \simto F := R\operatorname{St}X. \]
+    This implies that we have a weak equivalence
+    \[ X \simto \operatorname{Un} F \]
+    of cofibrant-fibrant objects in $\cat{sSet}_{\/S}$.
+    By (\ref{thm-2-w}), this map is a homotopy equivalence.
+    In particular, we may take $X \times \Delta[1]$ and $\operatorname{Un} F \times \Delta[1]$
+    as the cylinder objects,
+    and a homotopy equivalence with respect to these cylinder objects
+    must induce a homotopy equivalence of the fibres at each point of $S$.
+    It follows that
+    \[ X_s \simeq (\operatorname{Un}F)_s \]
+    for any $s\in S$. By the second part, we are done.
 \end{proof}
 
 Our goal now is to use the Grothendieck construction 
@@ -490,17 +506,33 @@ Moreover, we have the following.
 \end{proposition}
 
 \begin{proof}
-    \nyw
+    By the definition of straightening, we see that 
+    \[ \Hom_{\mathfrak C\cat C}(x,y) \simeq (\operatorname{St}_{\cat{C}}\{x\})(y). \]
+    Therefore, it suffices to show that the map of functors 
+    \[ \operatorname{St}_{\cat{C}}\{x\} \to \operatorname{St}_{\cat{C}}\cat{C}_{x\/} \]
+    is a weak equivalence. In fact, we will show that it is a trivial cofibration,
+    which reduces to showing that the inclusion
+    \[ \{x\} \hookrightarrow \cat{C}_{x\/} \]
+    is a trivial cofibration in $\cat{sSet}_{\/\cat{C}}$.
+    Thus we only need to show that this map has the left lifting property against left fibrations.
+    This is because this map is a retract of the map 
+    \[ \{\infty\} \hookrightarrow (\cat{C}_{x\/})^\vartriangleleft, \]
+    which has the required left lifting property,
+    since it is obtained by attaching simpices along left horns.
 \end{proof}
 
 Combining these two equivalences, we see that
 \[\Hom_{\cat C}^\vartriangleleft(x,y)\simeq\Hom_{\mathfrak C\cat C}(x,y).\]
-A dual argument, involving right fibrations,
-shows that 
-\[\Hom_{\cat C}^\vartriangleright(x,y)\simeq\Hom_{\mathfrak C\cat C}(x,y).\]
-Therefore, we have proved the fact that $\cat C$ and $\mathfrak C\cat C$
-have weakly homotopy equivalent mapping spaces,
-as our first application of the Grothendieck construction.
+Together with a dual argument, involving right fibrations,
+we have shown that 
+
+\begin{theorem} \label{thm-5-h}
+    Let $\cat C$ be a quasi-category, and let $x,y\in\cat C$. Then 
+    \[\Hom_{\cat C}^\vartriangleleft(x,y)\simeq\Hom_{\mathfrak C\cat C}(x,y)
+    \simeq\Hom_{\cat C}^\vartriangleright(x,y). \qedhere \] \restoreqed
+\end{theorem}
+
+This is our first application of the Grothendieck construction.
 
 \subsection{For cocartesian fibrations}
 

@@ -94,12 +94,10 @@ carries a model structure, which we shall describe now.
     \end{itms}
 \end{theorem}
 
-\begin{proof}
-    See \cite[Proposition~3.1.3.7]{htt}.
-\end{proof}
+See \cite[Proposition~3.1.3.7]{htt}.
 
 The name of the model structure may seem a little strange.
-In fact, it is a special case of the two model structures on $\cat{sSet}^+_{\/S}$
+In fact, it is a special case of the two model structures on $\cat{sSet}^+_{\smash{\/}S}$
 when $S=\{*\}$. These two model structures were used in the formulation 
 of Grothendieck construction for (co)cartesian fibrations in the last section.
 
@@ -145,7 +143,7 @@ much more explicit.
     where 
     \begin{itms}
         \item There are $n+1$ rows and any number of columns.
-        Each bullet represents an object of $\cat{C}$.
+        Each dot in the diagram (except in the ellipses) represents an object of $\cat{C}$.
         \item The horizontal arrows may go to the left or the right,
         but the arrows in the same column must go in the same direction.
         \item The arrows going downwards or leftwards are in $\cat{W}$.
@@ -170,26 +168,26 @@ is the ordinary category which we denoted by $\cat{C}[\cat{W}^{-1}]$ in (\ref{co
     \[ \cat{C}[\cat{W}^{-1}] \simeq \mathfrak{N}R\cat{L}(\cat{C},\cat{W}). \]
 \end{theorem}
 
-\begin{proof}
-    See \cite[\S1.2]{hinich13}.
-\end{proof}
+See \cite[\S1.2]{hinich13}.
 
 As a corollary, the homotopy category of $\cat{C}[\cat{W}^{-1}]$
 is equivalent to the category defined in (\ref{constr-1-locn}).
 
 \subsection{Simplicial model categories}
 
-The above idea will only work with model categories 
-together with a compatible simplicial structure.
-They are called \emph{simplicial model categories}.
+If a model category has a compatible simplicial structure,
+then the $\infty$-category obtained by localisation
+will be much easier to work with.
+This type of model categories are called \emph{simplicial model categories}.
 
 Defining the compatibility conditions between the model structure
 and the simplicial structure will require some
 preliminaries in monoidal category theory and enriched category theory.
 
-For simplicity, we will only be concerned about
+For simplicity, we will only be concerned with
 monoidal categories that are \emph{symmetric},
-i.e., the tensor product is commutative.
+i.e., the tensor product is commutative,
+which is almost always the case.
 
 \begin{definition}
     A \term{symmetric monoidal category} consists of
@@ -358,9 +356,7 @@ which is often quite easy to describe.
     \[ \cat{C}[\cat{W}^{-1}] \simeq \mathfrak{N}\cat{C}_{\mathrm{cf}}. \]
 \end{theorem}
 
-\begin{proof}
-    See \cite[Theorem~1.3.4.20]{ha}.
-\end{proof}
+See \cite[Theorem~1.3.4.20]{ha}.
 
 \begin{example}
     As was mentioned in (\ref{rmk-4-locn}),

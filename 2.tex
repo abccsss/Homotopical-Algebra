@@ -484,7 +484,13 @@ The proof of this theorem depends on the following fact.
 \end{proof}
 
 \begin{proof}[Proof of \textup{(\ref{thm-2-a})}]
-    \nyw
+    By (\ref{thm-2-w}), the functor 
+    \[ \cat{C} \xrightarrow{RQ} \cat{C}_{\mathrm{cf}} \to \Ho(\cat{C}) \]
+    sends $\cat{W}$ to isomorphisms, inducing a functor
+    from $\cat{C}[\cat W^{-1}]$ to $\Ho(\cat{C})$,
+    which is clearly full and essentially surjective.
+    We leave it to the reader to show that it is faithful
+    (in the same way as we proved (\ref{thm-1-htop})).
 \end{proof}
 
 \begin{remark}
@@ -496,7 +502,7 @@ The proof of this theorem depends on the following fact.
     through a construction called a \term{framing}.
     This construction is analogous to $X\times\Delta^n$ and $X^{\Delta^n}$,
     in order to describe higher homotopies in a model category.
-    We will possibly return to this point later. \varqed
+    See \cite[Chapter~5]{hovey} for details. \varqed
 \end{remark}
 
 \subsection{Derived functors}
@@ -584,7 +590,7 @@ and $F$ preserves trivial cofibrations iff $G$ preserves fibrations.
 \end{lemma}
 
 \begin{proof}
-    \nyw
+    Omitted. See \cite[Lemma~1.1.12]{hovey}.
 \end{proof}
 
 \begin{corollary}
@@ -596,7 +602,12 @@ and $F$ preserves trivial cofibrations iff $G$ preserves fibrations.
 \end{corollary}
 
 \begin{proof}
-    \nyw
+    By Ken Brown's lemma, the derived functors $\mathbb LF$ and $\mathbb RG$ exist.
+    To show that they form an adjunction, we have to show that the isomorphism 
+    \[ \Hom_{\cat{C}}(FX,Y) \simeq \Hom_{\cat{D}}(X,GY) \]
+    preserves homotopy classes for any $X\in\cat{D}_{\mathrm{cf}}$ and $Y\in\cat{C}_{\mathrm{cf}}$.
+    This requires a little more work and we shall omit the details.
+    See \cite[Lemma~1.3.10]{hovey}.
 \end{proof}
 
 \begin{definition}
@@ -604,6 +615,12 @@ and $F$ preserves trivial cofibrations iff $G$ preserves fibrations.
     is called a \term{Quillen equivalence} if
     $\mathbb LF$ and $\mathbb RG$ are equivalences of categories.
 \end{definition}
+
+A Quillen equivalence is not an equivalence of categories.
+However, we will see that it induces an equivalence of 
+$\infty$-categories obtained by localisation.
+This will be a powerful tool to construct equivalences
+between $\infty$-categories.
 
 \begin{proposition}\label{thm-2-z}
     Let $(F\dashv G)$ be a Quillen equivalence

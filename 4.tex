@@ -1,7 +1,7 @@
 Infinity categories are difficult to study.
 Unlike in classical category theory,
 in order to understand infinity categories,
-one needs to work with various models, instead of a single definition.
+one needs to work with multiple models, instead of a single definition.
 
 In these notes, we will work with two models for $(\infty,1)$-categories:
 quasi-categories, and categories enriched over Kan complexes.
@@ -26,7 +26,7 @@ which comprise the higher structure of an infinity category.
 We now introduce some terminology for
 a quasi-category $\cat C$.
 \begin{itms}
-    \item We say $x\in\cat C$ is an \term{object} of $\cat C$, if $x\in\cat C_0$.
+    \item We say $x$ is an \term{object} of $\cat C$, and write $x\in\cat C$, if $x\in\cat C_0$.
     \item We say $f\:x\to y$ is a \term{morphism} of $\cat C$, if $f\in\cat C_1$,
     and $d_0f=x$, $d_1f=y$.
     \item The \term{identity morphism} $1_x$ of an object $x\in\cat C$
@@ -402,7 +402,22 @@ are converted to quasi-categories under this construction.
 \end{proposition}
 
 \begin{proof}
-    \nyw
+    We need to establish the lifting property
+    \[ \begin{tikzcd}
+        \Lambda_i[n] \ar[d] \ar[r] & \mathfrak{N}\cat{C} \\
+        \Delta[n] \ar[ur,dashed]
+    \end{tikzcd} \]
+    for $0<i<n$, which is equivalent to the lifting property 
+    \[ \begin{tikzcd}
+        \mathfrak{C}\Lambda_i[n] \ar[d] \ar[r] & \cat{C} \\
+        \mathfrak{C}\Delta[n] \rlap{\ .} \ar[ur,dashed]
+    \end{tikzcd} \]
+    But for $0<i<n$, the only difference between $\mathfrak{C}\Lambda_i[n]$ and $\mathfrak{C}\Delta[n]$
+    is that the spaces $\Hom(0,n)$ are different. Moreover, the inclusion
+    \[ \Hom_{\mathfrak{C}\Lambda_i[n]}(0,n) \hookrightarrow \Hom_{\mathfrak{C}\Delta[n]}(0,n) \]
+    is a trivial cofibration,
+    which follows from a careful bookkeeping to work out what the left hand side is.
+    Since trivial cofibrations lift against Kan complexes, we are done.
 \end{proof}
 
 \subsection{Equivalence of the two models}
