@@ -2,9 +2,22 @@ In infinity categories,
 homotopy equivalent objects are equivalent by definition.
 Therefore, the only well-defined notion of (co)limits 
 is that of homotopy (co)limits.
-It is very difficult to compute homotopy (co)limits
-directly from the definitions.
-However, model categories will give us great help in such computations.
+
+Homotopy (co)limits behave very differently from ordinary (co)limits.
+For example, the diagram
+\[\begin{tikzcd}
+    \{*,*\} \ar[r] \ar[d] \ar[dr,phantom,pos=.75,"\lrcorner"] & \{*\} \ar[d] \\
+    \{*\} \ar[r] & S^1
+\end{tikzcd}\]
+is a homotopy pushout diagram of topological spaces,
+where $\{*,*\}$ denotes the discrete space with two points.
+The advantage of such a notion of (co)limits is that 
+if we change the objects in the diagram to homotopy equivalent ones,
+the result does not change.
+The disadvantage is that they are difficult to compute.
+
+However, model categories will give us great help in computing
+homotopy (co)limits.
 
 \subsection{Colimits and limits}
 
@@ -38,6 +51,17 @@ which all have the same homotopy type (\ref{thm-5-h}).
 One may expect that initial objects are unique if they exist.
 As before, uniqueness means being a contractible space.
 
+\begin{lemma}
+    Let $\cat{C}$ be a quasi-category, and let $x\in\cat{C}$.
+    Then the maps 
+    \[ \cat{C}_{x\/}\to\cat{C} \quad\text{and}\quad \cat{C}_{\/x}\to\cat{C} \]
+    are a left fibration and a right fibration, respectively.
+\end{lemma}
+
+\begin{proof}
+    Exercise for the reader.
+\end{proof}
+
 \begin{proposition}
     Let $\cat C$ be a quasi-category.
     \begin{itms}
@@ -54,7 +78,7 @@ As before, uniqueness means being a contractible space.
     For the first part, note that $x$ is an initial object 
     if and only if the map $\cat C_{x\/}\to\cat C$ has contractible fibres.
     But a left fibration has contractible fibres iff
-    it is a trivial fibration, which is a standard fact which we have not mentioned.
+    it is a trivial fibration, which is a standard fact \cite[Lemma~2.1.3.4]{htt}.
 
     For the second part, suppose we have a map $f\:\partial\Delta[n]\to\cat{C}$,
     such that all vertices are sent to initial objects, with $n>0$.
@@ -116,7 +140,7 @@ We need to deduce some of their properties to make them computable.
 
 \begin{proposition}\label{thm-6-z}
     Let $\cat C$ be a quasi-category,
-    and let $\{x_\alpha\}$ be a collection of objects in $\cat C$.
+    and let $\{x_\alpha\}_{\alpha\in A}$ be a collection of objects in $\cat C$.
     An object $x\in\cat C$ is a coproduct of the objects $x_\alpha$,
     if and only if for any $y\in\cat C$, the induced map 
     \[ \Hom_{\cat C}(x,y)\to\prod_\alpha\Hom_{\cat C}(x_\alpha,y) \]
@@ -124,29 +148,20 @@ We need to deduce some of their properties to make them computable.
 \end{proposition}
 
 \begin{proof}
+    We have a map $A\to\cat{C}$, $\alpha\mapsto x_\alpha$.
     The right hand side is equivalent to  
     \[ \prod_\alpha{}(\cat C_{x_\alpha\/})_y
-    \simeq (\cat C_{\{x_\alpha\}\/})_y, \]
+    \simeq (\cat C_{A\/})_y, \]
     where the subscript $y$ means taking the fibre of the map to $\cat C$.
     The left hand side is equivalent to 
-    \[ (\cat C_{x\/})_y\simeq((\cat C_{\{x_\alpha\}\/})_{x\/})_y \]
+    \[ (\cat C_{x\/})_y\simeq((\cat C_{A\/})_{x\/})_y \]
     by (\ref{thm-6-c}). Thus $x$ is a coproduct, if and only if the left fibration
-    \[(\cat C_{\{x_\alpha\}\/})_{x\/}\to\cat C_{\{x_\alpha\}\/}\]
+    \[(\cat C_{A\/})_{x\/}\to\cat C_{A\/}\]
     is a trivial fibration,
-    if and only if it is a categorical equivalence (since categorical equivalences are weak homotopy equivalences),
-    if and only if their fibres are equivalent, by the next lemma.
-\end{proof}
-
-\begin{lemma}
-    Let $S$ be a simplicial set, and let $X,Y\in\cat{sSet}_{\/S}$
-    be two left fibrations over $S$.
-    Let $f\:X\to Y$ be a map in $\cat{sSet}_{\/S}$.
-    Then $f$ is a categorical equivalence if and only if 
-    $f$ induces weak equivalences on each fibre.
-\end{lemma}
-
-\begin{proof}
-    \nyw
+    if and only if it has contractible fibres,
+    if and only if all the left fibrations
+    \[((\cat C_{A\/})_{x\/})_y\to(\cat C_{A\/})_y\]
+    are trivial fibrations.
 \end{proof}
 
 This result on coproducts is a special case of a general theorem,
@@ -284,8 +299,15 @@ that establishes certain ordinary pushouts as homotopy pushouts.
     if the map $x\to y$ is a cofibration.
 \end{proposition}
 
-The proof is a standard argument in model category theory 
-which we omit here.
+\begin{proof}[Sketch of Proof]
+    The key is to show that the map 
+    \[ \Hom_{\cat{C}}(y,w) \to \Hom_{\cat{C}}(x,w) \]
+    is a fibration of simplicial sets,
+    since it is known that an ordinary pullback along a fibration of simplicial sets 
+    is a homotopy pullback.
+    This will follow from the axioms of a simplicial model category 
+    by a standard argument which we omit here.
+\end{proof}
 
 This gives an easy way to compute homotopy pushouts
 in a simplicial model category. Namely,
@@ -323,7 +345,7 @@ Readers unfamiliar with (co)ends may skip to the next subsection.
     \end{itms}
 \end{proposition}
 
-See for example \cite{riehl}.
+See \cite{riehl}.
 
 \begin{example}
     Let $G$ be a topological group acting on a space $X$.
@@ -338,12 +360,12 @@ See for example \cite{riehl}.
 
 \subsection{Adjoint functors}
 
-In classical category theory,
-adjoint functors have played a very important role.
-For example, colimits and limits are special cases of adjoint functors.
+Adjoint functors play a very important role
+in classical category theory.
+For example, colimits and limits are two special cases of adjoint functors.
 For $\infty$-categories,
 there is also a homotopical version of adjoint functors,
-which we will now study.
+which we will now discuss.
 
 \begin{definition}
     Let $\cat C,\cat D$ be quasi-categories, and let 
@@ -389,7 +411,7 @@ we will formulate another two equivalent definitions.
     \end{itms}
 \end{definition}
 
-Via the Grothendieck construction,
+Via the Grothendieck construction (\ref{thm-5-gc}),
 presheaves on $\cat C$ are equivalent to right fibrations over $\cat C$.
 Namely, given $F\in\mathscr P(\cat C)$, the right fibration 
 \[ \operatorname{Un}_{\cat C}F\to\cat C \]
@@ -403,8 +425,17 @@ has fibre (equivalent to) $F(x)$ at $x\in\cat C$.
     is representable.
 \end{definition}
 
-By definition, right fibrations of the form $\operatorname{Un}_{\cat C}h_x$
-are representable.
+By definition, representable right fibrations are of the form
+$\operatorname{Un}_{\cat{C}}h_x$.
+If we look at its fibres, we realise that it is equivalent to $\cat{C}_{\/x}$,
+in the fibrewise sense, i.e.\ in $\cat{sSet}_{\/\cat{C}}$
+with the contravariant model structure (\ref{thm-5-gc}).
+
+\begin{proposition} \label{thm-6-rrf}
+    Any representable right fibration over $\cat{C}$ is equivalent to 
+    $\cat{C}_{\/x}$ in $\cat{sSet}_{\/\cat{C}}$,
+    where $x\in\cat{C}$ is any representing object. \qed
+\end{proposition}
 
 Dually, a left fibration $p\:X\to\cat C$ is representable 
 if the right fibration $p\op\:X\op\to\cat C\op$ is representable.
@@ -425,13 +456,28 @@ if the right fibration $p\op\:X\op\to\cat C\op$ is representable.
 \end{proposition}
 
 \begin{proof}
-    \nyw
+    We only need to prove the second part.
+
+    Suppose $x$ represents $p$.
+    Then $\tilde{\cat{C}}\simeq\cat{C}_{\/x}$ in $\cat{sSet}_{\/\cat{C}}$.
+    The object $\mathbb{1}_x\in\cat{C}_{\/x}$ is terminal, as desired.
+
+    Suppose such an object $\tilde{x}$ exists.
+    It is a good exercise for the reader to show that the map
+    \[ \tilde{\cat{C}}_{\/\tilde{x}} \to \cat{C}_{\/x} \]
+    is a trivial fibration of simplicial sets.
+    But since $\tilde{x}$ is terminal,
+    we have another trivial fibration $\tilde{\cat{C}}_{\/\tilde{x}}\to\tilde{\cat{C}}$,
+    which implies that 
+    \[ \tilde{\cat{C}} \simeq \tilde{\cat{C}}_{\/\tilde{x}} \simeq \cat{C}_{\/x} \]
+    as right fibrations over $\cat{C}$.
+    Therefore, $p$ is represented by $x$.
 \end{proof}
 
 We can now give the equivalent definitions
 of adjoint functors.
 
-\begin{proposition}
+\begin{proposition} \label{thm-6-d}
     Let $\cat C,\cat D$ be two quasi-categories.
     Then a pair of adjoint functors between $\cat C$ and $\cat D$
     is equivalent to a left fibration 
@@ -452,8 +498,19 @@ of adjoint functors.
     \[ \Hom_{\cat D}(F-,-)\simeq\Hom_{\cat C}(-,G-)\:\cat C\op\times\cat D\to\cat S. \]
 \end{proposition}
 
-\begin{proof}[Sketch of Proof]
-    \nyw
+\begin{proof}
+    Clearly, a pair of adjoint functor gives rise to such a left fibration $p$.
+
+    Now suppose we are given such a left fibration $p$.
+    Then for any $x\in\cat{C}$, we wish to define $Fx$ to be 
+    a representing object of $p|_{x\times\cat{D}}$,
+    or equivalently, an initial object of $p^{-1}(x\times\cat{D})$.
+    This is done as follows.
+    Consider the full subcategory $Y \subset X$ spanned by all such initial objects.
+    One can prove that $Y\to\cat{C}\op$ is a trivial fibration
+    (by repeated applications of the Grothendieck construction; the reader may try it),
+    and we may take $F$ to be any of its sections.
+    The functor $G$ is defined analogously.
 \end{proof}
 
 \begin{proposition}
@@ -482,8 +539,14 @@ of adjoint functors.
     \end{itms}
 \end{proposition}
 
-\begin{proof}[Sketch of Proof]
-    \nyw
+\begin{proof}
+    Assume we are given $M$.
+    It is straightforward to recover the adjoint pair, since (co)cartesian fibrations 
+    give rise to transport functors, via the Grothendieck construction.
+
+    It remains to show that this procedure is inverse to 
+    the construction of $M$ in the formulation of the proposition.
+    We omit these verifications.
 \end{proof}
 
 \begin{proposition}
@@ -495,7 +558,14 @@ of adjoint functors.
 \end{proposition}
 
 \begin{proof}
-    \nyw
+    We use the equivalent definition of adjoint functors given in (\ref{thm-6-d}).
+    The functor $\operatorname{const}$ gives a right representable left fibration 
+    \[ X \to \operatorname{Fun}(\cat K,\cat C)\op \times \cat{C}. \]
+    It suffices to show that it is also left representable.
+    But note that 
+    \[ X|_{f\times\cat{C}} \simeq \cat{C}_{f\/}, \]
+    and left representability is equivalent to $\cat{C}_{f\/}$ having an initial object,
+    which is equivalent to $\cat{C}$ having colimits.
 \end{proof}
 
 \begin{remark}

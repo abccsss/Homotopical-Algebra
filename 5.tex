@@ -391,7 +391,7 @@ For a general $S\in\cat{sSet}$, we have the following result.
 
 See \cite[Theorem~2.2.1.2]{htt}.
 
-\begin{corollary}[Grothendieck construction]
+\begin{corollary}[Grothendieck construction] \label{thm-5-gc}
     The functors 
     \[\begin{tikzcd}
         \smash{\cat{LFib}_{\/S}}\vphantom{1_1}\ar[r,bend left,start anchor=north east,end anchor=north west,"R\operatorname{St}_S"] &
@@ -459,18 +459,12 @@ gives back the fibres of a left fibration.
     \[ (\operatorname{Un}_SF)_s \simeq \operatorname{Un}_{\{s\}}F(s) \simeq F(s), \]
     where the second equivalence uses (\ref{eg-5-pt}).
 
-    For the first part, consider the weak equivalence
-    \[ \operatorname{St} X \simto F := R\operatorname{St}X. \]
-    This implies that we have a weak equivalence
-    \[ X \simto \operatorname{Un} F \]
-    of cofibrant-fibrant objects in $\cat{sSet}_{\/S}$.
-    By (\ref{thm-2-w}), this map is a homotopy equivalence.
-    In particular, we may take $X \times \Delta[1]$ and $\operatorname{Un} F \times \Delta[1]$
-    as the cylinder objects,
-    and a homotopy equivalence with respect to these cylinder objects
-    must induce a homotopy equivalence of the fibres at each point of $S$.
+    For the first part, we have a weak equivalence
+    \[ X \simto \operatorname{Un}_S R \operatorname{St}_S X \]
+    of left fibrations over $S$,
+    i.e.\ a fibrewise homotopy equivalence, by (\ref{thm-5-gc}).
     It follows that
-    \[ X_s \simeq (\operatorname{Un}F)_s \]
+    \[ X_s \simeq (\operatorname{Un}_SR\operatorname{St}_SX)_s \]
     for any $s\in S$. By the second part, we are done.
 \end{proof}
 
