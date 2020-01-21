@@ -12,7 +12,7 @@ constructions and results in homological algebra.
 \end{definition}
 
 The abbreviation ``dg'' stands for ``differential graded''.
-Cochain complexes are also known as dg vector spaces (or modules).
+Cochain complexes are also known as dg vector spaces (or dg modules).
 
 \begin{definition}
     Let $\cat{C}$ be a dg category over $R$.
@@ -106,7 +106,36 @@ and then we will prove that the two constructions are equivalent.
 \end{proposition}
 
 \begin{proof}
-    \nyw
+    The $0$-simplices of both sides are just 
+    the morphisms from $X$ to $Y$ in the underlying category,
+    i.e.\ the $0$-cocycles in $\Hom_{\cat{C}}(X,Y)$.
+
+    For $1$-simplices, a $1$-simplex of the left hand side is a diagram 
+    \[\begin{tikzcd}[row sep=.5em]
+        X \ar[dd,"\mathbb{1}"'] \ar[dr,"f"] \\
+        \ \ar[r,phantom,pos=.3,"\alpha"] & Y \rlap{\ ,} \\
+        X \ar[ur,"g"']
+    \end{tikzcd}\]
+    which can be written as a sum 
+    \[\begin{tikzcd}[row sep=.5em]
+        X \ar[dd,"\mathbb{1}"'] \ar[dr,"f"] \\
+        \ \ar[r,phantom,pos=.3,"0"] & Y \\
+        X \ar[ur,"f"']
+    \end{tikzcd} \quad+\quad \begin{tikzcd}[row sep=.5em]
+        X \ar[dd,"0"'] \ar[dr,"0"] \\
+        \ \ar[r,phantom,pos=.3,"\alpha"] & Y \rlap{\ .} \\
+        X \ar[ur,"g-f"']
+    \end{tikzcd}\]
+    The first part is determined by $f$, and the second part by $\alpha$.
+    It follows that 
+    \[ \begin{aligned}
+        \Hom_{\Ndg(\cat{C})}^{\vartriangleright}(X,Y)_1
+        &\simeq Z_0\bigl(\Hom_{\cat{C}}(X,Y)\bigr) \oplus \Hom_{\cat{C}}(X,Y)_1 \\
+        &\simeq \operatorname{DK}(\tau_{\geq0}\Hom_{\cat{C}}(X,Y))_1.
+    \end{aligned} \]
+
+    For higher simplices, a similar argument will do.
+    We leave the details to the reader.
 \end{proof}
 
 \begin{corollary}
@@ -115,6 +144,9 @@ and then we will prove that the two constructions are equivalent.
     \mathfrak{N}\circ\mathrm{forget}\circ{\operatorname{DK}}\circ\tau_{\geq0}(\cat{C}).
     \qedhere\] \qed
 \end{corollary}
+
+In particular, the functor $\Ndg$ is a right adjoint.
+In fact, it is right Quillen with respect to a model structure on dg categories.
 
 \begin{theorem}
     The category $\cat{Cat}_{\cat{Ch}_R}$ has the \term{Tabuada model structure}, with
@@ -143,7 +175,7 @@ In this section, we take a closer look at this particular $\infty$-category,
 and in particular, the pushouts and pullbacks in this category.
 We will show that it is a stable $\infty$-category.
 
-\begin{proposition}
+\begin{proposition}\label{thm-9-k}
     Let $f\:X\to Y$ be a morphism in the category $\cat{sAb}$
     of simplicial abelian groups. Then $f$ is a fibration of simplicial sets,
     if and only if the map 
@@ -152,10 +184,29 @@ We will show that it is a stable $\infty$-category.
 \end{proposition}
 
 \begin{proof}
-    \nyw
+    Let $0\leq i\leq n$. Then there is a splitting
+    \[ \KD(\mathbb{Z}\Delta[n]) \simeq \KD(\mathbb{Z}\Lambda_i[n]) \oplus D^n, \]
+    where 
+    \[ D^n := \Bigl(\cdots\to0\to\mathbb{Z}\xrightarrow{1}\mathbb{Z}\to0\to\cdots\Bigr), \]
+    with the nonzero terms in (homological indexing) the positions $n$ and $n-1$.
+    The following lifting properties are equivalent:
+    \[ \begin{tikzcd}
+        \Lambda_i[n] \ar[r]\ar[d] & X \ar[d] \\
+        \Delta[n]\ar[r]\ar[ur,dashed] & Y
+    \end{tikzcd} \enspace\iff\enspace \begin{tikzcd}[column sep=2em]
+        \KD(\Lambda_i[n]) \ar[r]\ar[d] & \KD(X) \ar[d] \\
+        \KD(\Delta[n])\ar[r]\ar[ur,dashed] & \KD(Y)
+    \end{tikzcd} \enspace\iff\enspace \begin{tikzcd}
+        0 \ar[r]\ar[d] & \KD(X) \ar[d] \\
+        D^n \ar[r]\ar[ur,dashed] & \KD(Y)\rlap{\ .}
+    \end{tikzcd} \]
+    Since a map from $D^n$ to any chain complex $C$
+    is equivalent to an element of $C_n$,
+    the lifting property in the last diagram above is equivalent to
+    the map $\KD(X)\to\KD(Y)$ being degreewise surjective.
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\label{thm-9-s}
     Every simplicial abelian group is a Kan complex. \qed
 \end{corollary}
 
@@ -172,7 +223,24 @@ We will show that it is a stable $\infty$-category.
 \end{corollary}
 
 \begin{proof}
-    \nyw
+    We regard $\cat{Ch}(\cat{A})$ as a simplicial category
+    via the functor ${\operatorname{DK}}\circ\tau_{\geq0}$.
+    Then it is enriched over Kan complexes by (\ref{thm-9-s}).
+    By (\ref{thm-6-x}),
+    we have to show that for any $Z\in\cat{Ch}(\cat{A})$, the diagram 
+    \[ \begin{tikzcd}
+        \Hom_{\cat{Ch}(\cat{A})}(Y',Z) \ar[d] \ar[r] \ar[dr,phantom,pos=.25,"\ulcorner"] &
+        \Hom_{\cat{Ch}(\cat{A})}(Y,Z) \ar[d] \\
+        \Hom_{\cat{Ch}(\cat{A})}(X',Z) \ar[r,"f^*"'] &
+        \Hom_{\cat{Ch}(\cat{A})}(X,Z)
+    \end{tikzcd} \]
+    is a homotopy pullback diagram of Kan complexes.
+    It is known that for simplicial sets,
+    any pullback along a fibration is a homotopy pullback.
+    Thus it suffices to show that $f^*$ is a fibration.
+    By (\ref{thm-9-k}), it suffices to show that $f^*$
+    as a map of chain complexes (i.e.\ before applying the Dold--Kan functor)
+    is surjective. This is true since $f$ is a split injection.
 \end{proof}
 
 This corollary enables us to construct 
@@ -203,7 +271,11 @@ then $X\otimes D^1$ is the tensor product of $X$ and the cochain complex
     \end{pmatrix}. \]
 \end{definition}
 
-\begin{proposition}
+This important construction in homological algebra
+can now be seen as a special case of an $\infty$-categorical construction,
+i.e., the homotopy cofibre.
+
+\begin{theorem}
     Let $f\:X\to Y$ be a morphism in $\cat{Ch}(\cat{A})$.
     Then the mapping cone of $f$ is the homotopy cofibre of $f$:
     \[\begin{tikzcd}
@@ -211,22 +283,26 @@ then $X\otimes D^1$ is the tensor product of $X$ and the cochain complex
         Y\ar[r] & \operatorname{cone}(f)\rlap{\ .}
     \end{tikzcd}\]
     In particular, the suspension of $X$ is homotopy equivalent to
-    the shifted complex $X[1]$,
-    i.e.\ one has the homotopy pushout diagram
+    the shifted complex $X[1]$.
+    In other words, one has the homotopy pushout diagram
     \[\begin{tikzcd}
         X\ar[r]\ar[d,"f"']\ar[dr,phantom,pos=.75,"\lrcorner",end anchor={[xshift=-.5em]north}] & 0\ar[d] \\
         0\ar[r] & X[1]\rlap{\ .}
     \end{tikzcd}\]
-\end{proposition}
+\end{theorem}
 
 \begin{proof}
     This follows immediately from (\ref{cor-9-o}).
 \end{proof}
 
-\begin{theorem}
+\begin{corollary}
     The category $\Ndg(\cat{Ch}(\cat{A}))$ is stable.
-\end{theorem}
+\end{corollary}
 
 \begin{proof}
-    \nyw
+    We have seen that the suspension functor $\Sigma\simeq[1]$ is invertible.
+    By (\ref{thm-7-s}), it suffices to show the existence of homotopy pushouts.
+    Note that any map $f\:X\to Y$ is equivalent to a degreewise split injection 
+    $X\hookrightarrow\operatorname{Cyl}(f)$, where $\operatorname{Cyl}(f)$ is the mapping cylinder
+    as in homological algebra.
 \end{proof}

@@ -93,21 +93,19 @@ In this case, we denote
 For a non-negative integer $n$, we denote
 \[ X[n]:=\Sigma^nX\quad\text{and}\quad X[-n]:=\Omega^nX. \]
 
-\begin{proposition}
-    Let $\cat C$ be a pointed $\infty$-category 
-    that admits pushouts and pullbacks. Then the following are equivalent.
+\begin{theorem} \label{thm-7-s}
+    Let $\cat C$ be a pointed $\infty$-category.
+    Then the following are equivalent.
     \begin{itms}
-        \item $\Sigma$ is an equivalence.
-        \item $\Omega$ is an equivalence.
         \item $\cat C$ is stable.
-        \item A square in $\cat C$ is a pushout square,
+        \item $\cat C$ admits pushouts and $\Sigma$ is an equivalence.
+        \item $\cat C$ admits pullbacks and $\Omega$ is an equivalence.
+        \item $\cat C$ admits pushouts and pullbacks; a square in $\cat C$ is a pushout square,
         if and only if it is a pullback square.
     \end{itms}
-\end{proposition}
+\end{theorem}
 
-\begin{proof}
-    Omitted.
-\end{proof}
+See \cite[Proposition~1.1.3.4 and Corollary~1.4.2.27]{ha}.
 
 \begin{definition}
     Let $\cat C,\cat D$ be stable $\infty$-categories.
@@ -522,7 +520,7 @@ For example, the above discussion suggests that we should have
     \bigr). \varqedhere\]
 \end{remark}
 
-\begin{proposition}
+\begin{theorem}
     Let $\cat{C}$ and $\cat{D}$ be $\infty$-categories.
 
     \begin{itms}
@@ -535,10 +533,27 @@ For example, the above discussion suggests that we should have
         is stable if $\cat{C}$ admits finite colimits and 
         $\cat{D}$ admits finite limits.
     \end{itms}
-\end{proposition}
+\end{theorem}
 
 \begin{proof}
-    \nyw
+    It suffices to prove the second part.
+    The functors $\Sigma_{\cat{C}}$ and $\Omega_{\cat{D}}$
+    induce functors on $\operatorname{Exc}_*(\cat{C},\cat{D})$.
+    It is known that (co)limits in $\operatorname{Fun}(\cat{C},\cat{D})$
+    can be computed in $\cat{D}$ provided that $\cat{D}$ has these (co)limits.
+    Therefore, the functor $\Omega_{\cat{D}}$ on $\operatorname{Exc}_*(\cat{C},\cat{D})$
+    coincides with its own $\Omega$ functor.
+    Let $F\in\operatorname{Exc}_*(\cat{C},\cat{D})$.
+    Then for any $X\in\cat{C}$, we have a pullback square 
+    \[\begin{tikzcd}
+        FX \ar[r] \ar[d] \ar[dr,phantom,pos=.25,"\ulcorner"] & 0\ar[d] \\
+        0\ar[r] & F\Sigma_{\cat{C}}X \rlap{\ ,}
+    \end{tikzcd}\]
+    which establishes an equivalence
+    \[ FX \simeq \Omega_{\cat{D}}F\Sigma_{\cat{C}}X. \]
+    This means that $\Sigma_{\cat{C}}$ is inverse to $\Omega_{\cat{D}}$.
+    By (\ref{thm-7-s}), $\operatorname{Exc}_*(\cat{C},\cat{D})$
+    is stable.
 \end{proof}
 
 \begin{proposition}
@@ -549,7 +564,7 @@ For example, the above discussion suggests that we should have
 \end{proposition}
 
 \begin{proof}
-    \nyw
+    Omitted. 
 \end{proof}
 
 \begin{proposition}
@@ -576,7 +591,15 @@ For example, the above discussion suggests that we should have
 \end{proposition}
 
 \begin{proof}
-    \nyw
+    It suffices to prove the second part.
+    Since $\operatorname{Exc}_*(\cat{C},\cat{D})$ is stable, we have 
+    \[ \begin{aligned}[b]
+        \operatorname{Exc}_*(\cat{C},\cat{D})
+        &\simeq \operatorname{Sp}\bigl(\operatorname{Exc}_*(\cat{C},\cat{D})\bigr) \\
+        &\simeq \operatorname{Exc}_*\bigl(\cat{S}^{\mathrm{fin}}_*,\ \operatorname{Exc}_*(\cat{C},\cat{D})\bigr) \\
+        &\simeq \operatorname{Exc}_*\bigl(\cat{C},\ \operatorname{Exc}_*(\cat{S}^{\mathrm{fin}}_*,\cat{D})\bigr) \\
+        &\simeq \operatorname{Exc}_*\bigl(\cat{C},\ \operatorname{Sp}(\cat{D})\bigr). 
+    \end{aligned} \qedhere \]
 \end{proof}
 
 Therefore, we have proved the following.
